@@ -29,6 +29,7 @@ import { Rewards } from './pages/Rewards';
 import { Livestream } from './pages/Livestream';
 import { WegramAI } from './pages/WegramAI';
 import { Trending } from './pages/Trending';
+import { Verification } from './pages/Verification';
 import { Explore } from './pages/Explore';
 import { Games } from './pages/Games';
 import { UserProfile } from './pages/UserProfile';
@@ -112,6 +113,7 @@ function AppContent() {
           
           {/* Full functionality pages */}
           <Route path="/trending" element={<Trending />} />
+          <Route path="/verification" element={<Verification />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/games" element={<Games />} />
