@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MessageCircle, Phone, Video, MoreHorizontal, Calendar, Users, ExternalLink } from 'lucide-react';
+import { ArrowLeft, MessageCircle, MoreHorizontal, Calendar, Users, ExternalLink, Send } from 'lucide-react';
 import { mockPosts } from '../data/mockData';
 import { MessageModal } from '../components/Layout/MessageModal';
+import { useTheme } from '../hooks/useTheme';
 
 interface UserProfileData {
   username: string;
@@ -117,6 +118,7 @@ const getUserData = (username: string): UserProfileData => {
 };
 
 export const UserProfile: React.FC = () => {
+  const { isDark } = useTheme();
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
@@ -138,13 +140,6 @@ export const UserProfile: React.FC = () => {
     setIsMessageModalOpen(true);
   };
 
-  const handleCall = () => {
-    alert('Voice call feature coming soon!');
-  };
-
-  const handleVideoCall = () => {
-    alert('Video call feature coming soon!');
-  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)' }}>
@@ -152,7 +147,9 @@ export const UserProfile: React.FC = () => {
       <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
         <button
           onClick={() => navigate(-1)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+          className={`p-2 rounded-lg transition-colors ${
+            isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+          }`}
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -161,13 +158,9 @@ export const UserProfile: React.FC = () => {
           <p className="text-sm text-secondary">{user.posts} posts</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
-            <Phone className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
-            <Video className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+          <button className={`p-2 rounded-lg transition-colors ${
+            isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+          }`}>
             <MoreHorizontal className="w-5 h-5" />
           </button>
         </div>
@@ -209,28 +202,14 @@ export const UserProfile: React.FC = () => {
             <span>{user.mutualConnections} Mutual Connections</span>
           </div>
 
-          {/* Action Buttons */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          {/* Message Button */}
+          <div className="mb-6">
             <button
               onClick={handleMessage}
-              className="flex flex-col items-center gap-2 p-4 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors"
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-4 px-6 rounded-xl font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg"
             >
-              <MessageCircle className="w-6 h-6" />
-              <span className="text-sm font-medium">Message</span>
-            </button>
-            <button
-              onClick={handleCall}
-              className="flex flex-col items-center gap-2 p-4 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors"
-            >
-              <Phone className="w-6 h-6" />
-              <span className="text-sm font-medium">Voice Call</span>
-            </button>
-            <button
-              onClick={handleVideoCall}
-              className="flex flex-col items-center gap-2 p-4 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors"
-            >
-              <Video className="w-6 h-6" />
-              <span className="text-sm font-medium">Video Call</span>
+              <Send className="w-5 h-5" />
+              Send Message
             </button>
           </div>
 
@@ -299,7 +278,9 @@ export const UserProfile: React.FC = () => {
             onClick={handleFollow}
             className={`w-full py-3 rounded-lg font-medium transition-colors ${
               user.isFollowing
-                ? 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+                ? isDark 
+                  ? 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+                  : 'bg-gray-400 text-gray-600 hover:bg-gray-500'
                 : 'btn-primary'
             }`}
           >
