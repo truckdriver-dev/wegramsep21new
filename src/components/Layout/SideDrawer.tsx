@@ -14,7 +14,6 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
   const { isDark } = useTheme();
   const { signOut } = useAuth();
   const navigate = useNavigate();
-  const [isExpanded, setIsExpanded] = useState(false);
   const [isTwoFactorModalOpen, setIsTwoFactorModalOpen] = useState(false);
 
   const menuItems = [
@@ -64,23 +63,18 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
       
       {/* Drawer */}
-      <div className={`relative ${isExpanded ? 'w-96' : 'w-20'} bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full`} style={{ backgroundColor: 'var(--card)' }}>
+      <div className="relative w-96 bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full" style={{ backgroundColor: 'var(--card)' }}>
         {/* Header with logo */}
         <div className="p-6 flex-1 flex flex-col">
           <div className="flex items-center gap-3 mb-8">
-            <button 
-              onClick={() => setIsExpanded(!isExpanded)}
-              className={`${isExpanded ? 'flex items-center gap-3' : 'flex items-center justify-center'} transition-colors ${
-                isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
-              } rounded-lg p-2 w-full`}
-            >
+            <div className="flex items-center gap-3 p-2 w-full">
               <img 
                 src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
                 alt="WEGRAM Logo" 
                 className="w-10 h-10 rounded-xl object-cover shadow-2xl border border-purple-400/30 flex-shrink-0"
               />
-              {isExpanded && <span className="text-xl font-bold text-primary">WEGRAM</span>}
-            </button>
+              <span className="text-xl font-bold text-primary">WEGRAM</span>
+            </div>
           </div>
 
           {/* Menu Items */}
@@ -91,10 +85,9 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                 <button
                   key={item.id}
                   onClick={() => handleItemClick(item.path)}
-                  className={`w-full flex items-center ${isExpanded ? 'gap-4' : 'justify-center'} py-4 transition-all duration-200 text-left group ${
+                  className={`w-full flex items-center gap-4 py-4 transition-all duration-200 text-left group ${
                     isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
                   } rounded-lg mb-2`}
-                  title={!isExpanded ? item.label : undefined}
                 >
                   <Icon className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-colors duration-200" 
                         style={{
@@ -104,11 +97,9 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text'
                         }} />
-                  {isExpanded && (
-                    <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
-                      {item.label}
-                    </span>
-                  )}
+                  <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
+                    {item.label}
+                  </span>
                 </button>
               );
             })}
@@ -118,10 +109,9 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
           <div className="mt-auto border-t pt-4 space-y-2" style={{ borderColor: isDark ? '#4b5563' : '#d1d5db' }}>
             <button
               onClick={handleTwoFactorClick}
-              className={`w-full flex items-center ${isExpanded ? 'gap-4' : 'justify-center'} py-4 transition-all duration-200 text-left group ${
+              className={`w-full flex items-center gap-4 py-4 transition-all duration-200 text-left group ${
                 isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
               } rounded-lg`}
-              title={!isExpanded ? '2FA Settings' : undefined}
             >
               <Shield className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-colors duration-200" 
                     style={{
@@ -131,26 +121,21 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text'
                     }} />
-              {isExpanded && (
-                <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
-                  2FA Settings
-                </span>
-              )}
+              <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
+                2FA Settings
+              </span>
             </button>
             
             <button
               onClick={handleLogout}
-              className={`w-full flex items-center ${isExpanded ? 'gap-4' : 'justify-center'} py-4 transition-all duration-200 text-left group ${
+              className={`w-full flex items-center gap-4 py-4 transition-all duration-200 text-left group ${
                 isDark ? 'hover:bg-red-700' : 'hover:bg-red-100'
               } rounded-lg`}
-              title={!isExpanded ? 'Log Out' : undefined}
             >
               <LogOut className="w-5 h-5 text-red-400 group-hover:text-red-300 transition-colors duration-200" />
-              {isExpanded && (
-                <span className="font-medium text-red-400 group-hover:text-red-300 transition-all duration-200">
-                  Log Out
-                </span>
-              )}
+              <span className="font-medium text-red-400 group-hover:text-red-300 transition-all duration-200">
+                Log Out
+              </span>
             </button>
           </div>
         </div>
