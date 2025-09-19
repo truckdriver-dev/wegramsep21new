@@ -85,6 +85,94 @@ export const mockPosts: Post[] = [
     replies: 12,
     shares: 9,
     gifts: 3
+  },
+  {
+    id: '4',
+    userId: '4',
+    username: '@web3_dev',
+    content: '🚀 Just deployed my first smart contract on Solana! The future is decentralized. Building the next generation of DeFi protocols.',
+    timestamp: '8h',
+    likes: 247,
+    replies: 89,
+    shares: 34,
+    gifts: 12
+  },
+  {
+    id: '5',
+    userId: '5',
+    username: '@crypto_whale',
+    content: 'Market update: SOL looking bullish! 📈 The Web3 ecosystem is growing stronger every day. Time to accumulate more tokens!',
+    timestamp: '12h',
+    likes: 892,
+    replies: 156,
+    shares: 78,
+    gifts: 45
+  },
+  {
+    id: '6',
+    userId: '6',
+    username: '@nft_artist',
+    content: '🎨 New NFT collection dropping tomorrow! Each piece tells a story of the digital revolution. Web3 is empowering creators like never before.',
+    timestamp: '1d',
+    likes: 524,
+    replies: 203,
+    shares: 91,
+    gifts: 28
+  },
+  {
+    id: '7',
+    userId: '7',
+    username: '@defi_guru',
+    content: 'Yield farming strategies for 2025: 💰 1. Diversify protocols 2. Monitor impermanent loss 3. Compound rewards 4. Stay updated on new pools',
+    timestamp: '1d',
+    likes: 1247,
+    replies: 234,
+    shares: 156,
+    gifts: 67
+  },
+  {
+    id: '8',
+    userId: '8',
+    username: '@blockchain_news',
+    content: '🔥 BREAKING: Major DeFi protocol announces integration with Solana. This could be a game-changer for cross-chain liquidity!',
+    timestamp: '2d',
+    likes: 2156,
+    replies: 445,
+    shares: 289,
+    gifts: 134
+  },
+  {
+    id: '9',
+    userId: '9',
+    username: '@solana_builder',
+    content: 'Building on Solana is incredible! ⚡ The speed and low fees make it perfect for consumer applications. The ecosystem is thriving!',
+    timestamp: '2d',
+    likes: 678,
+    replies: 123,
+    shares: 56,
+    gifts: 23
+  },
+  {
+    id: '10',
+    userId: '10',
+    username: '@crypto_educator',
+    content: '📚 Web3 Education Thread: Understanding smart contracts, DeFi protocols, and the future of decentralized finance. Knowledge is power!',
+    timestamp: '3d',
+    likes: 934,
+    replies: 178,
+    shares: 267,
+    gifts: 45
+  },
+  {
+    id: '11',
+    userId: '11',
+    username: '@metaverse_explorer',
+    content: '🌐 Exploring virtual worlds built on blockchain! The metaverse is becoming reality. Own your digital assets, control your destiny.',
+    timestamp: '3d',
+    likes: 445,
+    replies: 67,
+    shares: 23,
+    gifts: 15
   }
 ];
 

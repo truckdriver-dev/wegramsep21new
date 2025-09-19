@@ -97,6 +97,118 @@ const getUserData = (username: string): UserProfileData => {
           verified: true
         }
       ]
+    },
+    '@web3_dev': {
+      username: '@web3_dev',
+      displayName: 'Web3 Developer',
+      bio: 'Full-stack blockchain developer • Smart contract specialist • Building DeFi protocols on Solana',
+      avatar: '👨‍💻',
+      bannerColor: 'from-cyan-600 to-blue-600',
+      joinDate: 'Mar 10, 2024',
+      posts: 127,
+      followers: 1850,
+      following: 643,
+      mutualConnections: 18,
+      isFollowing: false,
+      connections: []
+    },
+    '@crypto_whale': {
+      username: '@crypto_whale',
+      displayName: 'Crypto Whale',
+      bio: 'Large-scale investor • Market analyst • Sharing insights on crypto trends and opportunities',
+      avatar: '🐋',
+      bannerColor: 'from-blue-600 to-indigo-600',
+      joinDate: 'Nov 5, 2023',
+      posts: 289,
+      followers: 8420,
+      following: 234,
+      mutualConnections: 32,
+      isFollowing: true,
+      connections: []
+    },
+    '@nft_artist': {
+      username: '@nft_artist',
+      displayName: 'NFT Artist',
+      bio: 'Digital creator • 1/1 NFT artist • Exploring the intersection of art and blockchain technology',
+      avatar: '🎭',
+      bannerColor: 'from-pink-600 to-purple-600',
+      joinDate: 'Aug 22, 2023',
+      posts: 342,
+      followers: 4560,
+      following: 892,
+      mutualConnections: 24,
+      isFollowing: false,
+      connections: []
+    },
+    '@defi_guru': {
+      username: '@defi_guru',
+      displayName: 'DeFi Guru',
+      bio: 'Yield farming expert • Protocol researcher • Maximizing returns in decentralized finance',
+      avatar: '📊',
+      bannerColor: 'from-green-600 to-emerald-600',
+      joinDate: 'Sep 15, 2023',
+      posts: 198,
+      followers: 6340,
+      following: 445,
+      mutualConnections: 28,
+      isFollowing: true,
+      connections: []
+    },
+    '@blockchain_news': {
+      username: '@blockchain_news',
+      displayName: 'Blockchain News',
+      bio: 'Breaking crypto news • Market updates • Keeping the community informed about Web3 developments',
+      avatar: '📰',
+      bannerColor: 'from-orange-600 to-red-600',
+      joinDate: 'Jun 3, 2023',
+      posts: 1247,
+      followers: 12800,
+      following: 156,
+      mutualConnections: 45,
+      isFollowing: false,
+      connections: []
+    },
+    '@solana_builder': {
+      username: '@solana_builder',
+      displayName: 'Solana Builder',
+      bio: 'Building on Solana • dApp developer • Passionate about fast, scalable blockchain solutions',
+      avatar: '⚡',
+      bannerColor: 'from-purple-600 to-violet-600',
+      joinDate: 'Dec 18, 2023',
+      posts: 156,
+      followers: 2940,
+      following: 567,
+      mutualConnections: 21,
+      isFollowing: true,
+      connections: []
+    },
+    '@crypto_educator': {
+      username: '@crypto_educator',
+      displayName: 'Crypto Educator',
+      bio: 'Teaching Web3 • Simplifying blockchain concepts • Helping newcomers navigate the crypto space',
+      avatar: '🎓',
+      bannerColor: 'from-blue-600 to-teal-600',
+      joinDate: 'Apr 7, 2024',
+      posts: 234,
+      followers: 5680,
+      following: 789,
+      mutualConnections: 35,
+      isFollowing: false,
+      connections: []
+    },
+    '@metaverse_explorer': {
+      username: '@metaverse_explorer',
+      displayName: 'Metaverse Explorer',
+      bio: 'Virtual world enthusiast • NFT collector • Exploring digital realms and blockchain gaming',
+      avatar: '🌐',
+      bannerColor: 'from-indigo-600 to-purple-600',
+      joinDate: 'Jan 29, 2024',
+      posts: 178,
+      followers: 3420,
+      following: 923,
+      mutualConnections: 19,
+      isFollowing: true,
+      connections: []
     }
   };
 
@@ -334,7 +446,12 @@ export const UserProfile: React.FC = () => {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-primary font-medium">{post.username}</span>
+                          <button 
+                            onClick={() => navigate(`/user/${post.username}`)}
+                            className="text-primary font-medium hover:text-purple-400 transition-colors cursor-pointer"
+                          >
+                            {post.username}
+                          </button>
                           <span className="text-secondary text-sm">•</span>
                           <span className="text-secondary text-sm">{post.timestamp}</span>
                         </div>
