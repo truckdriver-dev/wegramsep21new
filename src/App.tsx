@@ -41,6 +41,7 @@ import { BuyWegram } from './pages/BuyWegram';
 import { Notifications } from './pages/Notifications';
 import { LaunchToken } from './pages/LaunchToken';
 import { Video } from './pages/Video';
+import { ProfileEdit } from './pages/ProfileEdit';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -102,6 +103,7 @@ function AppContent() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/compose" element={<Compose />} />
           <Route path="/wallet" element={<Wallet />} />
