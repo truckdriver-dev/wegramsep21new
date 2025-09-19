@@ -5,11 +5,14 @@ import { usePosts } from '../hooks/usePosts';
 import { useAuth } from '../hooks/useAuth';
 import { mockPosts } from '../data/mockData';
 import { useTheme } from '../hooks/useTheme';
+import { useNavigate } from 'react-router-dom';
+import { TrendingUp, Users, Zap } from 'lucide-react';
 
 export const Home: React.FC = () => {
   const { isDark } = useTheme();
   const { posts, loading, createPost, likePost, giftPost } = usePosts();
   const { user, profile } = useAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'following' | 'trenches' | 'trending'>('following');
   
   // For MVP demo - show mock posts if no real posts exist
@@ -66,6 +69,71 @@ export const Home: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-20 pb-24">
+      {/* Livestream Banner */}
+      <div 
+        onClick={() => navigate('/livestream')}
+        className="relative mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-800 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl overflow-hidden group"
+      >
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        {/* Sparkle effects */}
+        <div className="absolute top-2 right-6 w-2 h-2 bg-white rounded-full opacity-60 animate-pulse"></div>
+        <div className="absolute bottom-3 right-12 w-1 h-1 bg-purple-200 rounded-full opacity-40 animate-ping"></div>
+        <div className="absolute top-4 left-20 w-1.5 h-1.5 bg-pink-300 rounded-full opacity-50 animate-pulse delay-300"></div>
+        
+        <div className="relative flex items-center justify-between">
+          {/* Left side - Avatars */}
+          <div className="flex items-center space-x-3">
+            <div className="flex -space-x-2">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+                🎬
+              </div>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+                🎮
+              </div>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+                🚀
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="ml-4">
+              <div className="flex items-center space-x-2">
+                <h3 className="text-white font-bold text-lg tracking-wide">LIVE STREAMS</h3>
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-lg"></div>
+              </div>
+              <p className="text-purple-100 text-sm font-medium">Join the action now</p>
+            </div>
+          </div>
+          
+          {/* Right side - Stats */}
+          <div className="flex items-center space-x-4">
+            <div className="text-right">
+              <div className="flex items-center justify-end space-x-1 mb-1">
+                <Users className="w-4 h-4 text-purple-200" />
+                <span className="text-white font-bold text-lg">2.4K</span>
+              </div>
+              <div className="flex items-center justify-end space-x-1">
+                <TrendingUp className="w-3 h-3 text-green-400" />
+                <span className="text-purple-100 text-xs font-medium">+127</span>
+              </div>
+            </div>
+            
+            {/* Activity pulse */}
+            <div className="relative">
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <Zap className="w-4 h-4 text-yellow-300 animate-pulse" />
+              </div>
+              <div className="absolute inset-0 w-8 h-8 border-2 border-white/30 rounded-full animate-ping"></div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom decorative line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </div>
+
       {/* Feed Navigation */}
       <div className={`flex gap-1 mb-6 rounded-lg p-1 ${
         isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
