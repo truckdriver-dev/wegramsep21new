@@ -53,7 +53,11 @@ export const LaunchToken: React.FC = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="card mb-6 text-center" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
+        <div className={`card mb-6 text-center ${
+          isDark 
+            ? 'bg-gradient-to-br from-gray-800 to-gray-900' 
+            : 'bg-gradient-to-br from-blue-50 to-purple-50'
+        }`}>
           <div className="w-20 h-20 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
             <Coins className="w-10 h-10 text-white" />
           </div>
@@ -64,7 +68,11 @@ export const LaunchToken: React.FC = () => {
           </p>
 
           {/* Coming Soon Badge */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, #7B2CFF 0%, #9945FF 100%)' }}>
+          <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full mb-6 ${
+            isDark 
+              ? 'bg-gradient-to-r from-purple-600 to-blue-600' 
+              : 'bg-gradient-to-r from-purple-500 to-blue-500'
+          }`}>
             <Star className="w-5 h-5 text-white" />
             <span className="text-white font-semibold">Coming Soon</span>
             <Zap className="w-5 h-5 text-white" />
