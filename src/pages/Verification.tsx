@@ -7,7 +7,22 @@ export const Verification: React.FC = () => {
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'processing' | 'success'>('info');
   const [copiedAddress, setCopiedAddress] = useState(false);
 
-  const verificationPrice = '6'; // 6 WGM = $2
+  const verificationPriceUSD = 2.00; // $2 worth of WGM tokens
+  const [wgmAmount, setWgmAmount] = useState<string>('Loading...');
+  const [wgmPrice, setWgmPrice] = useState<number | null>(null);
+
+  // Mock price calculation - in real implementation, fetch from price API
+  React.useEffect(() => {
+    // Simulate fetching WGM price (in real app, use CoinGecko, CoinMarketCap, etc.)
+    const fetchPrice = async () => {
+      const mockWgmPriceUSD = 0.33; // Example: $0.33 per WGM
+      setWgmPrice(mockWgmPriceUSD);
+      const tokensNeeded = (verificationPriceUSD / mockWgmPriceUSD).toFixed(2);
+      setWgmAmount(tokensNeeded);
+    };
+    
+    setTimeout(fetchPrice, 1000);
+  }, [verificationPriceUSD]);
 
   const handleStartVerification = () => {
     setPaymentStep('payment');
@@ -46,8 +61,10 @@ export const Verification: React.FC = () => {
                 <CheckCircle className="w-8 h-8 text-blue-400" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Verified Badge</h3>
-              <div className="text-3xl font-bold gradient-text mb-1">{verificationPrice} WGM</div>
-              <div className="text-secondary text-sm">One-time payment (~$2.00 USD)</div>
+              <div className="text-3xl font-bold gradient-text mb-1">
+                {wgmAmount === 'Loading...' ? 'Loading...' : `${wgmAmount} WGM`}
+              </div>
+              <div className="text-secondary text-sm">One-time payment ($2.00 USD worth)</div>
             </div>
             
             <div className="space-y-3 mb-6">
@@ -82,7 +99,7 @@ export const Verification: React.FC = () => {
             <Shield className="w-12 h-12 mx-auto mb-4 text-green-400" />
             <h3 className="text-xl font-semibold text-primary mb-2">Complete Payment</h3>
             <p className="text-secondary text-sm">
-              Send exactly {verificationPrice} WGM to the address below to complete your verification
+              Send exactly {wgmAmount} WGM ($2.00 worth) to the address below to complete your verification
             </p>
           </div>
 
@@ -91,7 +108,7 @@ export const Verification: React.FC = () => {
             <div>
               <label className="block text-secondary text-sm mb-2">Amount to Send</label>
               <div className="p-3 bg-overlay-light rounded-lg">
-                <div className="text-xl font-bold text-primary">{verificationPrice} WGM</div>
+                <div className="text-xl font-bold text-primary">{wgmAmount} WGM</div>
               </div>
             </div>
 
