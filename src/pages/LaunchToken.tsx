@@ -1,8 +1,10 @@
 import React from 'react';
 import { ArrowLeft, Rocket, Zap, TrendingUp, Users, Shield, Star, Coins } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 export const LaunchToken: React.FC = () => {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
 
   const features = [
@@ -35,7 +37,9 @@ export const LaunchToken: React.FC = () => {
         <div className="flex items-center gap-3 mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -95,19 +99,27 @@ export const LaunchToken: React.FC = () => {
         <div className="card mb-6">
           <h3 className="text-lg font-bold text-primary mb-4">What You Can Do</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className={`flex items-center gap-3 p-3 rounded-lg ${
+              isDark ? 'bg-black bg-opacity-20' : 'bg-gray-100 bg-opacity-70'
+            }`}>
               <div className="w-6 h-6 rounded-full bg-green-600 text-white text-sm font-bold flex items-center justify-center">✓</div>
               <span className="text-primary">Create custom token with your branding</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className={`flex items-center gap-3 p-3 rounded-lg ${
+              isDark ? 'bg-black bg-opacity-20' : 'bg-gray-100 bg-opacity-70'
+            }`}>
               <div className="w-6 h-6 rounded-full bg-green-600 text-white text-sm font-bold flex items-center justify-center">✓</div>
               <span className="text-primary">Set tokenomics and distribution rules</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className={`flex items-center gap-3 p-3 rounded-lg ${
+              isDark ? 'bg-black bg-opacity-20' : 'bg-gray-100 bg-opacity-70'
+            }`}>
               <div className="w-6 h-6 rounded-full bg-green-600 text-white text-sm font-bold flex items-center justify-center">✓</div>
               <span className="text-primary">Launch on Solana with low fees</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className={`flex items-center gap-3 p-3 rounded-lg ${
+              isDark ? 'bg-black bg-opacity-20' : 'bg-gray-100 bg-opacity-70'
+            }`}>
               <div className="w-6 h-6 rounded-full bg-green-600 text-white text-sm font-bold flex items-center justify-center">✓</div>
               <span className="text-primary">Integrate with WEGRAM ecosystem</span>
             </div>

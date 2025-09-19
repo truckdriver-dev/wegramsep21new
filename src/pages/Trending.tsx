@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, Flame, Clock, Hash, Users, Eye, Heart, MessageCircle, Share } from 'lucide-react';
 import { PostCard } from '../components/Post/PostCard';
 import { mockPosts, Post } from '../data/mockData';
+import { useTheme } from '../hooks/useTheme';
 
 interface TrendingTopic {
   id: string;
@@ -17,6 +18,7 @@ interface TrendingPost extends Post {
 }
 
 export const Trending: React.FC = () => {
+  const { isDark } = useTheme();
   const [activeTab, setActiveTab] = useState<'posts' | 'topics'>('posts');
   const [timeFilter, setTimeFilter] = useState<'1h' | '24h' | '7d'>('24h');
   const [trendingPosts, setTrendingPosts] = useState<TrendingPost[]>([]);
@@ -134,7 +136,9 @@ export const Trending: React.FC = () => {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
               timeFilter === time
                 ? 'bg-purple-600 text-white'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                : isDark 
+                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
             }`}
           >
             {time}
@@ -143,13 +147,17 @@ export const Trending: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-1 mb-6 bg-gray-800 bg-opacity-50 rounded-lg p-1">
+      <div className={`flex gap-1 mb-6 rounded-lg p-1 ${
+        isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
+      }`}>
         <button
           onClick={() => setActiveTab('posts')}
           className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
             activeTab === 'posts'
               ? 'bg-purple-600 text-white'
-              : 'text-gray-400 hover:text-white'
+              : isDark 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-700'
+                : 'text-gray-600 hover:text-gray-800 hover:bg-gray-300'
           }`}
         >
           <Flame className="w-4 h-4 inline mr-2" />
@@ -160,7 +168,9 @@ export const Trending: React.FC = () => {
           className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
             activeTab === 'topics'
               ? 'bg-purple-600 text-white'
-              : 'text-gray-400 hover:text-white'
+              : isDark 
+                ? 'text-gray-400 hover:text-white hover:bg-gray-700'
+                : 'text-gray-600 hover:text-gray-800 hover:bg-gray-300'
           }`}
         >
           <Hash className="w-4 h-4 inline mr-2" />

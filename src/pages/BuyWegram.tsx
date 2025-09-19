@@ -203,7 +203,9 @@ export const BuyWegram: React.FC = () => {
             <Shield className="w-5 h-5 text-yellow-400 mt-0.5" />
             <div>
               <h4 className="text-yellow-400 font-semibold mb-2">Important Notice</h4>
-              <p className="text-yellow-200 text-sm">
+              <p className={`text-sm ${
+                isDark ? 'text-yellow-200' : 'text-yellow-800'
+              }`}>
                 Cryptocurrency investments carry risk. Only invest what you can afford to lose. 
                 WEGRAM tokens are utility tokens for the WEGRAM platform. This is not financial advice.
               </p>
