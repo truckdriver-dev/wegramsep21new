@@ -1,15 +1,13 @@
 import React from 'react';
-import { BarChart3, Plus, Wallet, HelpCircle, User } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
 
 export const BottomNav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { profile } = useAuth();
 
   const tabs = [
-    { id: 'profile', label: 'Profile', icon: User, path: profile?.username ? `/user/${profile.username}` : '/home' },
+    { id: 'video', label: 'Video', icon: Play, path: '/video' },
     { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/analytics' },
     { id: 'add', label: 'Add', icon: Plus, path: '/compose' },
     { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/wallet' },
