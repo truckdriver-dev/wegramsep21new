@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MessageCircle, MoreHorizontal, Calendar, Users, ExternalLink, Send } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Calendar, Users, ExternalLink, Send } from 'lucide-react';
 import { mockPosts } from '../data/mockData';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { useTheme } from '../hooks/useTheme';

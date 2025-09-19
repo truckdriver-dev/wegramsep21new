@@ -1,6 +1,7 @@
-import React from 'react';
-import { X, Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Grid3X3, Bookmark, Coins, Play, ShoppingCart, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Bookmark, Coins, Play, ShoppingCart, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 
 interface SideDrawerProps {
   isOpen: boolean;
@@ -8,7 +9,9 @@ interface SideDrawerProps {
 }
 
 export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: Home, path: '/home' },
@@ -40,16 +43,23 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
       
       {/* Drawer */}
-      <div className="relative w-80 max-w-sm bg-opacity-95 backdrop-blur-sm overflow-y-auto" style={{ backgroundColor: 'var(--card)' }}>
+      <div className={`relative ${isExpanded ? 'w-80 max-w-sm' : 'w-20'} bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300`} style={{ backgroundColor: 'var(--card)' }}>
         {/* Header with logo */}
         <div className="p-6 pb-20">
           <div className="flex items-center gap-3 mb-8">
-            <img 
-              src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
-              alt="WEGRAM Logo" 
-              className="w-10 h-10 rounded-xl object-cover shadow-2xl border border-purple-400/30"
-            />
-            <span className="text-xl font-bold text-primary">WEGRAM</span>
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-3 transition-colors ${
+                isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+              } rounded-lg p-2`}
+            >
+              <img 
+                src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
+                alt="WEGRAM Logo" 
+                className="w-10 h-10 rounded-xl object-cover shadow-2xl border border-purple-400/30"
+              />
+              {isExpanded && <span className="text-xl font-bold text-primary">WEGRAM</span>}
+            </button>
           </div>
 
           {/* Menu Items */}
@@ -59,7 +69,10 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
               <button
                 key={item.id}
                 onClick={() => handleItemClick(item.path)}
-                className="w-full flex items-center gap-4 py-4 hover:bg-gray-700 transition-all duration-200 text-left group"
+                className={`w-full flex items-center ${isExpanded ? 'gap-4' : 'justify-center'} py-4 transition-all duration-200 text-left group ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                } rounded-lg mb-2`}
+                title={!isExpanded ? item.label : undefined}
               >
                 <Icon className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-colors duration-200" 
                       style={{
@@ -69,9 +82,11 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text'
                       }} />
-                <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
-                  {item.label}
-                </span>
+                {isExpanded && (
+                  <span className="font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
+                    {item.label}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -91,14 +106,20 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors relative">
+            <button className={`p-2 rounded-lg transition-colors relative ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}>
               <Bell className="w-5 h-5" />
               <div className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full"></div>
             </button>
-            <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+            <button className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}>
               <RotateCcw className="w-5 h-5" />
             </button>
-            <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+            <button className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}>
               <Gift className="w-5 h-5" />
             </button>
           </div>

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Gift } from 'lucide-react';
 import { PostComposer } from '../components/Post/PostComposer';
 import { PostCard } from '../components/Post/PostCard';
 import { usePosts } from '../hooks/usePosts';
 import { useAuth } from '../hooks/useAuth';
 import { mockPosts } from '../data/mockData';
+import { useTheme } from '../hooks/useTheme';
 
 export const Home: React.FC = () => {
+  const { isDark } = useTheme();
   const { posts, loading, createPost, likePost, giftPost } = usePosts();
   const { user, profile } = useAuth();
+  const [activeTab, setActiveTab] = useState<'following' | 'fresh' | 'trending'>('following');
   
   // For MVP demo - show mock posts if no real posts exist
   const displayPosts = posts.length > 0 ? posts : mockPosts.map(post => ({
@@ -64,6 +66,27 @@ export const Home: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-20 pb-24">
+      {/* Feed Navigation */}
+      <div className={`flex gap-1 mb-6 rounded-lg p-1 ${
+        isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
+      }`}>
+        {(['following', 'fresh', 'trending'] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              activeTab === tab
+                ? 'bg-purple-600 text-white'
+                : isDark 
+                  ? 'text-gray-400 hover:text-white hover:bg-gray-700'
+                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-300'
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
+      </div>
+
       {user && profile && (
         <PostComposer 
           onPost={handlePost}
