@@ -17,13 +17,15 @@ export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMess
         {/* Menu Button */}
         <button
           onClick={onMenuClick}
-          className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+          className={`p-2 rounded-lg transition-colors ${
+            isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-200'
+          }`}
           aria-label="Menu"
         >
           <div className="w-5 h-5 flex flex-col justify-center gap-1">
-            <div className="w-full h-0.5 bg-white"></div>
-            <div className="w-full h-0.5 bg-white"></div>
-            <div className="w-full h-0.5 bg-white"></div>
+            <div className={`w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-800'}`}></div>
+            <div className={`w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-800'}`}></div>
+            <div className={`w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-800'}`}></div>
           </div>
         </button>
 
