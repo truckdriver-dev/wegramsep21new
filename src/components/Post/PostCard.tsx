@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heart, MessageCircle, Share, MoreHorizontal, Gift, Bookmark, Smile, Link, Copy, Flag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 import { Post } from '../../data/mockData';
 
 interface PostCardProps {
@@ -14,6 +15,7 @@ interface PostCardProps {
 
 export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onShare, onGift, onBookmark }) => {
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const [showMenu, setShowMenu] = React.useState(false);
 
   const handleAvatarClick = () => {
@@ -70,7 +72,9 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
         <div className="relative">
           <button 
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1 hover:bg-gray-700 rounded transition-colors"
+            className={`p-1 rounded transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
           >
             <MoreHorizontal className="w-4 h-4" />
           </button>
@@ -84,10 +88,16 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
               />
               
               {/* Menu */}
-              <div className="absolute right-0 top-8 z-20 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-2 min-w-48">
+              <div className={`absolute right-0 top-8 z-20 rounded-lg shadow-lg py-2 min-w-48 ${
+                isDark 
+                  ? 'bg-gray-800 border border-gray-700' 
+                  : 'bg-white border border-gray-300'
+              }`}>
                 <button
                   onClick={handlePostReactions}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-gray-700 transition-colors text-primary"
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-colors text-primary ${
+                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                  }`}
                 >
                   <Smile className="w-4 h-4 text-yellow-400" />
                   <span>Post reactions</span>
@@ -95,7 +105,9 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
                 
                 <button
                   onClick={handleCopyLink}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-gray-700 transition-colors text-primary"
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-colors text-primary ${
+                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                  }`}
                 >
                   <Link className="w-4 h-4 text-blue-400" />
                   <span>Copy link</span>
@@ -103,7 +115,9 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
                 
                 <button
                   onClick={handleCopyText}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-gray-700 transition-colors text-primary"
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-colors text-primary ${
+                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                  }`}
                 >
                   <Copy className="w-4 h-4 text-green-400" />
                   <span>Copy text</span>

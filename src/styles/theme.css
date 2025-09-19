@@ -112,7 +112,7 @@ body {
 }
 
 .btn-secondary {
-  background: #1B2340;
+  background: var(--card);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: var(--radius-input);
@@ -125,7 +125,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: #2A3458;
+  background: var(--border);
 }
 
 .input {
@@ -173,7 +173,7 @@ body {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%);
   border: none;
-  color: white;
+  color: #ffffff;
   font-size: 24px;
   font-weight: 300;
   cursor: pointer;
@@ -202,7 +202,7 @@ body {
   border-radius: 50%;
   background: var(--accent);
   border: none;
-  color: white;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;

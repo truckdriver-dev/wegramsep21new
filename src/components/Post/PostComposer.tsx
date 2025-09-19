@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, Video, X, Upload } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 interface PostComposerProps {
   onPost: (content: string) => void;
@@ -12,6 +13,7 @@ export const PostComposer: React.FC<PostComposerProps> = ({
   onCancel,
   placeholder = "What's happening? (text only)"
 }) => {
+  const { isDark } = useTheme();
   const [content, setContent] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -49,11 +51,17 @@ export const PostComposer: React.FC<PostComposerProps> = ({
       
       {/* Post Type Options */}
       <div className="flex gap-2 mb-4">
-        <div className="flex items-center gap-2 px-3 py-2 bg-gray-700 rounded-lg">
+        <div className={`flex items-center gap-2 px-3 py-2 rounded-lg ${
+          isDark ? 'bg-gray-700' : 'bg-gray-200'
+        }`}>
           <span className="text-2xl">📝</span>
           <span className="text-primary text-sm font-medium">Text</span>
         </div>
-        <label className="flex items-center gap-2 px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer transition-colors">
+        <label className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+          isDark 
+            ? 'bg-gray-700 hover:bg-gray-600' 
+            : 'bg-gray-200 hover:bg-gray-300'
+        }`}>
           <span className="text-2xl">📷</span>
           <span className="text-primary text-sm font-medium">Photo</span>
           <input
@@ -64,7 +72,11 @@ export const PostComposer: React.FC<PostComposerProps> = ({
             className="hidden"
           />
         </label>
-        <label className="flex items-center gap-2 px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer transition-colors">
+        <label className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+          isDark 
+            ? 'bg-gray-700 hover:bg-gray-600' 
+            : 'bg-gray-200 hover:bg-gray-300'
+        }`}>
           <span className="text-2xl">🎥</span>
           <span className="text-primary text-sm font-medium">Video</span>
           <input
@@ -81,7 +93,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="What's happening?"
-        className="w-full h-24 bg-transparent text-primary placeholder-gray-400 resize-none outline-none mb-4"
+        className={`w-full h-24 bg-transparent text-primary resize-none outline-none mb-4 ${
+          isDark ? 'placeholder-gray-400' : 'placeholder-gray-500'
+        }`}
         style={{ fontFamily: 'var(--font-base)' }}
       />
       
@@ -90,7 +104,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
         <div className="mb-4">
           <div className="grid grid-cols-2 gap-2">
             {selectedFiles.map((file, index) => (
-              <div key={index} className="relative bg-gray-800 rounded-lg p-3">
+              <div key={index} className={`relative rounded-lg p-3 ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
+              }`}>
                 <div className="flex items-center gap-2">
                   {file.type.startsWith('image/') ? (
                     <Image className="w-4 h-4 text-blue-400" />
@@ -102,7 +118,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
                   </span>
                   <button
                     onClick={() => removeFile(index)}
-                    className="p-1 hover:bg-gray-700 rounded transition-colors"
+                    className={`p-1 rounded transition-colors ${
+                      isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
+                    }`}
                   >
                     <X className="w-3 h-3 text-red-400" />
                   </button>
