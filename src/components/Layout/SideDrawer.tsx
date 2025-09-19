@@ -64,20 +64,20 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
       
       {/* Drawer */}
-      <div className={`relative ${isExpanded ? 'w-80 max-w-sm' : 'w-20'} bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full`} style={{ backgroundColor: 'var(--card)' }}>
+      <div className={`relative ${isExpanded ? 'w-96' : 'w-20'} bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full`} style={{ backgroundColor: 'var(--card)' }}>
         {/* Header with logo */}
         <div className="p-6 flex-1 flex flex-col">
           <div className="flex items-center gap-3 mb-8">
             <button 
               onClick={() => setIsExpanded(!isExpanded)}
-              className={`flex items-center gap-3 transition-colors ${
+              className={`${isExpanded ? 'flex items-center gap-3' : 'flex items-center justify-center'} transition-colors ${
                 isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
-              } rounded-lg p-2`}
+              } rounded-lg p-2 w-full`}
             >
               <img 
                 src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
                 alt="WEGRAM Logo" 
-                className="w-10 h-10 rounded-xl object-cover shadow-2xl border border-purple-400/30"
+                className="w-10 h-10 rounded-xl object-cover shadow-2xl border border-purple-400/30 flex-shrink-0"
               />
               {isExpanded && <span className="text-xl font-bold text-primary">WEGRAM</span>}
             </button>
