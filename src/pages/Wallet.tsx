@@ -13,6 +13,7 @@ import {
   Ticket
 } from 'lucide-react';
 import { SolanaWallet, WalletData } from '../utils/solanaWallet';
+import { useTheme } from '../hooks/useTheme';
 
 interface Token {
   symbol: string;
@@ -23,11 +24,12 @@ interface Token {
 }
 
 export const Wallet: React.FC = () => {
+  const { isDark } = useTheme();
   const [walletData, setWalletData] = useState<WalletData | null>(null);
   const [activeTab, setActiveTab] = useState<'tokens' | 'tickets' | 'activity'>('tokens');
   const [showPrivateKey, setShowPrivateKey] = useState(false);
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
-  const [walletBalance] = useState(0);
+  // const [walletBalance] = useState(0); // Reserved for future use
   const [earnings] = useState(0);
   const [pendingRewards] = useState(156.78);
 
@@ -116,7 +118,11 @@ export const Wallet: React.FC = () => {
       <div className="max-w-md mx-auto px-4 pt-20 pb-24">
         
         {/* Profile Header */}
-        <div className="card mb-6" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
+        <div className={`mb-6 p-6 rounded-2xl ${
+          isDark 
+            ? 'bg-gradient-to-br from-slate-800 to-slate-900' 
+            : 'bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200'
+        }`}>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">
               <span className="text-white font-bold text-lg">W</span>
@@ -138,7 +144,9 @@ export const Wallet: React.FC = () => {
                   className="w-6 h-6 rounded-full object-cover"
                 />
                 <span className="text-3xl font-bold text-primary">${totalUsdValue.toFixed(0)}</span>
-                <button className="p-1 hover:bg-gray-700 rounded transition-colors">
+                <button className={`p-1 rounded transition-colors ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                }`}>
                   <RefreshCw className="w-4 h-4 text-secondary" />
                 </button>
               </div>
@@ -147,7 +155,9 @@ export const Wallet: React.FC = () => {
               <h3 className="text-secondary text-sm mb-2">Earnings</h3>
               <div className="flex items-center gap-2">
                 <span className="text-3xl font-bold text-primary">${earnings}</span>
-                <button className="p-1 hover:bg-gray-700 rounded transition-colors">
+                <button className={`p-1 rounded transition-colors ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                }`}>
                   <RefreshCw className="w-4 h-4 text-secondary" />
                 </button>
               </div>
@@ -158,36 +168,52 @@ export const Wallet: React.FC = () => {
           <div className="grid grid-cols-4 gap-4 mb-6">
             <button
               onClick={handleDeposit}
-              className="flex flex-col items-center gap-2 p-4 hover:bg-gray-700 hover:bg-opacity-30 rounded-full transition-colors"
+              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+                isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
+              }`}
             >
-              <div className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center">
+              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
+                isDark ? 'border-gray-600' : 'border-gray-300'
+              }`}>
                 <ArrowUp className="w-5 h-5" />
               </div>
               <span className="text-sm font-medium text-primary">Deposit</span>
             </button>
             <button
               onClick={handleWithdraw}
-              className="flex flex-col items-center gap-2 p-4 hover:bg-gray-700 hover:bg-opacity-30 rounded-full transition-colors"
+              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+                isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
+              }`}
             >
-              <div className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center">
+              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
+                isDark ? 'border-gray-600' : 'border-gray-300'
+              }`}>
                 <ArrowDown className="w-5 h-5" />
               </div>
               <span className="text-sm font-medium text-primary">Withdraw</span>
             </button>
             <button
               onClick={handleSwap}
-              className="flex flex-col items-center gap-2 p-4 hover:bg-gray-700 hover:bg-opacity-30 rounded-full transition-colors"
+              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+                isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
+              }`}
             >
-              <div className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center">
+              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
+                isDark ? 'border-gray-600' : 'border-gray-300'
+              }`}>
                 <RefreshCw className="w-5 h-5" />
               </div>
               <span className="text-sm font-medium text-primary">Swap</span>
             </button>
             <button
               onClick={handleMore}
-              className="flex flex-col items-center gap-2 p-4 hover:bg-gray-700 hover:bg-opacity-30 rounded-full transition-colors"
+              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+                isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
+              }`}
             >
-              <div className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center">
+              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
+                isDark ? 'border-gray-600' : 'border-gray-300'
+              }`}>
                 <Plus className="w-5 h-5" />
               </div>
               <span className="text-sm font-medium text-primary">More</span>
@@ -219,7 +245,9 @@ export const Wallet: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-700 mb-6">
+        <div className={`flex border-b mb-6 ${
+          isDark ? 'border-gray-700' : 'border-gray-200'
+        }`}>
           <button
             onClick={() => setActiveTab('tokens')}
             className={`flex-1 py-3 text-center transition-colors relative ${
@@ -263,7 +291,9 @@ export const Wallet: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {token.symbol === 'USDC' ? (
-                      <div className="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-2xl">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${
+                        isDark ? 'bg-gray-700' : 'bg-gray-200'
+                      }`}>
                         {token.logo}
                       </div>
                     ) : (
@@ -290,7 +320,9 @@ export const Wallet: React.FC = () => {
 
         {activeTab === 'tickets' && (
           <div className="text-center py-12">
-            <Ticket className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <Ticket className={`w-16 h-16 mx-auto mb-4 ${
+              isDark ? 'text-gray-600' : 'text-gray-400'
+            }`} />
             <h3 className="text-primary font-semibold mb-2">No tickets yet</h3>
             <p className="text-secondary text-sm">Event tickets and NFTs will appear here</p>
           </div>
@@ -298,7 +330,9 @@ export const Wallet: React.FC = () => {
 
         {activeTab === 'activity' && (
           <div className="text-center py-12">
-            <Activity className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <Activity className={`w-16 h-16 mx-auto mb-4 ${
+              isDark ? 'text-gray-600' : 'text-gray-400'
+            }`} />
             <h3 className="text-primary font-semibold mb-2">No activity yet</h3>
             <p className="text-secondary text-sm">Your transaction history will appear here</p>
           </div>
@@ -318,12 +352,16 @@ export const Wallet: React.FC = () => {
                 <span className="text-secondary text-sm">Wallet Address</span>
                 <button
                   onClick={() => handleCopy(walletData.publicKey, 'address')}
-                  className="p-1 hover:bg-gray-600 rounded transition-colors"
+                  className={`p-1 rounded transition-colors ${
+                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
+                  }`}
                 >
                   {copiedItem === 'address' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
-              <div className="p-3 bg-black bg-opacity-30 rounded-lg font-mono text-xs text-primary break-all">
+              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
+                isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
+              }`}>
                 {walletData.publicKey}
               </div>
             </div>
@@ -335,19 +373,25 @@ export const Wallet: React.FC = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowPrivateKey(!showPrivateKey)}
-                    className="p-1 hover:bg-gray-600 rounded transition-colors"
+                    className={`p-1 rounded transition-colors ${
+                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
+                    }`}
                   >
                     {showPrivateKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                   <button
                     onClick={() => handleCopy(walletData.privateKey, 'privateKey')}
-                    className="p-1 hover:bg-gray-600 rounded transition-colors"
+                    className={`p-1 rounded transition-colors ${
+                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
+                    }`}
                   >
                     {copiedItem === 'privateKey' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
-              <div className="p-3 bg-black bg-opacity-30 rounded-lg font-mono text-xs text-primary break-all">
+              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
+                isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
+              }`}>
                 {showPrivateKey ? walletData.privateKey : '•'.repeat(88)}
               </div>
             </div>
@@ -359,12 +403,16 @@ export const Wallet: React.FC = () => {
                   <span className="text-secondary text-sm">Recovery Phrase</span>
                   <button
                     onClick={() => handleCopy(walletData.mnemonic!, 'mnemonic')}
-                    className="p-1 hover:bg-gray-600 rounded transition-colors"
+                    className={`p-1 rounded transition-colors ${
+                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
+                    }`}
                   >
                     {copiedItem === 'mnemonic' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
-                <div className="p-3 bg-black bg-opacity-30 rounded-lg text-xs text-primary">
+                <div className={`p-3 rounded-lg text-xs text-primary ${
+                  isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
+                }`}>
                   {walletData.mnemonic}
                 </div>
               </div>
