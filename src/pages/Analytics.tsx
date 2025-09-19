@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart3, TrendingUp, Users, Eye, Heart, Share, Copy, Check } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
 interface TopPost {
   id: string;
@@ -17,6 +18,7 @@ interface Referral {
 }
 
 export const Analytics: React.FC = () => {
+  const { isDark } = useTheme();
   const [referralLinkCopied, setReferralLinkCopied] = useState(false);
   
   const stats = [
@@ -179,10 +181,12 @@ export const Analytics: React.FC = () => {
             />
             <button
               onClick={handleCopyReferralLink}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-4 py-2 rounded-lg transition-colors text-white ${
                 referralLinkCopied 
-                  ? 'bg-green-600 text-white' 
-                  : 'bg-purple-600 hover:bg-purple-700 text-white'
+                  ? 'bg-green-600' 
+                  : isDark 
+                    ? 'bg-purple-600 hover:bg-purple-700' 
+                    : 'bg-purple-500 hover:bg-purple-600'
               }`}
             >
               {referralLinkCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
