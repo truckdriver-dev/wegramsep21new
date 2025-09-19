@@ -441,9 +441,12 @@ export const UserProfile: React.FC = () => {
                 }`}>
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold">
+                      <button 
+                        onClick={() => navigate(`/user/${post.username}`)}
+                        className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold hover:scale-105 transition-transform cursor-pointer"
+                      >
                         {post.username.charAt(1).toUpperCase()}
-                      </div>
+                      </button>
                       <div>
                         <div className="flex items-center gap-2">
                           <button 
