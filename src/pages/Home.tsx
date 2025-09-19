@@ -72,7 +72,11 @@ export const Home: React.FC = () => {
       {/* Livestream Banner */}
       <div 
         onClick={() => navigate('/livestream')}
-        className="relative mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-800 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl overflow-hidden group"
+        onKeyDown={(e) => e.key === 'Enter' && navigate('/livestream')}
+        role="button"
+        tabIndex={0}
+        aria-label="Go to livestreams"
+        className="relative mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-800 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -86,13 +90,13 @@ export const Home: React.FC = () => {
           {/* Left side - Avatars */}
           <div className="flex items-center space-x-3">
             <div className="flex -space-x-2">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
                 🎬
               </div>
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
                 🎮
               </div>
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 border-3 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
                 🚀
               </div>
             </div>
