@@ -18,7 +18,6 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: Home, path: '/home' },
-    { id: 'profile', label: 'Profile', icon: User, path: profile?.username ? `/user/${profile.username}` : '/home' },
     { id: 'launch-token', label: 'Launch Your Token', icon: Coins, path: '/launch-token' },
     { id: 'trending', label: 'Trending', icon: TrendingUp, path: '/trending' },
     { id: 'verification', label: 'Get Verified', icon: CheckCircle, path: '/verification' },
@@ -67,8 +66,8 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="relative w-96 bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full" style={{ backgroundColor: 'var(--card)' }}>
         {/* Header with logo */}
         <div className="p-6 flex-1 flex flex-col">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="flex items-center gap-3 p-2 w-full">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3 p-2">
               <img 
                 src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
                 alt="WEGRAM Logo" 
@@ -76,6 +75,32 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
               />
               <span className="text-xl font-bold text-primary">WEGRAM</span>
             </div>
+            
+            {/* Profile Button */}
+            {profile?.username && (
+              <button
+                onClick={() => {
+                  navigate(`/user/${profile.username}`);
+                  onClose();
+                }}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 group ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                }`}
+                title="View Profile"
+              >
+                <User className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-colors duration-200" 
+                      style={{
+                        filter: 'drop-shadow(0 0 2px currentColor)',
+                        background: 'linear-gradient(135deg, #00D4FF, #9945FF)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }} />
+                <span className="text-sm font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
+                  Profile
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Menu Items */}
