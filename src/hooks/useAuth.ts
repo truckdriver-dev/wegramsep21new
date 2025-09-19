@@ -22,7 +22,15 @@ export const useAuth = () => {
     // If no Supabase, use mock data
     if (!supabase) {
       setUser(null);
-      setProfile(null);
+      setProfile({
+        id: mockUser.id,
+        username: mockUser.username,
+        email: mockUser.email || null,
+        avatar_url: null,
+        bio: null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
       setLoading(false);
       return;
     }
