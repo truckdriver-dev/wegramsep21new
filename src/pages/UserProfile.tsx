@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Calendar, Users, ExternalLink, Send } from 'lucide-react';
-import { mockPosts } from '../data/mockData';
+import { ArrowLeft, MoreHorizontal, Users, Send, UserPlus, UserMinus } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { useTheme } from '../hooks/useTheme';
 
@@ -117,11 +116,114 @@ const getUserData = (username: string): UserProfileData => {
   };
 };
 
+// Mock feed posts from various users
+const getFeedPosts = () => {
+  return [
+    {
+      id: 'feed1',
+      userId: 'web3_dev',
+      username: '@web3_dev',
+      content: '🚀 Just deployed my first smart contract on Solana! The future is decentralized. Building the next generation of DeFi protocols.',
+      timestamp: '2h',
+      likes: 247,
+      replies: 89,
+      shares: 34,
+      gifts: 12,
+      isFollowing: false
+    },
+    {
+      id: 'feed2',
+      userId: 'crypto_whale',
+      username: '@crypto_whale',
+      content: 'Market update: SOL looking bullish! 📈 The Web3 ecosystem is growing stronger every day. Time to accumulate more tokens!',
+      timestamp: '4h',
+      likes: 892,
+      replies: 156,
+      shares: 78,
+      gifts: 45,
+      isFollowing: true
+    },
+    {
+      id: 'feed3',
+      userId: 'nft_artist',
+      username: '@nft_artist',
+      content: '🎨 New NFT collection dropping tomorrow! Each piece tells a story of the digital revolution. Web3 is empowering creators like never before.',
+      timestamp: '6h',
+      likes: 524,
+      replies: 203,
+      shares: 91,
+      gifts: 28,
+      isFollowing: false
+    },
+    {
+      id: 'feed4',
+      userId: 'defi_guru',
+      username: '@defi_guru',
+      content: 'Yield farming strategies for 2025: 💰 1. Diversify protocols 2. Monitor impermanent loss 3. Compound rewards 4. Stay updated on new pools',
+      timestamp: '8h',
+      likes: 1247,
+      replies: 234,
+      shares: 156,
+      gifts: 67,
+      isFollowing: true
+    },
+    {
+      id: 'feed5',
+      userId: 'blockchain_news',
+      username: '@blockchain_news',
+      content: '🔥 BREAKING: Major DeFi protocol announces integration with Solana. This could be a game-changer for cross-chain liquidity!',
+      timestamp: '12h',
+      likes: 2156,
+      replies: 445,
+      shares: 289,
+      gifts: 134,
+      isFollowing: false
+    },
+    {
+      id: 'feed6',
+      userId: 'solana_builder',
+      username: '@solana_builder',
+      content: 'Building on Solana is incredible! ⚡ The speed and low fees make it perfect for consumer applications. The ecosystem is thriving!',
+      timestamp: '1d',
+      likes: 678,
+      replies: 123,
+      shares: 56,
+      gifts: 23,
+      isFollowing: true
+    },
+    {
+      id: 'feed7',
+      userId: 'crypto_educator',
+      username: '@crypto_educator',
+      content: '📚 Web3 Education Thread: Understanding smart contracts, DeFi protocols, and the future of decentralized finance. Knowledge is power!',
+      timestamp: '1d',
+      likes: 934,
+      replies: 178,
+      shares: 267,
+      gifts: 45,
+      isFollowing: false
+    },
+    {
+      id: 'feed8',
+      userId: 'metaverse_explorer',
+      username: '@metaverse_explorer',
+      content: '🌐 Exploring virtual worlds built on blockchain! The metaverse is becoming reality. Own your digital assets, control your destiny.',
+      timestamp: '2d',
+      likes: 445,
+      replies: 67,
+      shares: 23,
+      gifts: 15,
+      isFollowing: true
+    }
+  ];
+};
+
 export const UserProfile: React.FC = () => {
   const { isDark } = useTheme();
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [followingUsers, setFollowingUsers] = useState<Set<string>>(new Set(['@crypto_whale', '@defi_guru', '@solana_builder', '@metaverse_explorer']));
   
   if (!username) {
     navigate('/home');
@@ -129,11 +231,20 @@ export const UserProfile: React.FC = () => {
   }
 
   const user = getUserData(username);
-  const userPosts = mockPosts.filter(post => post.username === username);
 
   const handleFollow = () => {
     // Follow/unfollow logic would go here
     console.log('Follow/unfollow user:', username);
+  };
+
+  const handleFollowUser = (postUsername: string) => {
+    const newFollowing = new Set(followingUsers);
+    if (newFollowing.has(postUsername)) {
+      newFollowing.delete(postUsername);
+    } else {
+      newFollowing.add(postUsername);
+    }
+    setFollowingUsers(newFollowing);
   };
 
   const handleMessage = () => {
@@ -196,11 +307,6 @@ export const UserProfile: React.FC = () => {
             <p className="text-primary text-sm leading-relaxed">{user.bio}</p>
           </div>
 
-          {/* Stats */}
-          <div className="flex items-center gap-2 mb-4 text-sm text-secondary">
-            <Users className="w-4 h-4" />
-            <span>{user.mutualConnections} Mutual Connections</span>
-          </div>
 
           {/* Message Button */}
           <div className="mb-6">
@@ -213,47 +319,63 @@ export const UserProfile: React.FC = () => {
             </button>
           </div>
 
-          {/* Member Since */}
+          {/* Recent Feed Posts */}
           <div className="card mb-4">
-            <h3 className="text-secondary font-medium mb-2">Member Since</h3>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded bg-purple-600 flex items-center justify-center">
-                <Calendar className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-primary font-medium">{user.joinDate}</span>
-            </div>
-          </div>
-
-          {/* Connections */}
-          {user.connections.length > 0 && (
-            <div className="card mb-4">
-              <h3 className="text-secondary font-medium mb-3">Connections</h3>
-              {user.connections.map((connection, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center">
-                      <ExternalLink className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-primary font-medium">{connection.username}</span>
-                        {connection.verified && (
-                          <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                            <span className="text-white text-xs">✓</span>
-                          </div>
-                        )}
+            <h3 className="text-primary font-semibold mb-4">Recent Posts</h3>
+            <div className="space-y-4">
+              {getFeedPosts().map(post => (
+                <div key={post.id} className={`p-4 rounded-lg transition-colors ${
+                  isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-gray-100 hover:bg-gray-50'
+                }`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold">
+                        {post.username.charAt(1).toUpperCase()}
                       </div>
-                      <div className="text-secondary text-sm">Member since {connection.memberSince}</div>
-                      <div className="text-secondary text-sm">
-                        {connection.posts.toLocaleString()} Posts • {connection.followers} Followers
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-primary font-medium">{post.username}</span>
+                          <span className="text-secondary text-sm">•</span>
+                          <span className="text-secondary text-sm">{post.timestamp}</span>
+                        </div>
                       </div>
                     </div>
+                    <button
+                      onClick={() => handleFollowUser(post.username)}
+                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                        followingUsers.has(post.username)
+                          ? isDark 
+                            ? 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+                            : 'bg-gray-300 text-gray-600 hover:bg-gray-400'
+                          : 'bg-purple-600 text-white hover:bg-purple-700'
+                      }`}
+                    >
+                      {followingUsers.has(post.username) ? (
+                        <>
+                          <UserMinus className="w-3 h-3" />
+                          Unfollow
+                        </>
+                      ) : (
+                        <>
+                          <UserPlus className="w-3 h-3" />
+                          Follow
+                        </>
+                      )}
+                    </button>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-secondary" />
+                  <p className="text-primary mb-3 leading-relaxed">{post.content}</p>
+                  <div className="flex items-center justify-between text-secondary text-sm">
+                    <div className="flex gap-4">
+                      <span>{post.likes} likes</span>
+                      <span>{post.replies} replies</span>
+                      <span>{post.shares} shares</span>
+                    </div>
+                    <span>{post.gifts} gifts</span>
+                  </div>
                 </div>
               ))}
             </div>
-          )}
+          </div>
 
           {/* Stats Card */}
           <div className="card mb-4">
@@ -287,26 +409,6 @@ export const UserProfile: React.FC = () => {
             {user.isFollowing ? 'Following' : 'Follow'}
           </button>
 
-          {/* Recent Posts */}
-          {userPosts.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-primary font-semibold mb-4">Recent Posts</h3>
-              <div className="space-y-4">
-                {userPosts.slice(0, 3).map(post => (
-                  <div key={post.id} className="card">
-                    <p className="text-primary mb-3">{post.content}</p>
-                    <div className="flex items-center justify-between text-secondary text-sm">
-                      <span>{post.timestamp}</span>
-                      <div className="flex gap-4">
-                        <span>{post.likes} likes</span>
-                        <span>{post.replies} replies</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
       
