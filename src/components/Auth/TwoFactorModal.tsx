@@ -138,32 +138,301 @@ export const TwoFactorModal: React.FC<TwoFactorModalProps> = ({ isOpen, onClose 
                           <rect x="20" y="20" width="8" height="8" fill="black"/>
                           <rect x="116" y="20" width="8" height="8" fill="black"/>
                           <rect x="20" y="116" width="8" height="8" fill="black"/>
-                          {/* Data pattern */}
+                          
+                          {/* Dense data pattern - row by row for realistic QR appearance */}
+                          {/* Row 1 */}
                           <rect x="48" y="8" width="4" height="4"/>
                           <rect x="56" y="8" width="4" height="4"/>
                           <rect x="64" y="8" width="4" height="4"/>
                           <rect x="80" y="8" width="4" height="4"/>
                           <rect x="88" y="8" width="4" height="4"/>
+                          <rect x="96" y="8" width="4" height="4"/>
+                          
+                          {/* Row 2 */}
+                          <rect x="48" y="12" width="4" height="4"/>
+                          <rect x="60" y="12" width="4" height="4"/>
+                          <rect x="68" y="12" width="4" height="4"/>
+                          <rect x="76" y="12" width="4" height="4"/>
+                          <rect x="92" y="12" width="4" height="4"/>
+                          
+                          {/* Row 3 */}
                           <rect x="48" y="16" width="4" height="4"/>
                           <rect x="64" y="16" width="4" height="4"/>
                           <rect x="72" y="16" width="4" height="4"/>
+                          <rect x="84" y="16" width="4" height="4"/>
                           <rect x="88" y="16" width="4" height="4"/>
+                          <rect x="100" y="16" width="4" height="4"/>
+                          
+                          {/* Row 4 */}
+                          <rect x="52" y="20" width="4" height="4"/>
+                          <rect x="56" y="20" width="4" height="4"/>
+                          <rect x="68" y="20" width="4" height="4"/>
+                          <rect x="76" y="20" width="4" height="4"/>
+                          <rect x="84" y="20" width="4" height="4"/>
+                          <rect x="96" y="20" width="4" height="4"/>
+                          
+                          {/* Row 5 */}
                           <rect x="48" y="24" width="4" height="4"/>
                           <rect x="56" y="24" width="4" height="4"/>
                           <rect x="72" y="24" width="4" height="4"/>
                           <rect x="80" y="24" width="4" height="4"/>
                           <rect x="96" y="24" width="4" height="4"/>
-                          {/* More pattern continues... */}
+                          <rect x="100" y="24" width="4" height="4"/>
+                          
+                          {/* Row 6 */}
+                          <rect x="44" y="28" width="4" height="4"/>
+                          <rect x="52" y="28" width="4" height="4"/>
+                          <rect x="60" y="28" width="4" height="4"/>
+                          <rect x="76" y="28" width="4" height="4"/>
+                          <rect x="84" y="28" width="4" height="4"/>
+                          <rect x="92" y="28" width="4" height="4"/>
+                          
+                          {/* Row 7 */}
+                          <rect x="48" y="32" width="4" height="4"/>
+                          <rect x="64" y="32" width="4" height="4"/>
+                          <rect x="68" y="32" width="4" height="4"/>
+                          <rect x="80" y="32" width="4" height="4"/>
+                          <rect x="88" y="32" width="4" height="4"/>
+                          <rect x="100" y="32" width="4" height="4"/>
+                          
+                          {/* Row 8 */}
+                          <rect x="52" y="36" width="4" height="4"/>
+                          <rect x="60" y="36" width="4" height="4"/>
+                          <rect x="72" y="36" width="4" height="4"/>
+                          <rect x="84" y="36" width="4" height="4"/>
+                          <rect x="92" y="36" width="4" height="4"/>
+                          <rect x="96" y="36" width="4" height="4"/>
+                          
+                          {/* Row 9 */}
+                          <rect x="44" y="40" width="4" height="4"/>
+                          <rect x="56" y="40" width="4" height="4"/>
+                          <rect x="68" y="40" width="4" height="4"/>
+                          <rect x="76" y="40" width="4" height="4"/>
+                          <rect x="88" y="40" width="4" height="4"/>
+                          <rect x="100" y="40" width="4" height="4"/>
+                          
+                          {/* Row 10 */}
+                          <rect x="48" y="44" width="4" height="4"/>
+                          <rect x="60" y="44" width="4" height="4"/>
+                          <rect x="64" y="44" width="4" height="4"/>
+                          <rect x="80" y="44" width="4" height="4"/>
+                          <rect x="92" y="44" width="4" height="4"/>
+                          
+                          {/* Center timing pattern */}
                           <rect x="8" y="48" width="4" height="4"/>
                           <rect x="16" y="48" width="4" height="4"/>
+                          <rect x="24" y="48" width="4" height="4"/>
                           <rect x="32" y="48" width="4" height="4"/>
+                          <rect x="40" y="48" width="4" height="4"/>
                           <rect x="48" y="48" width="4" height="4"/>
                           <rect x="56" y="48" width="4" height="4"/>
+                          <rect x="64" y="48" width="4" height="4"/>
                           <rect x="72" y="48" width="4" height="4"/>
+                          <rect x="80" y="48" width="4" height="4"/>
                           <rect x="88" y="48" width="4" height="4"/>
+                          <rect x="96" y="48" width="4" height="4"/>
                           <rect x="104" y="48" width="4" height="4"/>
+                          <rect x="112" y="48" width="4" height="4"/>
                           <rect x="120" y="48" width="4" height="4"/>
                           <rect x="128" y="48" width="4" height="4"/>
+                          <rect x="136" y="48" width="4" height="4"/>
+                          
+                          {/* Vertical timing */}
+                          <rect x="48" y="8" width="4" height="4"/>
+                          <rect x="48" y="16" width="4" height="4"/>
+                          <rect x="48" y="24" width="4" height="4"/>
+                          <rect x="48" y="32" width="4" height="4"/>
+                          <rect x="48" y="40" width="4" height="4"/>
+                          <rect x="48" y="56" width="4" height="4"/>
+                          <rect x="48" y="64" width="4" height="4"/>
+                          <rect x="48" y="72" width="4" height="4"/>
+                          <rect x="48" y="80" width="4" height="4"/>
+                          <rect x="48" y="88" width="4" height="4"/>
+                          <rect x="48" y="96" width="4" height="4"/>
+                          <rect x="48" y="104" width="4" height="4"/>
+                          <rect x="48" y="112" width="4" height="4"/>
+                          <rect x="48" y="120" width="4" height="4"/>
+                          <rect x="48" y="128" width="4" height="4"/>
+                          <rect x="48" y="136" width="4" height="4"/>
+                          
+                          {/* More dense data patterns */}
+                          <rect x="52" y="52" width="4" height="4"/>
+                          <rect x="60" y="52" width="4" height="4"/>
+                          <rect x="68" y="52" width="4" height="4"/>
+                          <rect x="84" y="52" width="4" height="4"/>
+                          <rect x="92" y="52" width="4" height="4"/>
+                          <rect x="100" y="52" width="4" height="4"/>
+                          
+                          <rect x="56" y="56" width="4" height="4"/>
+                          <rect x="64" y="56" width="4" height="4"/>
+                          <rect x="72" y="56" width="4" height="4"/>
+                          <rect x="80" y="56" width="4" height="4"/>
+                          <rect x="96" y="56" width="4" height="4"/>
+                          
+                          <rect x="52" y="60" width="4" height="4"/>
+                          <rect x="68" y="60" width="4" height="4"/>
+                          <rect x="76" y="60" width="4" height="4"/>
+                          <rect x="88" y="60" width="4" height="4"/>
+                          <rect x="100" y="60" width="4" height="4"/>
+                          
+                          <rect x="56" y="64" width="4" height="4"/>
+                          <rect x="60" y="64" width="4" height="4"/>
+                          <rect x="72" y="64" width="4" height="4"/>
+                          <rect x="84" y="64" width="4" height="4"/>
+                          <rect x="92" y="64" width="4" height="4"/>
+                          
+                          <rect x="52" y="68" width="4" height="4"/>
+                          <rect x="64" y="68" width="4" height="4"/>
+                          <rect x="80" y="68" width="4" height="4"/>
+                          <rect x="88" y="68" width="4" height="4"/>
+                          <rect x="96" y="68" width="4" height="4"/>
+                          
+                          <rect x="60" y="72" width="4" height="4"/>
+                          <rect x="68" y="72" width="4" height="4"/>
+                          <rect x="76" y="72" width="4" height="4"/>
+                          <rect x="92" y="72" width="4" height="4"/>
+                          <rect x="100" y="72" width="4" height="4"/>
+                          
+                          <rect x="52" y="76" width="4" height="4"/>
+                          <rect x="64" y="76" width="4" height="4"/>
+                          <rect x="84" y="76" width="4" height="4"/>
+                          <rect x="88" y="76" width="4" height="4"/>
+                          
+                          <rect x="56" y="80" width="4" height="4"/>
+                          <rect x="68" y="80" width="4" height="4"/>
+                          <rect x="72" y="80" width="4" height="4"/>
+                          <rect x="80" y="80" width="4" height="4"/>
+                          <rect x="96" y="80" width="4" height="4"/>
+                          
+                          <rect x="60" y="84" width="4" height="4"/>
+                          <rect x="76" y="84" width="4" height="4"/>
+                          <rect x="84" y="84" width="4" height="4"/>
+                          <rect x="92" y="84" width="4" height="4"/>
+                          <rect x="100" y="84" width="4" height="4"/>
+                          
+                          <rect x="52" y="88" width="4" height="4"/>
+                          <rect x="64" y="88" width="4" height="4"/>
+                          <rect x="68" y="88" width="4" height="4"/>
+                          <rect x="80" y="88" width="4" height="4"/>
+                          <rect x="88" y="88" width="4" height="4"/>
+                          
+                          <rect x="56" y="92" width="4" height="4"/>
+                          <rect x="72" y="92" width="4" height="4"/>
+                          <rect x="84" y="92" width="4" height="4"/>
+                          <rect x="96" y="92" width="4" height="4"/>
+                          <rect x="100" y="92" width="4" height="4"/>
+                          
+                          <rect x="52" y="96" width="4" height="4"/>
+                          <rect x="60" y="96" width="4" height="4"/>
+                          <rect x="68" y="96" width="4" height="4"/>
+                          <rect x="76" y="96" width="4" height="4"/>
+                          <rect x="92" y="96" width="4" height="4"/>
+                          
+                          <rect x="64" y="100" width="4" height="4"/>
+                          <rect x="80" y="100" width="4" height="4"/>
+                          <rect x="88" y="100" width="4" height="4"/>
+                          <rect x="96" y="100" width="4" height="4"/>
+                          
+                          {/* Bottom area patterns */}
+                          <rect x="52" y="120" width="4" height="4"/>
+                          <rect x="60" y="120" width="4" height="4"/>
+                          <rect x="68" y="120" width="4" height="4"/>
+                          <rect x="76" y="120" width="4" height="4"/>
+                          <rect x="84" y="120" width="4" height="4"/>
+                          <rect x="92" y="120" width="4" height="4"/>
+                          <rect x="100" y="120" width="4" height="4"/>
+                          
+                          <rect x="56" y="124" width="4" height="4"/>
+                          <rect x="64" y="124" width="4" height="4"/>
+                          <rect x="80" y="124" width="4" height="4"/>
+                          <rect x="88" y="124" width="4" height="4"/>
+                          <rect x="96" y="124" width="4" height="4"/>
+                          
+                          <rect x="52" y="128" width="4" height="4"/>
+                          <rect x="68" y="128" width="4" height="4"/>
+                          <rect x="72" y="128" width="4" height="4"/>
+                          <rect x="84" y="128" width="4" height="4"/>
+                          <rect x="100" y="128" width="4" height="4"/>
+                          
+                          <rect x="60" y="132" width="4" height="4"/>
+                          <rect x="76" y="132" width="4" height="4"/>
+                          <rect x="88" y="132" width="4" height="4"/>
+                          <rect x="92" y="132" width="4" height="4"/>
+                          
+                          <rect x="56" y="136" width="4" height="4"/>
+                          <rect x="64" y="136" width="4" height="4"/>
+                          <rect x="72" y="136" width="4" height="4"/>
+                          <rect x="80" y="136" width="4" height="4"/>
+                          <rect x="96" y="136" width="4" height="4"/>
+                          <rect x="100" y="136" width="4" height="4"/>
+                          
+                          {/* Right side patterns */}
+                          <rect x="140" y="52" width="4" height="4"/>
+                          <rect x="140" y="60" width="4" height="4"/>
+                          <rect x="140" y="68" width="4" height="4"/>
+                          <rect x="140" y="76" width="4" height="4"/>
+                          <rect x="140" y="84" width="4" height="4"/>
+                          <rect x="140" y="92" width="4" height="4"/>
+                          
+                          {/* Additional scattered pattern for density */}
+                          <rect x="12" y="52" width="4" height="4"/>
+                          <rect x="20" y="52" width="4" height="4"/>
+                          <rect x="28" y="52" width="4" height="4"/>
+                          <rect x="36" y="52" width="4" height="4"/>
+                          <rect x="44" y="52" width="4" height="4"/>
+                          
+                          <rect x="12" y="56" width="4" height="4"/>
+                          <rect x="24" y="56" width="4" height="4"/>
+                          <rect x="32" y="56" width="4" height="4"/>
+                          <rect x="40" y="56" width="4" height="4"/>
+                          
+                          <rect x="16" y="60" width="4" height="4"/>
+                          <rect x="28" y="60" width="4" height="4"/>
+                          <rect x="36" y="60" width="4" height="4"/>
+                          <rect x="44" y="60" width="4" height="4"/>
+                          
+                          <rect x="12" y="64" width="4" height="4"/>
+                          <rect x="20" y="64" width="4" height="4"/>
+                          <rect x="32" y="64" width="4" height="4"/>
+                          <rect x="40" y="64" width="4" height="4"/>
+                          
+                          <rect x="16" y="68" width="4" height="4"/>
+                          <rect x="24" y="68" width="4" height="4"/>
+                          <rect x="36" y="68" width="4" height="4"/>
+                          <rect x="44" y="68" width="4" height="4"/>
+                          
+                          <rect x="12" y="72" width="4" height="4"/>
+                          <rect x="28" y="72" width="4" height="4"/>
+                          <rect x="32" y="72" width="4" height="4"/>
+                          <rect x="40" y="72" width="4" height="4"/>
+                          
+                          <rect x="16" y="76" width="4" height="4"/>
+                          <rect x="20" y="76" width="4" height="4"/>
+                          <rect x="36" y="76" width="4" height="4"/>
+                          <rect x="44" y="76" width="4" height="4"/>
+                          
+                          <rect x="12" y="80" width="4" height="4"/>
+                          <rect x="24" y="80" width="4" height="4"/>
+                          <rect x="32" y="80" width="4" height="4"/>
+                          
+                          <rect x="16" y="84" width="4" height="4"/>
+                          <rect x="28" y="84" width="4" height="4"/>
+                          <rect x="40" y="84" width="4" height="4"/>
+                          <rect x="44" y="84" width="4" height="4"/>
+                          
+                          <rect x="20" y="88" width="4" height="4"/>
+                          <rect x="24" y="88" width="4" height="4"/>
+                          <rect x="32" y="88" width="4" height="4"/>
+                          <rect x="36" y="88" width="4" height="4"/>
+                          
+                          <rect x="12" y="92" width="4" height="4"/>
+                          <rect x="28" y="92" width="4" height="4"/>
+                          <rect x="40" y="92" width="4" height="4"/>
+                          
+                          <rect x="16" y="96" width="4" height="4"/>
+                          <rect x="20" y="96" width="4" height="4"/>
+                          <rect x="32" y="96" width="4" height="4"/>
+                          <rect x="44" y="96" width="4" height="4"/>
                         </g>
                       </svg>
                     </div>
