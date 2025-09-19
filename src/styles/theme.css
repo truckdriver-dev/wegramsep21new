@@ -217,3 +217,29 @@ body {
 .ai-dot:hover {
   transform: scale(1.1);
 }
+
+/* Theme-adaptive background utilities to replace bg-black bg-opacity */
+.bg-overlay-light {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-overlay-medium {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.bg-overlay-strong {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark theme overrides for overlays */
+.dark .bg-overlay-light {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark .bg-overlay-medium {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .bg-overlay-strong {
+  background-color: rgba(0, 0, 0, 0.4);
+}

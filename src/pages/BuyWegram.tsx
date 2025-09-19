@@ -78,11 +78,11 @@ export const BuyWegram: React.FC = () => {
 
           {/* Token Stats */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="text-center p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className="text-center p-3 bg-overlay-light rounded-lg">
               <div className="text-lg font-bold text-primary">${(marketCap / 1000000).toFixed(1)}M</div>
               <div className="text-secondary text-sm">Market Cap</div>
             </div>
-            <div className="text-center p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className="text-center p-3 bg-overlay-light rounded-lg">
               <div className="text-lg font-bold text-primary">${(volume24h / 1000).toFixed(0)}K</div>
               <div className="text-secondary text-sm">24h Volume</div>
             </div>
@@ -96,7 +96,7 @@ export const BuyWegram: React.FC = () => {
                 type="text"
                 value={tokenAddress}
                 readOnly
-                className="input flex-1 text-sm bg-black bg-opacity-30 font-mono"
+                className="input flex-1 text-sm bg-overlay-medium font-mono"
               />
               <button
                 onClick={handleCopyAddress}
@@ -178,15 +178,15 @@ export const BuyWegram: React.FC = () => {
         <div className="card mb-6">
           <h3 className="text-lg font-bold text-primary mb-4">How to Buy</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className="flex items-center gap-3 p-3 bg-overlay-light rounded-lg">
               <div className="w-6 h-6 rounded-full bg-purple-600 text-white text-sm font-bold flex items-center justify-center">1</div>
               <span className="text-primary">Connect your Solana wallet to Raydium</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className="flex items-center gap-3 p-3 bg-overlay-light rounded-lg">
               <div className="w-6 h-6 rounded-full bg-purple-600 text-white text-sm font-bold flex items-center justify-center">2</div>
               <span className="text-primary">Swap SOL for WEGRAM tokens</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-black bg-opacity-20 rounded-lg">
+            <div className="flex items-center gap-3 p-3 bg-overlay-light rounded-lg">
               <div className="w-6 h-6 rounded-full bg-purple-600 text-white text-sm font-bold flex items-center justify-center">3</div>
               <span className="text-primary">Start earning rewards on WEGRAM!</span>
             </div>

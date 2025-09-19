@@ -211,7 +211,7 @@ export const Rewards: React.FC = () => {
               
               <div className="space-y-3">
                 {dailyTasks.map((task) => (
-                  <div key={task.id} className="flex items-center justify-between p-3 bg-black bg-opacity-20 rounded-lg">
+                  <div key={task.id} className="flex items-center justify-between p-3 bg-overlay-light rounded-lg">
                     <div className="flex items-center gap-3">
                       <div className="text-2xl">{task.icon}</div>
                       <div>
@@ -332,7 +332,7 @@ export const Rewards: React.FC = () => {
                     type="text"
                     value="https://wegram.com/invite/demo123"
                     readOnly
-                    className="input flex-1 text-sm bg-black bg-opacity-30"
+                    className="input flex-1 text-sm bg-overlay-medium"
                   />
                   <button
                     onClick={handleGetLink}
@@ -348,12 +348,12 @@ export const Rewards: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-black bg-opacity-20 rounded-lg">
+                <div className="text-center p-4 bg-overlay-light rounded-lg">
                   <div className="text-2xl font-bold text-green-400">3</div>
                   <div className="text-secondary text-sm">Friends Joined</div>
                   <div className="text-xs text-green-400">+30 WGM earned</div>
                 </div>
-                <div className="text-center p-4 bg-black bg-opacity-20 rounded-lg">
+                <div className="text-center p-4 bg-overlay-light rounded-lg">
                   <div className="text-2xl font-bold text-purple-400">1</div>
                   <div className="text-secondary text-sm">Pending</div>
                   <div className="text-xs text-purple-400">+10 WGM potential</div>

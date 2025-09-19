@@ -98,7 +98,7 @@ export const Analytics: React.FC = () => {
         </div>
         <div className="space-y-3">
           {topLikedPosts.map((post, index) => (
-            <div key={post.id} className="p-2 bg-black bg-opacity-20 rounded-lg">
+            <div key={post.id} className="p-2 bg-overlay-light rounded-lg">
               <div className="mb-2">
                 <span className="text-purple-400 font-bold text-xs">#{index + 1}</span>
               </div>
@@ -130,7 +130,7 @@ export const Analytics: React.FC = () => {
         </div>
         <div className="space-y-3">
           {topPerformingPosts.map((post, index) => (
-            <div key={post.id} className="p-2 bg-black bg-opacity-20 rounded-lg">
+            <div key={post.id} className="p-2 bg-overlay-light rounded-lg">
               <div className="mb-2">
                 <span className="text-green-400 font-bold text-xs">#{index + 1}</span>
               </div>
@@ -172,7 +172,7 @@ export const Analytics: React.FC = () => {
               type="text"
               value={referralLink}
               readOnly
-              className="input flex-1 text-sm bg-black bg-opacity-30"
+              className="input flex-1 text-sm bg-overlay-medium"
             />
             <button
               onClick={handleCopyReferralLink}
@@ -191,13 +191,13 @@ export const Analytics: React.FC = () => {
 
         {/* Referral Stats */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="text-center p-3 bg-black bg-opacity-20 rounded-lg">
+          <div className="text-center p-3 bg-overlay-light rounded-lg">
             <div className="text-2xl font-bold text-green-400">
               {referrals.filter(r => r.status === 'active').length}
             </div>
             <div className="text-secondary text-sm">Active Referrals</div>
           </div>
-          <div className="text-center p-3 bg-black bg-opacity-20 rounded-lg">
+          <div className="text-center p-3 bg-overlay-light rounded-lg">
             <div className="text-2xl font-bold text-orange-400">
               {referrals.filter(r => r.status === 'pending').length}
             </div>

@@ -49,7 +49,7 @@ export const WegramAI: React.FC = () => {
         </div>
 
         {/* Chat Area */}
-        <div className="bg-black bg-opacity-30 rounded-lg p-4 mb-4 min-h-[300px] max-h-[400px] overflow-y-auto">
+        <div className="bg-overlay-medium rounded-lg p-4 mb-4 min-h-[300px] max-h-[400px] overflow-y-auto">
           <div className="space-y-4">
             {messages.map(message => (
               <div
