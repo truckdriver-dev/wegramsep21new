@@ -43,7 +43,9 @@ export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMess
         <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
             aria-label="Toggle theme"
             title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
@@ -51,21 +53,27 @@ export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMess
           </button>
           <button 
             onClick={onNotificationClick}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors relative"
+            className={`p-2 rounded-lg transition-colors relative ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
           >
             <Bell className="w-5 h-5 text-gray-400" />
             <div className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
           </button>
           <button 
             onClick={onMessageClick}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
           >
             <MessageCircle className="w-5 h-5 text-gray-400" />
           </button>
         </div>
 
         {/* Gift Button */}
-        <button onClick={onGiftClick} className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+        <button onClick={onGiftClick} className={`p-2 rounded-lg transition-colors ${
+          isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+        }`}>
           <Gift className="w-5 h-5 text-gray-400" />
         </button>
       </div>
