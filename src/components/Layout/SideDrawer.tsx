@@ -63,7 +63,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
       
       {/* Drawer */}
-      <div className="relative w-96 bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full" style={{ backgroundColor: 'var(--card)' }}>
+      <div className="relative w-full max-w-sm bg-opacity-95 backdrop-blur-sm overflow-y-auto transition-all duration-300 flex flex-col h-full" style={{ backgroundColor: 'var(--card)' }}>
         {/* Header with logo */}
         <div className="p-6 flex-1 flex flex-col">
           <div className="flex items-center justify-between mb-8">
