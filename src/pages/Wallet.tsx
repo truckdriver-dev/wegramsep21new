@@ -4,14 +4,11 @@ import {
   ArrowDown, 
   RefreshCw, 
   Plus,
-  Copy,
-  Check,
-  Eye,
-  EyeOff,
   Settings,
   Activity,
   Ticket
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { SolanaWallet, WalletData } from '../utils/solanaWallet';
 import { useTheme } from '../hooks/useTheme';
 
@@ -25,10 +22,9 @@ interface Token {
 
 export const Wallet: React.FC = () => {
   const { isDark } = useTheme();
+  const navigate = useNavigate();
   const [walletData, setWalletData] = useState<WalletData | null>(null);
   const [activeTab, setActiveTab] = useState<'tokens' | 'tickets' | 'activity'>('tokens');
-  const [showPrivateKey, setShowPrivateKey] = useState(false);
-  const [copiedItem, setCopiedItem] = useState<string | null>(null);
   // const [walletBalance] = useState(0); // Reserved for future use
   const [earnings] = useState(0);
   const [pendingRewards] = useState(156.78);
@@ -57,15 +53,10 @@ export const Wallet: React.FC = () => {
     localStorage.setItem('wegram_wallet', JSON.stringify(wallet));
   };
 
-  const handleCopy = (text: string, item: string) => {
-    navigator.clipboard?.writeText(text);
-    setCopiedItem(item);
-    setTimeout(() => setCopiedItem(null), 2000);
-  };
 
   const handleDeposit = () => {
     if (walletData) {
-      handleCopy(walletData.publicKey, 'deposit');
+      navigator.clipboard?.writeText(walletData.publicKey);
       alert('Wallet address copied! Share this to receive tokens');
     }
   };
@@ -338,87 +329,34 @@ export const Wallet: React.FC = () => {
           </div>
         )}
 
-        {/* Wallet Details (Collapsible) */}
-        {walletData && (
-          <div className="mt-8 card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-primary font-semibold">Wallet Details</h3>
-              <Settings className="w-5 h-5 text-secondary" />
-            </div>
-            
-            {/* Wallet Address */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-secondary text-sm">Wallet Address</span>
-                <button
-                  onClick={() => handleCopy(walletData.publicKey, 'address')}
-                  className={`p-1 rounded transition-colors ${
-                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
-                  }`}
-                >
-                  {copiedItem === 'address' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
-                isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
-              }`}>
-                {walletData.publicKey}
-              </div>
-            </div>
-
-            {/* Private Key */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-secondary text-sm">Private Key</span>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setShowPrivateKey(!showPrivateKey)}
-                    className={`p-1 rounded transition-colors ${
-                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
-                    }`}
-                  >
-                    {showPrivateKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                  <button
-                    onClick={() => handleCopy(walletData.privateKey, 'privateKey')}
-                    className={`p-1 rounded transition-colors ${
-                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
-                    }`}
-                  >
-                    {copiedItem === 'privateKey' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
-                isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
-              }`}>
-                {showPrivateKey ? walletData.privateKey : '•'.repeat(88)}
-              </div>
-            </div>
-
-            {/* Recovery Phrase */}
-            {walletData.mnemonic && (
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-secondary text-sm">Recovery Phrase</span>
-                  <button
-                    onClick={() => handleCopy(walletData.mnemonic!, 'mnemonic')}
-                    className={`p-1 rounded transition-colors ${
-                      isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-200'
-                    }`}
-                  >
-                    {copiedItem === 'mnemonic' ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
-                </div>
-                <div className={`p-3 rounded-lg text-xs text-primary ${
-                  isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
+        {/* Wallet Settings Link */}
+        <div className="mt-8">
+          <button
+            onClick={() => navigate('/wallet/settings')}
+            className={`w-full card transition-colors ${
+              isDark ? 'hover:bg-gray-800 hover:bg-opacity-50' : 'hover:bg-gray-50'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  isDark ? 'bg-purple-900 bg-opacity-30' : 'bg-purple-50'
                 }`}>
-                  {walletData.mnemonic}
+                  <Settings className="w-6 h-6 text-purple-500" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-primary font-semibold">Wallet Settings</h3>
+                  <p className="text-secondary text-sm">Manage wallet details and security</p>
                 </div>
               </div>
-            )}
-          </div>
-        )}
+              <div className="text-secondary">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
       </div>
     </div>
   );

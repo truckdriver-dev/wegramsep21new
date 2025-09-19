@@ -23,6 +23,7 @@ import { Profile } from './pages/Profile';
 import { Analytics } from './pages/Analytics';
 import { Compose } from './pages/Compose';
 import { Wallet } from './pages/Wallet';
+import { WalletSettings } from './pages/WalletSettings';
 import { Help } from './pages/Help';
 import { Rewards } from './pages/Rewards';
 import { Livestream } from './pages/Livestream';
@@ -103,6 +104,7 @@ function AppContent() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/compose" element={<Compose />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/wallet/settings" element={<WalletSettings />} />
           <Route path="/help" element={<Help />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/livestream" element={<Livestream />} />
