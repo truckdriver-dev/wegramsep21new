@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, BarChart3, Plus, Wallet, HelpCircle, Play } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav: React.FC = () => {
