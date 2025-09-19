@@ -69,73 +69,57 @@ export const Home: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-20 pb-24">
-      {/* Livestream Banner */}
+      {/* Crypto Performance Notification */}
       <div 
-        onClick={() => navigate('/livestream')}
-        onKeyDown={(e) => e.key === 'Enter' && navigate('/livestream')}
+        onClick={() => navigate('/trending')}
+        onKeyDown={(e) => e.key === 'Enter' && navigate('/trending')}
         role="button"
         tabIndex={0}
-        aria-label="Go to livestreams"
-        className="relative mb-6 p-4 rounded-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-800 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-purple-400"
+        aria-label="View trending crypto performance"
+        className="relative mb-4 mx-2 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
-        {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        {/* Sparkle effects */}
-        <div className="absolute top-2 right-6 w-2 h-2 bg-white rounded-full opacity-60 animate-pulse"></div>
-        <div className="absolute bottom-3 right-12 w-1 h-1 bg-purple-200 rounded-full opacity-40 animate-ping"></div>
-        <div className="absolute top-4 left-20 w-1.5 h-1.5 bg-pink-300 rounded-full opacity-50 animate-pulse delay-300"></div>
-        
-        <div className="relative flex items-center justify-between">
-          {/* Left side - Avatars */}
+        <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-full px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center space-x-3">
-            <div className="flex -space-x-2">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
-                🎬
-              </div>
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
-                🎮
-              </div>
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 ring-2 ring-white shadow-lg flex items-center justify-center text-white font-bold text-sm">
-                🚀
-              </div>
+            {/* Profile Pictures */}
+            <div className="flex -space-x-1.5">
+              <img 
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=face" 
+                alt="Trader profile"
+                className="w-8 h-8 rounded-full border-2 border-white object-cover"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1494790108755-2616b73b1eb0?w=400&h=400&fit=crop&crop=face" 
+                alt="Trader profile"
+                className="w-8 h-8 rounded-full border-2 border-white object-cover"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
+                alt="Trader profile"
+                className="w-8 h-8 rounded-full border-2 border-white object-cover"
+              />
             </div>
             
-            {/* Content */}
-            <div className="ml-4">
+            {/* Crypto Performance Text */}
+            <div className="flex-1">
               <div className="flex items-center space-x-2">
-                <h3 className="text-white font-bold text-lg tracking-wide">LIVE STREAMS</h3>
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-lg"></div>
-              </div>
-              <p className="text-purple-100 text-sm font-medium">Join the action now</p>
-            </div>
-          </div>
-          
-          {/* Right side - Stats */}
-          <div className="flex items-center space-x-4">
-            <div className="text-right">
-              <div className="flex items-center justify-end space-x-1 mb-1">
-                <Users className="w-4 h-4 text-purple-200" />
-                <span className="text-white font-bold text-lg">2.4K</span>
-              </div>
-              <div className="flex items-center justify-end space-x-1">
-                <TrendingUp className="w-3 h-3 text-green-400" />
-                <span className="text-purple-100 text-xs font-medium">+127</span>
+                <span className="text-white font-bold text-sm">SOL PUMPING</span>
+                <div className="flex items-center space-x-1">
+                  <TrendingUp className="w-3 h-3 text-green-400" />
+                  <span className="text-green-300 font-bold text-sm">+24.7%</span>
+                </div>
               </div>
             </div>
             
-            {/* Activity pulse */}
-            <div className="relative">
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <Zap className="w-4 h-4 text-yellow-300 animate-pulse" />
-              </div>
-              <div className="absolute inset-0 w-8 h-8 border-2 border-white/30 rounded-full animate-ping"></div>
+            {/* Activity Indicator */}
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-purple-100 text-xs font-medium">+417</span>
             </div>
           </div>
         </div>
         
-        {/* Bottom decorative line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        {/* Subtle glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-sm"></div>
       </div>
 
       {/* Feed Navigation */}
