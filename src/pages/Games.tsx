@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Gamepad2, Trophy, Coins, Users, Play, Star, Clock, TrendingUp, Zap, Target, Sword, Crown } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
 interface Game {
   id: string;
@@ -44,6 +45,7 @@ interface Achievement {
 }
 
 export const Games: React.FC = () => {
+  const { isDark } = useTheme();
   const [activeTab, setActiveTab] = useState<'games' | 'tournaments' | 'achievements' | 'leaderboard'>('games');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
@@ -384,7 +386,9 @@ export const Games: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-1 mb-4 bg-gray-800 bg-opacity-50 rounded-lg p-1 overflow-x-auto">
+      <div className={`flex gap-1 mb-4 rounded-lg p-1 overflow-x-auto ${
+        isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
+      }`}>
         {(['games', 'tournaments', 'achievements', 'leaderboard'] as const).map((tab) => (
           <button
             key={tab}
@@ -410,7 +414,9 @@ export const Games: React.FC = () => {
               className={`px-4 py-2 rounded-full text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0 min-w-fit ${
                 selectedCategory === category
                   ? 'bg-purple-600 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  : isDark 
+                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
               }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -426,7 +432,9 @@ export const Games: React.FC = () => {
             {filteredGames.map((game) => (
               <div key={game.id} className="card">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-3xl">
+                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                    isDark ? 'bg-gray-700' : 'bg-gray-300'
+                  }`}>
                     {game.thumbnail}
                   </div>
                   <div className="flex-1">

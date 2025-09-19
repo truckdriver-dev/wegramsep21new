@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Gift, Calendar, Users, Trophy, Zap, Star, Clock, CheckCircle, Copy, Coins } from 'lucide-react';
 import { mockRewards, Reward } from '../data/mockData';
+import { useTheme } from '../hooks/useTheme';
 
 interface Achievement {
   id: string;
@@ -23,6 +24,7 @@ interface DailyTask {
 }
 
 export const Rewards: React.FC = () => {
+  const { isDark } = useTheme();
   const [rewards, setRewards] = useState<Reward[]>(mockRewards);
   const [activeTab, setActiveTab] = useState<'daily' | 'achievements' | 'referrals'>('daily');
   const [linkCopied, setLinkCopied] = useState(false);
@@ -177,7 +179,9 @@ export const Rewards: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-1 mb-6 bg-gray-800 bg-opacity-50 rounded-lg p-1">
+      <div className={`flex gap-1 mb-6 rounded-lg p-1 ${
+        isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
+      }`}>
         {(['daily', 'achievements', 'referrals'] as const).map((tab) => (
           <button
             key={tab}
@@ -185,7 +189,9 @@ export const Rewards: React.FC = () => {
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
               activeTab === tab
                 ? 'bg-purple-600 text-white'
-                : 'text-gray-400 hover:text-white'
+                : isDark 
+                  ? 'text-gray-400 hover:text-white hover:bg-gray-700'
+                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-300'
             }`}
           >
             {tab === 'daily' && <Calendar className="w-4 h-4 inline mr-2" />}
@@ -268,7 +274,9 @@ export const Rewards: React.FC = () => {
               <div key={achievement.id} className="card">
                 <div className="flex items-start gap-4">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
-                    achievement.completed ? 'bg-yellow-400 bg-opacity-20' : 'bg-gray-700'
+                    achievement.completed 
+                      ? 'bg-yellow-400 bg-opacity-20' 
+                      : isDark ? 'bg-gray-700' : 'bg-gray-300'
                   }`}>
                     {achievement.completed ? achievement.icon : '🔒'}
                   </div>

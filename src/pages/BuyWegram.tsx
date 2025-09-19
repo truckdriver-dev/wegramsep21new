@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ExternalLink, ShoppingCart, TrendingUp, Zap, Shield, Users, Copy, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 export const BuyWegram: React.FC = () => {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const [copiedAddress, setCopiedAddress] = useState(false);
   
@@ -38,7 +40,9 @@ export const BuyWegram: React.FC = () => {
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className={`p-2 rounded-lg transition-colors ${
+              isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            }`}
           >
             <ArrowLeft className="w-6 h-6 text-primary" />
           </button>

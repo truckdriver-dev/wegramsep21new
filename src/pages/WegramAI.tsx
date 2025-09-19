@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Bot, Send } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
 interface ChatMessage {
   id: string;
@@ -9,6 +10,7 @@ interface ChatMessage {
 }
 
 export const WegramAI: React.FC = () => {
+  const { isDark } = useTheme();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -60,7 +62,7 @@ export const WegramAI: React.FC = () => {
                   className={`max-w-[80%] p-3 rounded-lg ${
                     message.type === 'user'
                       ? 'bg-purple-600 text-white'
-                      : 'bg-gray-700 text-gray-100'
+                      : isDark ? 'bg-gray-700 text-gray-100' : 'bg-gray-200 text-gray-800'
                   }`}
                 >
                   <p className="text-sm">{message.content}</p>
