@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Bookmark, Coins, Play, ShoppingCart, CheckCircle, LogOut, Shield } from 'lucide-react';
+import { Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Bookmark, Coins, Play, ShoppingCart, CheckCircle, LogOut, Shield, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import { TwoFactorModal } from '../Auth/TwoFactorModal';
@@ -12,12 +12,13 @@ interface SideDrawerProps {
 
 export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
   const { isDark } = useTheme();
-  const { signOut } = useAuth();
+  const { signOut, profile } = useAuth();
   const navigate = useNavigate();
   const [isTwoFactorModalOpen, setIsTwoFactorModalOpen] = useState(false);
 
   const menuItems = [
     { id: 'home', label: 'Home', icon: Home, path: '/home' },
+    { id: 'profile', label: 'Profile', icon: User, path: profile?.username ? `/user/${profile.username}` : '/home' },
     { id: 'launch-token', label: 'Launch Your Token', icon: Coins, path: '/launch-token' },
     { id: 'trending', label: 'Trending', icon: TrendingUp, path: '/trending' },
     { id: 'verification', label: 'Get Verified', icon: CheckCircle, path: '/verification' },
