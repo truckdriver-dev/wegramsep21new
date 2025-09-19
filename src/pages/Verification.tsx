@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, Star, Users, Shield, Zap, Crown, ArrowRight, Copy, Check } from 'lucide-react';
+import { CheckCircle, Star, Shield, Zap, Crown, ArrowRight, Copy, Check } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 interface VerificationTier {
@@ -15,7 +15,6 @@ interface VerificationTier {
 export const Verification: React.FC = () => {
   const { isDark } = useTheme();
   const [selectedTier, setSelectedTier] = useState<string>('blue');
-  const [walletConnected, setWalletConnected] = useState(false);
   const [paymentStep, setPaymentStep] = useState<'select' | 'payment' | 'processing' | 'success'>('select');
   const [copiedAddress, setCopiedAddress] = useState(false);
 
@@ -68,10 +67,8 @@ export const Verification: React.FC = () => {
   ];
 
   const selectedVerification = verificationTiers.find(tier => tier.id === selectedTier);
-  const mockWalletAddress = 'WGM7xK4p...qR9mL3v';
 
   const handleConnectWallet = () => {
-    setWalletConnected(true);
     setTimeout(() => setPaymentStep('payment'), 1000);
   };
 
