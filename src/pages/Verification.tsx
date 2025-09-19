@@ -26,11 +26,18 @@ export const Verification: React.FC = () => {
 
   const handleStartVerification = () => {
     setPaymentStep('payment');
+    // Automatically start monitoring for payment
+    startPaymentMonitoring();
   };
 
-  const handlePayment = () => {
+  const startPaymentMonitoring = () => {
     setPaymentStep('processing');
-    setTimeout(() => setPaymentStep('success'), 3000);
+    
+    // In a real app, this would monitor the blockchain for incoming transactions
+    // For demo purposes, simulating automatic detection after 5 seconds
+    setTimeout(() => {
+      setPaymentStep('success');
+    }, 5000);
   };
 
   const handleCopyAddress = () => {
@@ -97,9 +104,9 @@ export const Verification: React.FC = () => {
         <div className="card">
           <div className="text-center mb-6">
             <Shield className="w-12 h-12 mx-auto mb-4 text-green-400" />
-            <h3 className="text-xl font-semibold text-primary mb-2">Complete Payment</h3>
+            <h3 className="text-xl font-semibold text-primary mb-2">Send Payment</h3>
             <p className="text-secondary text-sm">
-              Send exactly {wgmAmount} WGM ($2.00 worth) to the address below to complete your verification
+              Send exactly {wgmAmount} WGM ($2.00 worth) to the address below. We'll automatically detect your payment and complete verification.
             </p>
           </div>
 
@@ -145,12 +152,14 @@ export const Verification: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={handlePayment}
-            className="w-full btn-primary py-3 font-semibold"
-          >
-            I've Sent the Payment
-          </button>
+          <div className="text-center">
+            <div className="animate-pulse text-secondary text-sm mb-2">
+              Monitoring blockchain for your payment...
+            </div>
+            <div className="text-xs text-secondary opacity-75">
+              This usually takes 1-2 minutes
+            </div>
+          </div>
         </div>
       )}
 
@@ -159,9 +168,9 @@ export const Verification: React.FC = () => {
           <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center animate-pulse">
             <Zap className="w-8 h-8 text-purple-400" />
           </div>
-          <h3 className="text-xl font-semibold text-primary mb-2">Processing Payment</h3>
+          <h3 className="text-xl font-semibold text-primary mb-2">Payment Detected!</h3>
           <p className="text-secondary mb-6">
-            We're verifying your transaction on the blockchain. This usually takes 1-2 minutes.
+            We found your payment on the blockchain. Confirming transaction and adding your verification badge...
           </p>
           <div className={`w-full rounded-full h-2 ${isDark ? 'bg-gray-700' : 'bg-gray-300'}`}>
             <div className="bg-purple-500 h-2 rounded-full animate-pulse" style={{ width: '65%' }}></div>
