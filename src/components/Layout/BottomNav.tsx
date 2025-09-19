@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, BarChart3, Plus, Wallet, HelpCircle } from 'lucide-react';
+import { User, BarChart3, Plus, Wallet, HelpCircle, Play } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav: React.FC = () => {
@@ -7,7 +7,7 @@ export const BottomNav: React.FC = () => {
   const location = useLocation();
 
   const tabs = [
-    { id: 'profile', label: 'Video', icon: User, path: '/profile' },
+    { id: 'video', label: 'Video', icon: Play, path: '/video' },
     { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/analytics' },
     { id: 'add', label: 'Add', icon: Plus, path: '/compose' },
     { id: 'wallet', label: 'Wallet', icon: Wallet, path: '/wallet' },
