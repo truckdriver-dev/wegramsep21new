@@ -6,6 +6,12 @@ WEGRAM is a next-generation Web3 social media platform that combines traditional
 
 Preferred communication style: Simple, everyday language.
 
+## Design Philosophy
+- **Beautiful, not cookie cutter**: All designs should be aesthetically pleasing and unique, avoiding generic or template-like appearances
+- **Production-ready quality**: Every webpage and component should be fully featured and worthy of production deployment  
+- **Professional standards**: Focus on creating polished, high-quality interfaces that users would expect from professional applications
+- **Attention to detail**: Emphasize proper spacing, typography, visual hierarchy, and modern design principles
+
 # System Architecture
 
 ## Frontend Architecture
