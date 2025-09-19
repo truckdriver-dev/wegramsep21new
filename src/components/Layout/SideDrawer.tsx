@@ -77,8 +77,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Profile Creation Button */}
-            {(
-              <button
+            <button
                 onClick={() => {
                   navigate('/profile/edit');
                   onClose();
@@ -100,7 +99,6 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                   Profile
                 </span>
               </button>
-            )}
           </div>
 
           {/* Menu Items */}
