@@ -102,24 +102,24 @@ export const Analytics: React.FC = () => {
         <div className="space-y-3">
           {topLikedPosts.map((post, index) => (
             <div key={post.id} className="p-2 bg-black bg-opacity-20 rounded-lg">
-              <div className="flex items-start justify-between mb-2">
+              <div className="mb-2">
                 <span className="text-purple-400 font-bold text-xs">#{index + 1}</span>
-                <div className="flex items-center gap-3 text-xs text-secondary">
-                  <span className="flex items-center gap-1">
-                    <Heart className="w-3 h-3" />
-                    {post.likes}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Share className="w-3 h-3" />
-                    {post.shares}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Eye className="w-3 h-3" />
-                    {post.views}
-                  </span>
-                </div>
               </div>
-              <p className="text-primary text-xs leading-relaxed">{post.content}</p>
+              <p className="text-primary text-xs leading-relaxed mb-2">{post.content}</p>
+              <div className="flex items-center gap-3 text-xs text-secondary">
+                <span className="flex items-center gap-1">
+                  <Heart className="w-3 h-3" />
+                  {post.likes}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Share className="w-3 h-3" />
+                  {post.shares}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Eye className="w-3 h-3" />
+                  {post.views}
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -134,24 +134,24 @@ export const Analytics: React.FC = () => {
         <div className="space-y-3">
           {topPerformingPosts.map((post, index) => (
             <div key={post.id} className="p-2 bg-black bg-opacity-20 rounded-lg">
-              <div className="flex items-start justify-between mb-2">
+              <div className="mb-2">
                 <span className="text-green-400 font-bold text-xs">#{index + 1}</span>
-                <div className="flex items-center gap-3 text-xs text-secondary">
-                  <span className="flex items-center gap-1">
-                    <Eye className="w-3 h-3" />
-                    {post.views}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Heart className="w-3 h-3" />
-                    {post.likes}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Share className="w-3 h-3" />
-                    {post.shares}
-                  </span>
-                </div>
               </div>
-              <p className="text-primary text-xs leading-relaxed">{post.content}</p>
+              <p className="text-primary text-xs leading-relaxed mb-2">{post.content}</p>
+              <div className="flex items-center gap-3 text-xs text-secondary">
+                <span className="flex items-center gap-1">
+                  <Eye className="w-3 h-3" />
+                  {post.views}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Heart className="w-3 h-3" />
+                  {post.likes}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Share className="w-3 h-3" />
+                  {post.shares}
+                </span>
+              </div>
             </div>
           ))}
         </div>
