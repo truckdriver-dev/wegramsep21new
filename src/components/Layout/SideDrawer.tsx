@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Grid3X3, Bookmark, Coins, Play, ShoppingCart } from 'lucide-react';
+import { X, Home, TrendingUp, Compass, Gamepad2, MessageCircle, Gift, Bot, Video, Bell, RotateCcw, Grid3X3, Bookmark, Coins, Play, ShoppingCart, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface SideDrawerProps {
@@ -14,6 +14,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
     { id: 'home', label: 'Home', icon: Home, path: '/home' },
     { id: 'launch-token', label: 'Launch Your Token', icon: Coins, path: '/launch-token' },
     { id: 'trending', label: 'Trending', icon: TrendingUp, path: '/trending' },
+    { id: 'verification', label: 'Get Verified', icon: CheckCircle, path: '/verification' },
     { id: 'bookmarks', label: 'Bookmarks', icon: Bookmark, path: '/bookmarks' },
     { id: 'explore', label: 'Explore', icon: Compass, path: '/explore' },
     { id: 'staking', label: 'Staking', icon: Coins, path: '/staking' },
