@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
   const { isDark } = useTheme();
   const { posts, loading, createPost, likePost, giftPost } = usePosts();
   const { user, profile } = useAuth();
-  const [activeTab, setActiveTab] = useState<'following' | 'fresh' | 'trending'>('following');
+  const [activeTab, setActiveTab] = useState<'following' | 'trenches' | 'trending'>('following');
   
   // For MVP demo - show mock posts if no real posts exist
   const displayPosts = posts.length > 0 ? posts : mockPosts.map(post => ({
@@ -70,7 +70,7 @@ export const Home: React.FC = () => {
       <div className={`flex gap-1 mb-6 rounded-lg p-1 ${
         isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-200 bg-opacity-70'
       }`}>
-        {(['following', 'fresh', 'trending'] as const).map((tab) => (
+        {(['following', 'trenches', 'trending'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
