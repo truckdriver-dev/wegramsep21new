@@ -87,7 +87,7 @@ export const Analytics: React.FC = () => {
 
   const handleCopyReferralLink = () => {
     navigator.clipboard?.writeText(referralLink);
-    // Wallet integration coming soon
+    setReferralLinkCopied(true);
     setTimeout(() => setReferralLinkCopied(false), 2000);
   };
 

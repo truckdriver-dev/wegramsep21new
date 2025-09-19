@@ -123,11 +123,15 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
                   <span>Copy text</span>
                 </button>
                 
-                <div className="border-t border-gray-700 my-1"></div>
+                <div className={`border-t my-1 ${
+                  isDark ? 'border-gray-700' : 'border-gray-200'
+                }`}></div>
                 
                 <button
                   onClick={handleReportPost}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-gray-700 transition-colors text-red-400"
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-colors text-red-400 ${
+                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                  }`}
                 >
                   <Flag className="w-4 h-4" />
                   <span>Report post</span>
