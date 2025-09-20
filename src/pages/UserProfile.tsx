@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, MoreHorizontal, Users, Send, UserPlus, UserMinus } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
+import { PostCard } from '../components/Post/PostCard';
 import { useTheme } from '../hooks/useTheme';
 
 interface UserProfileData {
@@ -228,121 +229,250 @@ const getUserData = (username: string): UserProfileData => {
   };
 };
 
-// Mock feed posts from various users
-const getFeedPosts = () => {
-  return [
-    {
-      id: 'feed1',
-      userId: 'web3_dev',
-      username: '@web3_dev',
-      content: '🚀 Just deployed my first smart contract on Solana! The future is decentralized. Building the next generation of DeFi protocols.',
-      timestamp: '2h',
-      likes: 247,
-      replies: 89,
-      shares: 34,
-      gifts: 12,
-      isFollowing: false
+// Mock feed posts personalized for each user based on their interests and following patterns
+const getFeedPosts = (username: string) => {
+  // Define realistic following relationships and interests for each user
+  const userInterests: { [key: string]: { following: string[], interests: string[], recommendations: string[] } } = {
+    '@crypto_trader': {
+      following: ['@defi_guru', '@crypto_whale', '@blockchain_news', '@solana_builder'],
+      interests: ['trading', 'market_analysis', 'defi', 'solana'],
+      recommendations: ['@crypto_educator', '@web3_dev']
     },
-    {
-      id: 'feed2',
-      userId: 'crypto_whale',
-      username: '@crypto_whale',
-      content: 'Market update: SOL looking bullish! 📈 The Web3 ecosystem is growing stronger every day. Time to accumulate more tokens!',
-      timestamp: '4h',
-      likes: 892,
-      replies: 156,
-      shares: 78,
-      gifts: 45,
-      isFollowing: true
+    '@defi_expert': {
+      following: ['@crypto_whale', '@solana_builder', '@crypto_educator', '@web3_dev'],
+      interests: ['defi', 'yield_farming', 'protocols', 'solana'],
+      recommendations: ['@blockchain_news', '@crypto_trader']
     },
-    {
-      id: 'feed3',
-      userId: 'nft_artist',
-      username: '@nft_artist',
-      content: '🎨 New NFT collection dropping tomorrow! Each piece tells a story of the digital revolution. Web3 is empowering creators like never before.',
-      timestamp: '6h',
-      likes: 524,
-      replies: 203,
-      shares: 91,
-      gifts: 28,
-      isFollowing: false
+    '@nft_collector': {
+      following: ['@nft_artist', '@metaverse_explorer', '@crypto_whale', '@crypto_educator'],
+      interests: ['nft', 'art', 'metaverse', 'collecting'],
+      recommendations: ['@blockchain_news', '@defi_guru']
     },
-    {
-      id: 'feed4',
-      userId: 'defi_guru',
-      username: '@defi_guru',
-      content: 'Yield farming strategies for 2025: 💰 1. Diversify protocols 2. Monitor impermanent loss 3. Compound rewards 4. Stay updated on new pools',
-      timestamp: '8h',
-      likes: 1247,
-      replies: 234,
-      shares: 156,
-      gifts: 67,
-      isFollowing: true
+    '@web3_dev': {
+      following: ['@solana_builder', '@defi_guru', '@crypto_educator', '@crypto_whale'],
+      interests: ['development', 'solana', 'defi', 'smart_contracts'],
+      recommendations: ['@blockchain_news', '@nft_artist']
     },
-    {
-      id: 'feed5',
-      userId: 'blockchain_news',
-      username: '@blockchain_news',
-      content: '🔥 BREAKING: Major DeFi protocol announces integration with Solana. This could be a game-changer for cross-chain liquidity!',
-      timestamp: '12h',
-      likes: 2156,
-      replies: 445,
-      shares: 289,
-      gifts: 134,
-      isFollowing: false
+    '@crypto_whale': {
+      following: ['@defi_guru', '@blockchain_news', '@crypto_educator', '@solana_builder'],
+      interests: ['investment', 'institutional', 'defi', 'market_analysis'],
+      recommendations: ['@crypto_trader', '@web3_dev']
     },
-    {
-      id: 'feed6',
-      userId: 'solana_builder',
-      username: '@solana_builder',
-      content: 'Building on Solana is incredible! ⚡ The speed and low fees make it perfect for consumer applications. The ecosystem is thriving!',
-      timestamp: '1d',
-      likes: 678,
-      replies: 123,
-      shares: 56,
-      gifts: 23,
-      isFollowing: true
+    '@nft_artist': {
+      following: ['@nft_collector', '@metaverse_explorer', '@crypto_whale', '@crypto_educator'],
+      interests: ['art', 'nft', 'metaverse', 'creativity'],
+      recommendations: ['@blockchain_news', '@defi_guru']
     },
-    {
-      id: 'feed7',
-      userId: 'crypto_educator',
-      username: '@crypto_educator',
-      content: '📚 Web3 Education Thread: Understanding smart contracts, DeFi protocols, and the future of decentralized finance. Knowledge is power!',
-      timestamp: '1d',
-      likes: 934,
-      replies: 178,
-      shares: 267,
-      gifts: 45,
-      isFollowing: false
+    '@defi_guru': {
+      following: ['@crypto_whale', '@solana_builder', '@crypto_educator', '@web3_dev'],
+      interests: ['defi', 'yield_farming', 'protocols', 'education'],
+      recommendations: ['@crypto_trader', '@blockchain_news']
     },
-    {
-      id: 'feed8',
-      userId: 'metaverse_explorer',
-      username: '@metaverse_explorer',
-      content: '🌐 Exploring virtual worlds built on blockchain! The metaverse is becoming reality. Own your digital assets, control your destiny.',
-      timestamp: '2d',
-      likes: 445,
-      replies: 67,
-      shares: 23,
-      gifts: 15,
-      isFollowing: true
+    '@blockchain_news': {
+      following: ['@crypto_whale', '@defi_guru', '@solana_builder', '@crypto_educator'],
+      interests: ['news', 'analysis', 'institutional', 'adoption'],
+      recommendations: ['@crypto_trader', '@web3_dev']
+    },
+    '@solana_builder': {
+      following: ['@web3_dev', '@defi_guru', '@crypto_educator', '@crypto_whale'],
+      interests: ['solana', 'development', 'defi', 'ecosystem'],
+      recommendations: ['@blockchain_news', '@crypto_trader']
+    },
+    '@crypto_educator': {
+      following: ['@defi_guru', '@crypto_whale', '@web3_dev', '@solana_builder'],
+      interests: ['education', 'tutorials', 'defi', 'blockchain'],
+      recommendations: ['@nft_artist', '@metaverse_explorer']
+    },
+    '@metaverse_explorer': {
+      following: ['@nft_artist', '@nft_collector', '@crypto_whale', '@crypto_educator'],
+      interests: ['metaverse', 'nft', 'virtual_worlds', 'art'],
+      recommendations: ['@blockchain_news', '@defi_guru']
     }
-  ];
+  };
+
+  // Generate personalized feed based on user's interests and following
+  const generatePersonalizedFeed = (username: string) => {
+    const userProfile = userInterests[username];
+    if (!userProfile) return [];
+
+    const allUsers = [
+      '@crypto_trader', '@defi_expert', '@nft_collector', '@web3_dev', '@crypto_whale',
+      '@nft_artist', '@defi_guru', '@blockchain_news', '@solana_builder', '@crypto_educator', '@metaverse_explorer'
+    ];
+
+    const feed = [];
+    let postId = 1;
+
+    // Add posts from users they follow (70% of feed)
+    userProfile.following.forEach(followedUser => {
+      const posts = generatePostsForUser(followedUser, userProfile.interests, 2);
+      feed.push(...posts.map(post => ({ ...post, id: `${username}_feed${postId++}`, isFollowing: true })));
+    });
+
+    // Add posts from recommended users (20% of feed)
+    userProfile.recommendations.forEach(recUser => {
+      const posts = generatePostsForUser(recUser, userProfile.interests, 1);
+      feed.push(...posts.map(post => ({ ...post, id: `${username}_feed${postId++}`, isFollowing: false })));
+    });
+
+    // Add posts from other users based on interests (10% of feed)
+    const otherUsers = allUsers.filter(u => 
+      !userProfile.following.includes(u) && 
+      !userProfile.recommendations.includes(u) && 
+      u !== username
+    );
+    const randomUser = otherUsers[Math.floor(Math.random() * otherUsers.length)];
+    const posts = generatePostsForUser(randomUser, userProfile.interests, 1);
+    feed.push(...posts.map(post => ({ ...post, id: `${username}_feed${postId++}`, isFollowing: false })));
+
+    return feed.sort(() => Math.random() - 0.5); // Shuffle the feed
+  };
+
+  // Generate posts for a specific user based on interests
+  const generatePostsForUser = (username: string, interests: string[], count: number) => {
+    const postTemplates = {
+      '@crypto_trader': [
+        '📊 Trading signals: {interest} showing strong momentum! Perfect entry point for swing traders.',
+        '📈 Market update: {interest} breaking resistance levels. Time to position for the next move!',
+        '💰 Portfolio update: {interest} positions performing well. Risk management is key!'
+      ],
+      '@defi_guru': [
+        '💎 DeFi yield opportunities: New {interest} pools offering 15% APY!',
+        '🔧 Yield farming strategies for {interest}: Compound interest is the 8th wonder!',
+        '⚡ {interest} protocol upgrade: Lower fees, higher rewards!'
+      ],
+      '@crypto_whale': [
+        '🐋 Large {interest} accumulation detected! Smart money is positioning.',
+        '💎 Institutional adoption of {interest} accelerating! The floodgates are opening.',
+        '📊 Market analysis: {interest} showing institutional interest patterns.'
+      ],
+      '@nft_artist': [
+        '🎨 New {interest} collection dropping! Each piece tells a story of digital revolution.',
+        '🌐 {interest} art in the metaverse! The 3D environment brings it to life.',
+        '💎 {interest} NFT sales hitting new highs! Digital art is becoming mainstream.'
+      ],
+      '@nft_collector': [
+        '🎨 Just acquired a rare {interest} piece! The floor price keeps climbing.',
+        '🌐 Virtual {interest} gallery opening! Come check out the latest collections.',
+        '💎 {interest} market is heating up! Digital real estate is the future.'
+      ],
+      '@web3_dev': [
+        '🚀 Just deployed a {interest} smart contract! The future is decentralized.',
+        '⚡ {interest} development is incredible! Built a full dApp in just 2 days.',
+        '🔧 New {interest} protocol audit completed! Security is paramount.'
+      ],
+      '@solana_builder': [
+        '⚡ Solana {interest} development is so smooth! The ecosystem is thriving.',
+        '🚀 Built a new {interest} protocol on Solana! Low fees make it perfect.',
+        '📊 {interest} on Solana: Network upgrade successful! Speeds increased 40%.'
+      ],
+      '@crypto_educator': [
+        '📚 {interest} education thread: Understanding the fundamentals is key!',
+        '🎓 {interest} tutorial: Making complex concepts accessible to everyone.',
+        '💡 {interest} knowledge is power! Education drives adoption.'
+      ],
+      '@blockchain_news': [
+        '📰 Breaking: Major {interest} development announced! This could be a game-changer.',
+        '🔥 {interest} adoption accelerating! Major corporations are entering the space.',
+        '📈 {interest} market analysis: The next bull run could be driven by innovation.'
+      ],
+      '@metaverse_explorer': [
+        '🌐 Exploring {interest} in virtual worlds! The metaverse is becoming reality.',
+        '🎨 {interest} art looks incredible in 3D space! The immersive experience is next-level.',
+        '💎 {interest} real estate is heating up! Virtual land prices are skyrocketing.'
+      ]
+    };
+
+    const templates = postTemplates[username as keyof typeof postTemplates] || [
+      '🚀 Exciting {interest} development! The future is bright.',
+      '💎 {interest} showing strong potential! Time to pay attention.',
+      '📊 {interest} analysis: The data looks promising!'
+    ];
+
+    const posts = [];
+    for (let i = 0; i < count; i++) {
+      const template = templates[Math.floor(Math.random() * templates.length)];
+      const interest = interests[Math.floor(Math.random() * interests.length)];
+      const content = template.replace('{interest}', interest);
+      
+      posts.push({
+        userId: username.replace('@', ''),
+        username: username,
+        content: content,
+        timestamp: `${Math.floor(Math.random() * 12) + 1}h`,
+        likes: Math.floor(Math.random() * 500) + 50,
+        replies: Math.floor(Math.random() * 100) + 10,
+        shares: Math.floor(Math.random() * 50) + 5,
+        gifts: Math.floor(Math.random() * 30) + 2
+      });
+    }
+    return posts;
+  };
+
+  const userFeeds: { [key: string]: any[] } = {
+    '@crypto_trader': generatePersonalizedFeed('@crypto_trader'),
+    '@defi_expert': generatePersonalizedFeed('@defi_expert'),
+    '@nft_collector': generatePersonalizedFeed('@nft_collector'),
+    '@web3_dev': generatePersonalizedFeed('@web3_dev'),
+    '@crypto_whale': generatePersonalizedFeed('@crypto_whale'),
+    '@nft_artist': generatePersonalizedFeed('@nft_artist'),
+    '@defi_guru': generatePersonalizedFeed('@defi_guru'),
+    '@blockchain_news': generatePersonalizedFeed('@blockchain_news'),
+    '@solana_builder': generatePersonalizedFeed('@solana_builder'),
+    '@crypto_educator': generatePersonalizedFeed('@crypto_educator'),
+    '@metaverse_explorer': generatePersonalizedFeed('@metaverse_explorer')
+  };
+
+  return userFeeds[username] || [];
 };
 
 export const UserProfile: React.FC = () => {
   const { isDark } = useTheme();
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [followingUsers, setFollowingUsers] = useState<Set<string>>(new Set(['@crypto_whale', '@defi_guru', '@solana_builder', '@metaverse_explorer']));
+
+  // Memoize the feed posts to prevent regeneration on every render
+  const feedPosts = useMemo(() => {
+    return getFeedPosts(`@${username}`);
+  }, [username]);
+  
+  // Get the original profile from navigation state
+  // This tracks the first profile clicked from home
+  const originalProfile = location.state?.originalProfile;
+  
+  // If no originalProfile is set, this means we came directly from home
+  const isFirstProfileFromHome = !originalProfile;
+  
+  // Determine where the back button should go
+  const getBackDestination = () => {
+    if (isFirstProfileFromHome) {
+      // If this is the first profile clicked from home, go back to home
+      return { path: '/home', state: null };
+    } else {
+      // If we came from another profile, go back to that original profile
+      // The original profile should go back to home (not create a fake home profile)
+      return { 
+        path: `/user/${originalProfile}`, 
+        state: null // No state, so it will be treated as first profile from home
+      };
+    }
+  };
+
+  // Check if back button should be enabled
+  // Back button should only work if:
+  // 1. This is the first profile from home (can go back to home)
+  // 2. This is a subsequent profile (can go back to original profile)
+  const canGoBack = isFirstProfileFromHome || originalProfile;
   
   if (!username) {
     navigate('/home');
     return null;
   }
 
-  const user = getUserData(username);
+  const user = getUserData(`@${username}`);
 
   const handleFollow = () => {
     // Follow/unfollow logic would go here
@@ -363,15 +493,50 @@ export const UserProfile: React.FC = () => {
     setIsMessageModalOpen(true);
   };
 
+  const handleLike = async (postId: string) => {
+    console.log('Liking post:', postId);
+    // Add like functionality here
+  };
+
+  const handleGift = async (postId: string) => {
+    console.log('Gifting post:', postId);
+    // Add gift functionality here
+  };
+
+  const handleBookmark = async (postId: string) => {
+    console.log('Bookmarking post:', postId);
+    // Add bookmark functionality here
+  };
+
+  const handleReply = async (postId: string) => {
+    console.log('Replying to post:', postId);
+    // Add reply functionality here
+  };
+
+  const handleShare = async (postId: string) => {
+    console.log('Sharing post:', postId);
+    // Add share functionality here
+  };
+
+
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)' }}>
+    <div className="min-h-screen relative" style={{ backgroundColor: 'var(--bg)' }}>
+      
       {/* Header */}
       <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            if (canGoBack) {
+              const destination = getBackDestination();
+              navigate(destination.path, destination.state ? { state: destination.state } : {});
+            }
+          }}
+          disabled={!canGoBack}
           className={`p-2 rounded-lg transition-colors ${
-            isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+            canGoBack 
+              ? (isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200')
+              : 'opacity-50 cursor-not-allowed'
           }`}
         >
           <ArrowLeft className="w-5 h-5" />
@@ -389,7 +554,7 @@ export const UserProfile: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto animate-in slide-in-from-top-4 duration-300">
         {/* Banner */}
         <div className={`h-32 bg-gradient-to-r ${user.bannerColor} relative`}>
           <div className="absolute top-4 right-4 flex gap-2">
@@ -435,33 +600,16 @@ export const UserProfile: React.FC = () => {
           <div className="card mb-4">
             <h3 className="text-primary font-semibold mb-4">Recent Posts</h3>
             <div className="space-y-4">
-              {getFeedPosts().map(post => (
-                <div key={post.id} className={`p-4 rounded-lg transition-colors ${
-                  isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-gray-100 hover:bg-gray-50'
-                }`}>
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <button 
-                        onClick={() => navigate(`/user/${post.username}`)}
-                        className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold hover:scale-105 transition-transform cursor-pointer"
-                      >
-                        {post.username.charAt(1).toUpperCase()}
-                      </button>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <button 
-                            onClick={() => navigate(`/user/${post.username}`)}
-                            className="text-primary font-medium hover:text-purple-400 transition-colors cursor-pointer"
-                          >
-                            {post.username}
-                          </button>
-                          <span className="text-secondary text-sm">•</span>
-                          <span className="text-secondary text-sm">{post.timestamp}</span>
-                        </div>
-                      </div>
-                    </div>
+              {feedPosts.map(post => (
+                <div key={post.id} className="relative">
+                  {/* Follow/Unfollow Button - positioned to avoid overlap with three dots */}
+                  <div className="absolute top-2 right-12 z-10">
                     <button
-                      onClick={() => handleFollowUser(post.username)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleFollowUser(post.username);
+                      }}
                       className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                         followingUsers.has(post.username)
                           ? isDark 
@@ -483,15 +631,26 @@ export const UserProfile: React.FC = () => {
                       )}
                     </button>
                   </div>
-                  <p className="text-primary mb-3 leading-relaxed">{post.content}</p>
-                  <div className="flex items-center justify-between text-secondary text-sm">
-                    <div className="flex gap-4">
-                      <span>{post.likes} likes</span>
-                      <span>{post.replies} replies</span>
-                      <span>{post.shares} shares</span>
-                    </div>
-                    <span>{post.gifts} gifts</span>
-                  </div>
+                  
+                  {/* PostCard with all interaction buttons */}
+                  <PostCard
+                    post={{
+                      id: post.id,
+                      userId: post.userId,
+                      username: post.username,
+                      content: post.content,
+                      timestamp: post.timestamp,
+                      likes: post.likes,
+                      replies: post.replies,
+                      shares: post.shares,
+                      gifts: post.gifts
+                    }}
+                    onLike={handleLike}
+                    onReply={handleReply}
+                    onShare={handleShare}
+                    onGift={handleGift}
+                    onBookmark={handleBookmark}
+                  />
                 </div>
               ))}
             </div>

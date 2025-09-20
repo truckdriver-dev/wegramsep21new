@@ -19,7 +19,14 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
   const [showMenu, setShowMenu] = React.useState(false);
 
   const handleAvatarClick = () => {
-    navigate(`/user/${post.username}`);
+    console.log('PostCard handleAvatarClick called with:', post.username);
+    const cleanUsername = post.username.replace('@', '');
+    console.log('Navigating to:', `/user/${cleanUsername}`);
+    
+    // Navigate from home page, so this becomes the original profile
+    navigate(`/user/${cleanUsername}`, { 
+      state: { originalProfile: cleanUsername } 
+    });
   };
 
   const handleGift = () => {
@@ -57,13 +64,29 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReply, onSha
     <div className="card mb-4">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          <button onClick={handleAvatarClick} className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('PostCard Avatar button clicked!');
+              handleAvatarClick();
+            }} 
+            className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl"
+          >
             <span className="text-white text-sm font-semibold">
               {post.username.charAt(1).toUpperCase()}
             </span>
           </button>
           <div>
-            <button onClick={handleAvatarClick} className="text-primary font-medium hover:text-purple-400 transition-colors cursor-pointer">
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('PostCard Username button clicked!');
+                handleAvatarClick();
+              }} 
+              className="text-primary font-medium hover:text-purple-400 hover:underline transition-all duration-200 cursor-pointer px-1 py-0.5 rounded hover:bg-purple-50 dark:hover:bg-purple-900/20"
+            >
               {post.username}
             </button>
             <div className="text-secondary text-sm">{post.timestamp}</div>
