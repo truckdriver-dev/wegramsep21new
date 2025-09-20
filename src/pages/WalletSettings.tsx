@@ -115,9 +115,9 @@ export const WalletSettings: React.FC = () => {
                   )}
                 </button>
               </div>
-              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
+              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all overflow-hidden ${
                 isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
-              }`}>
+              }`} style={{ wordBreak: 'break-all', overflowWrap: 'anywhere' }}>
                 {walletData.publicKey}
               </div>
             </div>
@@ -165,9 +165,9 @@ export const WalletSettings: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all ${
+              <div className={`p-3 rounded-lg font-mono text-xs text-primary break-all overflow-hidden ${
                 isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
-              }`}>
+              }`} style={{ wordBreak: 'break-all', overflowWrap: 'anywhere' }}>
                 {showPrivateKey ? walletData.privateKey : '•'.repeat(88)}
               </div>
             </div>
@@ -202,9 +202,9 @@ export const WalletSettings: React.FC = () => {
                     )}
                   </button>
                 </div>
-                <div className={`p-3 rounded-lg text-xs text-primary ${
+                <div className={`p-3 rounded-lg text-xs text-primary break-words overflow-hidden ${
                   isDark ? 'bg-black bg-opacity-30' : 'bg-gray-100 border border-gray-200'
-                }`}>
+                }`} style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
                   {walletData.mnemonic}
                 </div>
               </div>
