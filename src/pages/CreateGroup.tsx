@@ -54,49 +54,49 @@ export const CreateGroup: React.FC = () => {
           <Camera className="w-8 h-8 text-white" />
         </div>
         <div>
-          <h3 className="text-primary font-semibold text-lg">Add Photo</h3>
-          <p className="text-secondary text-sm">Choose a profile picture for your group</p>
+          <h3 className="text-white font-semibold text-lg">Add Photo</h3>
+          <p className="text-gray-300 text-sm">Choose a profile picture for your group</p>
         </div>
       </div>
 
       {/* Form Fields */}
       <div className="space-y-4">
         <div>
-          <label className="block text-primary font-semibold mb-2">Name</label>
+          <label className="block text-white font-semibold mb-2">Name</label>
           <input
             type="text"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="Enter group name"
-            className="w-full px-4 py-3 bg-overlay-light rounded-lg text-primary placeholder-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
 
         <div>
-          <label className="block text-primary font-semibold mb-2">Description</label>
+          <label className="block text-white font-semibold mb-2">Description</label>
           <input
             type="text"
             value={formData.description}
             onChange={(e) => handleInputChange('description', e.target.value)}
             placeholder="What is your group about?"
-            className="w-full px-4 py-3 bg-overlay-light rounded-lg text-primary placeholder-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
 
         <div>
-          <label className="block text-primary font-semibold mb-2">Category</label>
+          <label className="block text-white font-semibold mb-2">Category</label>
           <div className="relative">
             <select
               value={formData.category}
               onChange={(e) => handleInputChange('category', e.target.value)}
-              className="w-full px-4 py-3 bg-overlay-light rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-accent appearance-none"
+              className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent appearance-none"
             >
               <option value="">Select Category</option>
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
-            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-secondary pointer-events-none" />
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
           </div>
         </div>
       </div>
@@ -106,33 +106,33 @@ export const CreateGroup: React.FC = () => {
   const renderStep2 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-primary font-semibold mb-2">Tags (comma separated)</label>
+        <label className="block text-white font-semibold mb-2">Tags (comma separated)</label>
         <input
           type="text"
           value={formData.tags}
           onChange={(e) => handleInputChange('tags', e.target.value)}
-          className="w-full px-4 py-3 bg-overlay-light rounded-lg text-primary placeholder-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+          className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent"
         />
       </div>
 
       <div>
-        <label className="block text-primary font-semibold mb-2">Member Limit</label>
+        <label className="block text-white font-semibold mb-2">Member Limit</label>
         <div className="relative">
           <select
             value={formData.memberLimit}
             onChange={(e) => handleInputChange('memberLimit', e.target.value)}
-            className="w-full px-4 py-3 bg-overlay-light rounded-lg text-primary focus:outline-none focus:ring-2 focus:ring-accent appearance-none"
+            className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent appearance-none"
           >
             {memberLimits.map(limit => (
               <option key={limit} value={limit}>{limit}</option>
             ))}
           </select>
-          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-secondary pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
         </div>
       </div>
 
       <div>
-        <h3 className="text-primary font-semibold mb-4">Privacy Settings</h3>
+        <h3 className="text-white font-semibold mb-4">Privacy Settings</h3>
         <div className="space-y-3">
           {[
             { value: 'public', label: 'Public', description: 'Anyone can find this group in search and join' },
@@ -142,18 +142,18 @@ export const CreateGroup: React.FC = () => {
               key={option.value}
               onClick={() => handleInputChange('privacy', option.value)}
               className={`w-full p-4 rounded-lg text-left transition-colors ${
-                formData.privacy === option.value ? 'bg-accent bg-opacity-20 border border-accent' : 'bg-overlay-light'
+                formData.privacy === option.value ? 'bg-blue-500 bg-opacity-20 border border-blue-500' : 'bg-gray-700'
               }`}
             >
               <div className="flex items-center gap-3">
                 <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                  formData.privacy === option.value ? 'border-accent bg-accent' : 'border-secondary'
+                  formData.privacy === option.value ? 'border-blue-500 bg-blue-500' : 'border-gray-400'
                 }`}>
                   {formData.privacy === option.value && <Check className="w-3 h-3 text-white" />}
                 </div>
                 <div>
-                  <div className="text-primary font-semibold">{option.label}</div>
-                  <div className="text-secondary text-sm">{option.description}</div>
+                  <div className="text-white font-semibold">{option.label}</div>
+                  <div className="text-gray-300 text-sm">{option.description}</div>
                 </div>
               </div>
             </button>
@@ -166,7 +166,7 @@ export const CreateGroup: React.FC = () => {
   const renderStep3 = () => (
     <div className="space-y-6">
       <div>
-        <h3 className="text-primary font-semibold mb-4">Group Features</h3>
+        <h3 className="text-white font-semibold mb-4">Group Features</h3>
         <div className="space-y-4">
           {[
             { key: 'mediaSharing', label: 'Media Sharing', description: 'Allow members to share images, videos, and files' },
@@ -178,14 +178,14 @@ export const CreateGroup: React.FC = () => {
               <button
                 onClick={() => handleInputChange(feature.key, !formData[feature.key as keyof typeof formData])}
                 className={`w-5 h-5 rounded border-2 flex items-center justify-center mt-0.5 ${
-                  formData[feature.key as keyof typeof formData] ? 'border-accent bg-accent' : 'border-secondary'
+                  formData[feature.key as keyof typeof formData] ? 'border-blue-500 bg-blue-500' : 'border-gray-400'
                 }`}
               >
                 {formData[feature.key as keyof typeof formData] && <Check className="w-3 h-3 text-white" />}
               </button>
               <div className="flex-1">
-                <div className="text-primary font-semibold">{feature.label}</div>
-                <div className="text-secondary text-sm">{feature.description}</div>
+                <div className="text-white font-semibold">{feature.label}</div>
+                <div className="text-gray-300 text-sm">{feature.description}</div>
               </div>
             </div>
           ))}
@@ -193,7 +193,7 @@ export const CreateGroup: React.FC = () => {
       </div>
 
       <div>
-        <h3 className="text-primary font-semibold mb-4">Moderation Settings</h3>
+        <h3 className="text-white font-semibold mb-4">Moderation Settings</h3>
         <div className="space-y-4">
           {[
             { key: 'autoModeration', label: 'Auto Moderation', description: 'Automatically filter spam and inappropriate content' },
@@ -204,14 +204,14 @@ export const CreateGroup: React.FC = () => {
               <button
                 onClick={() => handleInputChange(feature.key, !formData[feature.key as keyof typeof formData])}
                 className={`w-5 h-5 rounded border-2 flex items-center justify-center mt-0.5 ${
-                  formData[feature.key as keyof typeof formData] ? 'border-accent bg-accent' : 'border-secondary'
+                  formData[feature.key as keyof typeof formData] ? 'border-blue-500 bg-blue-500' : 'border-gray-400'
                 }`}
               >
                 {formData[feature.key as keyof typeof formData] && <Check className="w-3 h-3 text-white" />}
               </button>
               <div className="flex-1">
-                <div className="text-primary font-semibold">{feature.label}</div>
-                <div className="text-secondary text-sm">{feature.description}</div>
+                <div className="text-white font-semibold">{feature.label}</div>
+                <div className="text-gray-300 text-sm">{feature.description}</div>
               </div>
             </div>
           ))}
@@ -221,21 +221,21 @@ export const CreateGroup: React.FC = () => {
   );
 
   return (
-    <div className="max-w-md mx-auto" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
+    <div className="max-w-md mx-auto bg-gray-900 min-h-screen">
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
+      <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3 bg-gray-900">
         <button
           onClick={handleBack}
-          className="p-2 rounded-lg transition-colors hover:bg-overlay-light"
+          className="p-2 rounded-lg transition-colors hover:bg-gray-800"
         >
-          <ArrowLeft className="w-5 h-5 text-primary" />
+          <ArrowLeft className="w-5 h-5 text-white" />
         </button>
-        <h1 className="text-lg font-bold text-primary">New Group</h1>
+        <h1 className="text-lg font-bold text-white">New Group</h1>
         <button
           onClick={() => navigate('/messages')}
-          className="ml-auto p-2 rounded-lg transition-colors hover:bg-overlay-light"
+          className="ml-auto p-2 rounded-lg transition-colors hover:bg-gray-800"
         >
-          <X className="w-5 h-5 text-primary" />
+          <X className="w-5 h-5 text-white" />
         </button>
       </div>
 
@@ -248,13 +248,13 @@ export const CreateGroup: React.FC = () => {
         <div className="flex gap-3 mt-8">
           <button
             onClick={handleBack}
-            className="flex-1 py-3 px-6 bg-overlay-light text-primary rounded-lg font-medium transition-colors hover:bg-overlay-medium"
+            className="flex-1 py-3 px-6 bg-gray-700 text-white rounded-lg font-medium transition-colors hover:bg-gray-600"
           >
             Back
           </button>
           <button
             onClick={handleNext}
-            className="flex-1 py-3 px-6 btn-primary"
+            className="flex-1 py-3 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium transition-colors hover:from-blue-600 hover:to-purple-700"
           >
             {step === 3 ? 'Create Group' : 'Next'}
           </button>

@@ -27,43 +27,41 @@ export const CreateNew: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-md mx-auto" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
-        <button
-          onClick={() => navigate('/messages')}
-          className="p-2 rounded-lg transition-colors hover:bg-overlay-light"
-        >
-          <ArrowLeft className="w-5 h-5 text-primary" />
-        </button>
-        <h1 className="text-lg font-bold text-primary">Create New</h1>
-        <button
-          onClick={() => navigate('/messages')}
-          className="ml-auto p-2 rounded-lg transition-colors hover:bg-overlay-light"
-        >
-          <X className="w-5 h-5 text-primary" />
-        </button>
-      </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+      <div className="max-w-md mx-auto mx-4 bg-card rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--card)' }}>
+        {/* Modal Header */}
+        <div className="px-6 py-4 flex items-center justify-between border-b" style={{ borderColor: 'var(--border)' }}>
+          <h1 className="text-lg font-bold text-primary">Create New</h1>
+          <button
+            onClick={() => navigate('/messages')}
+            className="p-2 rounded-lg transition-colors hover:bg-overlay-light"
+          >
+            <X className="w-5 h-5 text-primary" />
+          </button>
+        </div>
 
-      <div className="px-4 py-6">
-        <div className="space-y-4">
-          {options.map((option) => (
-            <button
-              key={option.id}
-              onClick={option.onClick}
-              className="w-full p-4 card hover:bg-overlay-light transition-colors text-left"
-            >
-              <div className="flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-full ${option.bgColor} flex items-center justify-center flex-shrink-0`}>
-                  <option.icon className={`w-6 h-6 ${option.iconColor}`} />
+        {/* Modal Content */}
+        <div className="p-6">
+          <div className="space-y-4">
+            {options.map((option) => (
+              <button
+                key={option.id}
+                onClick={option.onClick}
+                className="w-full p-4 rounded-xl hover:bg-overlay-light transition-colors text-left"
+                style={{ backgroundColor: 'var(--card)' }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`w-12 h-12 rounded-full ${option.bgColor} flex items-center justify-center flex-shrink-0`}>
+                    <option.icon className={`w-6 h-6 ${option.iconColor}`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-primary font-semibold text-lg mb-2">{option.title}</h3>
+                    <p className="text-primary text-sm leading-relaxed">{option.description}</p>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-primary font-semibold text-lg mb-2">{option.title}</h3>
-                  <p className="text-secondary text-sm leading-relaxed">{option.description}</p>
-                </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
