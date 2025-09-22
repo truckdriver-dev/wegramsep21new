@@ -42,7 +42,7 @@ export const CreateGroup: React.FC = () => {
     if (step > 1) {
       setStep(step - 1);
     } else {
-      navigate('/create-new');
+      navigate('/messages');
     }
   };
 

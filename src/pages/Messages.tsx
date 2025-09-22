@@ -105,7 +105,7 @@ export const Messages: React.FC = () => {
   };
 
   const handleCreateNew = () => {
-    navigate('/create-new');
+    navigate('/create-group');
   };
 
   const handleSettings = () => {
