@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Settings, User, MoreHorizontal } from 'lucide-react';
+import { Search, Settings, Plus, MoreHorizontal } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface Chat {
@@ -104,6 +104,14 @@ export const Messages: React.FC = () => {
     }
   };
 
+  const handleCreateNew = () => {
+    navigate('/create-new');
+  };
+
+  const handleSettings = () => {
+    navigate('/settings');
+  };
+
   return (
     <div className="max-w-md mx-auto pt-20 pb-24" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
       {/* Header */}
@@ -116,10 +124,16 @@ export const Messages: React.FC = () => {
             <h1 className="text-2xl font-bold gradient-text">NeoChat</h1>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-overlay-light rounded-lg transition-colors">
-              <User className="w-5 h-5 text-secondary" />
+            <button 
+              onClick={handleCreateNew}
+              className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
+            >
+              <Plus className="w-5 h-5 text-secondary" />
             </button>
-            <button className="p-2 hover:bg-overlay-light rounded-lg transition-colors">
+            <button 
+              onClick={handleSettings}
+              className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
+            >
               <Settings className="w-5 h-5 text-accent" />
             </button>
           </div>

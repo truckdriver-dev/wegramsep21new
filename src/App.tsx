@@ -43,6 +43,9 @@ import { LaunchToken } from './pages/LaunchToken';
 import { Video } from './pages/Video';
 import { ProfileEdit } from './pages/ProfileEdit';
 import { ChatDetail } from './pages/ChatDetail';
+import { Settings } from './pages/Settings';
+import { CreateNew } from './pages/CreateNew';
+import { CreateGroup } from './pages/CreateGroup';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -127,6 +130,11 @@ function AppContent() {
           
           {/* Chat Routes */}
           <Route path="/chat/:username" element={<ChatDetail />} />
+          
+          {/* Settings and Creation Routes */}
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/create-new" element={<CreateNew />} />
+          <Route path="/create-group" element={<CreateGroup />} />
           
           {/* Pages that need to be built */}
           <Route path="/staking" element={<Staking />} />
