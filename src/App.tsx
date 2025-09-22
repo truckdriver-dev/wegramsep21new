@@ -42,6 +42,7 @@ import { Notifications } from './pages/Notifications';
 import { LaunchToken } from './pages/LaunchToken';
 import { Video } from './pages/Video';
 import { ProfileEdit } from './pages/ProfileEdit';
+import { ChatDetail } from './pages/ChatDetail';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -123,6 +124,9 @@ function AppContent() {
           
           {/* User Profile */}
           <Route path="/user/:username" element={<UserProfile />} />
+          
+          {/* Chat Routes */}
+          <Route path="/chat/:username" element={<ChatDetail />} />
           
           {/* Pages that need to be built */}
           <Route path="/staking" element={<Staking />} />

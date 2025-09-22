@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Users, Send, UserPlus, UserMinus } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
 import { useTheme } from '../hooks/useTheme';
@@ -17,6 +17,7 @@ interface UserProfileData {
   following: number;
   mutualConnections: number;
   isFollowing: boolean;
+  verified?: boolean;
   connections: {
     platform: string;
     username: string;
@@ -30,6 +31,30 @@ interface UserProfileData {
 // Mock user data - in real app this would come from API
 const getUserData = (username: string): UserProfileData => {
   const userData: { [key: string]: UserProfileData } = {
+    '@alexchen': {
+      username: '@alexchen.eth',
+      displayName: 'Alex Chen',
+      bio: 'Building the future of Web3 social 🚀 | NFT collector & DeFi enthusiast | Always learning, always creating',
+      avatar: 'AC',
+      bannerColor: 'from-purple-600 to-blue-600',
+      joinDate: 'Jan 15, 2024',
+      posts: 847,
+      followers: 12500,
+      following: 2100,
+      mutualConnections: 12,
+      isFollowing: false,
+      verified: true,
+      connections: [
+        {
+          platform: 'Twitter',
+          username: '@alexchen_crypto',
+          memberSince: 'May 15, 2022',
+          posts: 1460,
+          followers: 10200,
+          verified: true
+        }
+      ]
+    },
     '@crypto_trader': {
       username: '@crypto_trader',
       displayName: 'CryptoTrader',
@@ -225,6 +250,7 @@ const getUserData = (username: string): UserProfileData => {
     following: 0,
     mutualConnections: 0,
     isFollowing: false,
+    verified: false,
     connections: []
   };
 };
@@ -426,6 +452,20 @@ const getFeedPosts = (username: string) => {
   return userFeeds[username] || [];
 };
 
+// Mock NFT data
+const getNFTData = (username: string) => {
+  const nftData: { [key: string]: any[] } = {
+    '@alexchen': [
+      { id: '1', name: 'CryptoPunks', tokenId: '#7804', icon: Palette, color: 'text-purple-400' },
+      { id: '2', name: 'Uniswap V3', tokenId: '#12456', icon: Zap, color: 'text-cyan-400' },
+      { id: '3', name: 'Bored Apes', tokenId: '#420', icon: Flame, color: 'text-orange-400' },
+      { id: '4', name: 'Azuki', tokenId: '#1337', icon: Diamond, color: 'text-blue-400' }
+    ]
+  };
+  
+  return nftData[username] || [];
+};
+
 export const UserProfile: React.FC = () => {
   const { isDark } = useTheme();
   const { username } = useParams<{ username: string }>();
@@ -433,10 +473,16 @@ export const UserProfile: React.FC = () => {
   const location = useLocation();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [followingUsers, setFollowingUsers] = useState<Set<string>>(new Set(['@crypto_whale', '@defi_guru', '@solana_builder', '@metaverse_explorer']));
+  const [activeTab, setActiveTab] = useState<'posts' | 'nft' | 'stats'>('posts');
 
   // Memoize the feed posts to prevent regeneration on every render
   const feedPosts = useMemo(() => {
     return getFeedPosts(`@${username}`);
+  }, [username]);
+
+  // Memoize NFT data
+  const nftData = useMemo(() => {
+    return getNFTData(`@${username}`);
   }, [username]);
   
   // Get the original profile from navigation state
@@ -520,9 +566,66 @@ export const UserProfile: React.FC = () => {
 
 
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'posts':
+        return (
+          <div className="space-y-4">
+            {feedPosts.map(post => (
+              <div key={post.id} className="relative">
+                <PostCard
+                  post={{
+                    id: post.id,
+                    userId: post.userId,
+                    username: post.username,
+                    content: post.content,
+                    timestamp: post.timestamp,
+                    likes: post.likes,
+                    replies: post.replies,
+                    shares: post.shares,
+                    gifts: post.gifts
+                  }}
+                  onLike={handleLike}
+                  onReply={handleReply}
+                  onShare={handleShare}
+                  onGift={handleGift}
+                  onBookmark={handleBookmark}
+                />
+              </div>
+            ))}
+          </div>
+        );
+      case 'nft':
+        return (
+          <div className="grid grid-cols-2 gap-4">
+            {nftData.map(nft => (
+              <div key={nft.id} className="card p-4 text-center">
+                <div className={`w-12 h-12 mx-auto mb-3 rounded-lg bg-overlay-light flex items-center justify-center`}>
+                  <nft.icon className={`w-6 h-6 ${nft.color}`} />
+                </div>
+                <h3 className="font-semibold text-primary text-sm mb-1">{nft.name}</h3>
+                <p className="text-secondary text-xs">{nft.tokenId}</p>
+              </div>
+            ))}
+          </div>
+        );
+      case 'stats':
+        return (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-overlay-light flex items-center justify-center">
+              <div className="text-2xl">🚧</div>
+            </div>
+            <h3 className="text-primary font-semibold mb-2">Coming Soon</h3>
+            <p className="text-secondary text-sm">The stats section is under development</p>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: 'var(--bg)' }}>
-      
       {/* Header */}
       <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
         <button
@@ -535,159 +638,123 @@ export const UserProfile: React.FC = () => {
           disabled={!canGoBack}
           className={`p-2 rounded-lg transition-colors ${
             canGoBack 
-              ? (isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200')
+              ? 'hover:bg-overlay-light'
               : 'opacity-50 cursor-not-allowed'
           }`}
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5 text-primary" />
         </button>
         <div>
           <h1 className="text-lg font-bold text-primary">{user.displayName}</h1>
           <p className="text-sm text-secondary">{user.posts} posts</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <button className={`p-2 rounded-lg transition-colors ${
-            isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
-          }`}>
-            <MoreHorizontal className="w-5 h-5" />
+          <button className="p-2 rounded-lg transition-colors hover:bg-overlay-light">
+            <MoreHorizontal className="w-5 h-5 text-primary" />
           </button>
         </div>
       </div>
 
       <div className="max-w-md mx-auto animate-in slide-in-from-top-4 duration-300">
-        {/* Banner */}
-        <div className={`h-32 bg-gradient-to-r ${user.bannerColor} relative`}>
-          <div className="absolute top-4 right-4 flex gap-2">
-            <button className="w-10 h-10 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
-            </button>
-            <button className="w-10 h-10 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
-              <MoreHorizontal className="w-5 h-5 text-white" />
-            </button>
-          </div>
-        </div>
-
-        {/* Profile Info */}
-        <div className="px-4 pb-4">
-          {/* Avatar */}
-          <div className="relative -mt-16 mb-4">
-            <div className="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center text-4xl border-4 border-gray-900">
+        {/* Profile Header */}
+        <div className="px-4 py-6">
+          {/* Avatar and Name */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg">
               {user.avatar}
             </div>
-            <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="text-xl font-bold gradient-text">{user.displayName}</h2>
+                {user.verified && (
+                  <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
+                    <CheckCircle className="w-3 h-3 text-white" />
+                  </div>
+                )}
+              </div>
+              <p className="text-secondary text-sm mb-4">{user.username}</p>
+              
+              {/* Action Icons */}
+              <div className="flex items-center gap-2">
+                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
+                  <Gift className="w-4 h-4 text-accent" />
+                </button>
+                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
+                  <MoreHorizontal className="w-4 h-4 text-secondary" />
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Name and Bio */}
-          <div className="mb-4">
-            <h2 className="text-2xl font-bold text-primary mb-1">{user.displayName}</h2>
-            <p className="text-secondary mb-2">{user.username}</p>
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="text-center">
+              <div className="text-lg font-bold text-primary">{user.followers.toLocaleString()}</div>
+              <div className="text-secondary text-xs">FOLLOWERS</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-primary">{user.following.toLocaleString()}</div>
+              <div className="text-secondary text-xs">FOLLOWING</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-primary">{user.posts}</div>
+              <div className="text-secondary text-xs">POSTS</div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="space-y-3 mb-6">
+            <button
+              onClick={handleFollow}
+              className={`w-full py-3 rounded-lg font-medium transition-colors ${
+                user.isFollowing
+                  ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
+                  : 'btn-primary'
+              }`}
+            >
+              {user.isFollowing ? 'Unfollow' : 'Follow'}
+            </button>
+            <button
+              onClick={handleMessage}
+              className="w-full py-3 rounded-lg font-medium transition-colors border border-accent text-accent hover:bg-accent hover:text-white"
+            >
+              Message
+            </button>
+          </div>
+
+          {/* Bio */}
+          <div className="mb-6">
             <p className="text-primary text-sm leading-relaxed">{user.bio}</p>
           </div>
 
-
-          {/* Message Button */}
-          <div className="mb-6">
-            <button
-              onClick={handleMessage}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-4 px-6 rounded-xl font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg"
-            >
-              <Send className="w-5 h-5" />
-              Send Message
-            </button>
+          {/* Navigation Tabs */}
+          <div className="flex border-b" style={{ borderColor: 'var(--border)' }}>
+            {[
+              { id: 'posts', label: 'Posts' },
+              { id: 'nft', label: 'NFT Holds' },
+              { id: 'stats', label: 'Stats' }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex-1 py-3 text-sm font-medium transition-colors relative ${
+                  activeTab === tab.id
+                    ? 'text-accent'
+                    : 'text-secondary hover:text-primary'
+                }`}
+              >
+                {tab.label}
+                {activeTab === tab.id && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"></div>
+                )}
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* Recent Feed Posts */}
-          <div className="card mb-4">
-            <h3 className="text-primary font-semibold mb-4">Recent Posts</h3>
-            <div className="space-y-4">
-              {feedPosts.map(post => (
-                <div key={post.id} className="relative">
-                  {/* Follow/Unfollow Button - positioned to avoid overlap with three dots */}
-                  <div className="absolute top-2 right-12 z-10">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleFollowUser(post.username);
-                      }}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                        followingUsers.has(post.username)
-                          ? isDark 
-                            ? 'bg-gray-600 text-gray-300 hover:bg-gray-700'
-                            : 'bg-gray-300 text-gray-600 hover:bg-gray-400'
-                          : 'bg-purple-600 text-white hover:bg-purple-700'
-                      }`}
-                    >
-                      {followingUsers.has(post.username) ? (
-                        <>
-                          <UserMinus className="w-3 h-3" />
-                          Unfollow
-                        </>
-                      ) : (
-                        <>
-                          <UserPlus className="w-3 h-3" />
-                          Follow
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  
-                  {/* PostCard with all interaction buttons */}
-                  <PostCard
-                    post={{
-                      id: post.id,
-                      userId: post.userId,
-                      username: post.username,
-                      content: post.content,
-                      timestamp: post.timestamp,
-                      likes: post.likes,
-                      replies: post.replies,
-                      shares: post.shares,
-                      gifts: post.gifts
-                    }}
-                    onLike={handleLike}
-                    onReply={handleReply}
-                    onShare={handleShare}
-                    onGift={handleGift}
-                    onBookmark={handleBookmark}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stats Card */}
-          <div className="card mb-4">
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-xl font-bold text-primary">{user.posts}</div>
-                <div className="text-secondary text-sm">Posts</div>
-              </div>
-              <div>
-                <div className="text-xl font-bold text-primary">{user.followers.toLocaleString()}</div>
-                <div className="text-secondary text-sm">Followers</div>
-              </div>
-              <div>
-                <div className="text-xl font-bold text-primary">{user.following.toLocaleString()}</div>
-                <div className="text-secondary text-sm">Following</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Follow Button */}
-          <button
-            onClick={handleFollow}
-            className={`w-full py-3 rounded-lg font-medium transition-colors ${
-              user.isFollowing
-                ? isDark 
-                  ? 'bg-gray-600 text-gray-300 hover:bg-gray-700'
-                  : 'bg-gray-400 text-gray-600 hover:bg-gray-500'
-                : 'btn-primary'
-            }`}
-          >
-            {user.isFollowing ? 'Following' : 'Follow'}
-          </button>
-
+        {/* Tab Content */}
+        <div className="px-4 pb-24">
+          {renderTabContent()}
         </div>
       </div>
       
