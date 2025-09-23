@@ -74,15 +74,12 @@ export const BottomNav: React.FC = () => {
             className="relative w-full max-w-sm rounded-2xl p-5 shadow-xl"
             style={{ backgroundColor: 'var(--card)', color: 'var(--text)' }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-blue-400" />
-                <span className="text-blue-400 text-sm">Everyone can reply</span>
-              </div>
+            {/* Close */}
+            <div className="flex items-center justify-end mb-3">
               <button
                 onClick={() => setShowCreateModal(false)}
                 className="p-2 rounded-lg hover:opacity-80"
+                aria-label="Close"
               >
                 <X className="w-5 h-5 text-gray-400" />
               </button>
@@ -127,7 +124,7 @@ export const BottomNav: React.FC = () => {
                 <Video className="w-6 h-6 text-blue-400" />
               </button>
 
-              {/* Spacer elements to mirror screenshot layout */}
+              {/* Spacer elements to mirror screenshot layout */
               <div className="w-6 h-6 rounded-full" style={{ border: '2px solid var(--border)' }} />
               <button
                 onClick={() => setShowCreateModal(false)}
