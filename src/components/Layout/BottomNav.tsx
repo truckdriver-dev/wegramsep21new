@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav: React.FC = () => {
@@ -98,15 +98,10 @@ export const BottomNav: React.FC = () => {
             <div className="flex items-start gap-3 mb-4">
               <button
                 onClick={() => navigate('/profile')}
-                className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center"
-                style={{ backgroundColor: 'var(--border)' }}
+                className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-105 transition-transform cursor-pointer"
                 aria-label="Open profile"
               >
-                <img
-                  src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
+                <User className="w-5 h-5 text-white" />
               </button>
               <textarea
                 value={textContent}
