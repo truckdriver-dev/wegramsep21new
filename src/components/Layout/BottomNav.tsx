@@ -98,7 +98,13 @@ export const BottomNav: React.FC = () => {
             <h3 className="text-center text-primary font-semibold mb-3">New post</h3>
             <div className="flex items-start gap-3 mb-4">
               <button
-                onClick={() => navigate(`/user/${mockUser.username.replace('@', '')}`)}
+                onClick={() => {
+                  // Close modal first, then navigate to avoid popup issues
+                  setShowCreateModal(false);
+                  setTimeout(() => {
+                    navigate(`/user/${mockUser.username.replace('@', '')}`);
+                  }, 100);
+                }}
                 className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-105 transition-transform cursor-pointer"
                 aria-label="Open profile"
               >
@@ -138,10 +144,13 @@ export const BottomNav: React.FC = () => {
                 </button>
               </div>
               <button
-                onClick={() => setShowCreateModal(false)}
+                onClick={() => {
+                  // Add more content or expand options - don't close modal
+                  setTextContent(prev => prev + ' ');
+                }}
                 className="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                 style={{ backgroundColor: 'var(--accent)' }}
-                aria-label="Close"
+                aria-label="Add more"
               >
                 <Plus className="w-4 h-4 text-white" />
               </button>
