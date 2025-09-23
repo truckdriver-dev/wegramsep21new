@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Plus, Wallet, HelpCircle, Play, Image, Type, Video, Smile, X, Globe, BarChart, CircleDot, List } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play, Image, Type, Video, Smile, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -18,12 +18,10 @@ export const BottomNav: React.FC = () => {
   ];
 
   const createOptions = [
-    { id: 'text', label: 'Text', icon: Type, color: 'text-blue-400' },
-    { id: 'image', label: 'Image', icon: Image, color: 'text-blue-400' },
-    { id: 'poll', label: 'Poll', icon: BarChart, color: 'text-blue-400' },
-    { id: 'live', label: 'LIVE', icon: CircleDot, color: 'text-blue-400' },
-    { id: 'gif', label: 'GIF', icon: Smile, color: 'text-blue-400' },
-    { id: 'thread', label: 'Thread', icon: List, color: 'text-blue-400' }
+    { id: 'text', label: 'Text', icon: Type, color: 'text-blue-400', bgColor: 'bg-blue-400 bg-opacity-20' },
+    { id: 'image', label: 'Image', icon: Image, color: 'text-green-400', bgColor: 'bg-green-400 bg-opacity-20' },
+    { id: 'video', label: 'Video', icon: Video, color: 'text-purple-400', bgColor: 'bg-purple-400 bg-opacity-20' },
+    { id: 'gif', label: 'GIF', icon: Smile, color: 'text-orange-400', bgColor: 'bg-orange-400 bg-opacity-20' }
   ];
 
   const handleCreateOption = (option: string) => {
@@ -88,43 +86,45 @@ export const BottomNav: React.FC = () => {
           />
           
           {/* Modal */}
-          <div className={`relative w-full max-w-sm rounded-t-2xl p-4 ${
+          <div className={`relative w-full max-w-sm rounded-t-2xl p-6 ${
             isDark ? 'bg-gray-800' : 'bg-white'
           }`}>
-            {/* Reply Setting */}
-            <div className="flex items-center gap-2 mb-4">
-              <Globe className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-400 text-sm">Everyone can reply</span>
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+              <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Create Post
+              </h3>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className={`p-2 rounded-lg transition-colors ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                }`}
+              >
+                <X className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+              </button>
             </div>
 
-            {/* Divider */}
-            <div className={`h-px mb-4 ${isDark ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
-
-            {/* Create Options - Horizontal Row */}
-            <div className="flex items-center justify-between">
+            {/* Create Options */}
+            <div className="grid grid-cols-2 gap-4">
               {createOptions.map((option) => {
                 const Icon = option.icon;
                 return (
                   <button
                     key={option.id}
                     onClick={() => handleCreateOption(option.id)}
-                    className="flex items-center justify-center w-8 h-8 transition-colors hover:opacity-80"
+                    className={`flex flex-col items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:scale-105 ${
+                      isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                    }`}
                   >
-                    <Icon className={`w-5 h-5 ${option.color}`} />
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center ${option.bgColor}`}>
+                      <Icon className={`w-6 h-6 ${option.color}`} />
+                    </div>
+                    <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      {option.label}
+                    </span>
                   </button>
                 );
               })}
-              
-              {/* Progress Circle */}
-              <div className="w-6 h-6 rounded-full border-2 border-gray-400"></div>
-              
-              {/* Plus Button */}
-              <button
-                onClick={() => setShowCreateModal(false)}
-                className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700 transition-colors"
-              >
-                <Plus className="w-4 h-4 text-white" />
-              </button>
             </div>
           </div>
         </div>
