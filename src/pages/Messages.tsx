@@ -45,29 +45,25 @@ export const Messages: React.FC = () => {
     },
     {
       id: '3',
-      name: 'Crypto Traders',
-      username: 'cryptotraders',
+      name: 'Crypto Trader',
+      username: '@crypto_trader',
       avatar: 'CT',
       avatarColor: 'bg-gradient-to-br from-purple-400 to-purple-600',
-      lastMessage: 'Jordan: Market is bullish 📈',
+      lastMessage: 'Market analysis: Bullish signals across all major pairs 📈',
       timestamp: '1h',
       unreadCount: 5,
-      isOnline: false,
-      isGroup: true,
-      groupMembers: 1247
+      isOnline: false
     },
     {
       id: '4',
-      name: 'NFT Collectors',
-      username: 'nftcollectors',
+      name: 'NFT Collector',
+      username: '@nft_collector',
       avatar: 'NC',
       avatarColor: 'bg-gradient-to-br from-orange-500 to-red-500',
-      lastMessage: 'Sam: Found a rare piece!',
+      lastMessage: 'Just discovered an amazing rare piece! The floor is rising 🚀',
       timestamp: '3h',
       unreadCount: 0,
-      isOnline: false,
-      isGroup: true,
-      groupMembers: 892
+      isOnline: false
     },
     {
       id: '5',
