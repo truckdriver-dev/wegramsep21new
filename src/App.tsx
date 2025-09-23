@@ -46,6 +46,7 @@ import { ChatDetail } from './pages/ChatDetail';
 import { Settings } from './pages/Settings';
 import { CreateNew } from './pages/CreateNew';
 import { CreateGroup } from './pages/CreateGroup';
+import { WeRunner } from './pages/WeRunner';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -142,6 +143,9 @@ function AppContent() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/create-new" element={<CreateNew />} />
           <Route path="/create-group" element={<CreateGroup />} />
+          
+          {/* Game Routes */}
+          <Route path="/werunner" element={<WeRunner />} />
           
           {/* Pages that need to be built */}
           <Route path="/staking" element={<Staking />} />

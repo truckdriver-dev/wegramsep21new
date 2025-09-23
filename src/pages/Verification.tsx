@@ -59,9 +59,9 @@ export const Verification: React.FC = () => {
         </p>
         
         {/* Free verification notice */}
-        <div className="mt-4 p-4 bg-gradient-to-r from-green-500 to-blue-500 bg-opacity-20 border border-green-500 border-opacity-30 rounded-lg">
-          <div className="text-green-400 font-semibold text-sm mb-1">🎉 Early Bird Special</div>
-          <div className="text-secondary text-xs">
+        <div className="mt-4 p-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg border-2 border-green-400 shadow-lg">
+          <div className="text-white font-bold text-sm mb-1 drop-shadow-lg">🎉 Early Bird Special</div>
+          <div className="text-white text-xs font-medium drop-shadow-md">
             First 1,000 members get verified for FREE! Limited time offer.
           </div>
         </div>

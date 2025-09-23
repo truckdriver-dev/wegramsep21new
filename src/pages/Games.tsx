@@ -165,6 +165,24 @@ export const Games: React.FC = () => {
       },
       blockchain: 'solana',
       status: 'live'
+    },
+    {
+      id: '7',
+      title: 'WeRunner',
+      description: 'Epic anime-style battle runner with stunning visuals',
+      category: 'arcade',
+      players: 25000,
+      earnings: '5-50 SOL/day',
+      rating: 4.9,
+      thumbnail: '⚡',
+      isPlaying: false,
+      rewards: {
+        daily: '2 SOL',
+        weekly: '20 SOL',
+        tournament: '500 SOL'
+      },
+      blockchain: 'solana',
+      status: 'live'
     }
   ];
 
@@ -711,8 +729,13 @@ export const Games: React.FC = () => {
             <div className="space-y-3">
               <button
                 onClick={() => {
-                  // Game integration coming soon
-                  console.log('Launching game:', selectedGame.title);
+                  if (selectedGame.title === 'WeRunner') {
+                    // Open WeRunner game in new tab
+                    window.open('/werunner', '_blank');
+                  } else {
+                    // Game integration coming soon
+                    console.log('Launching game:', selectedGame.title);
+                  }
                   setSelectedGame(null);
                 }}
                 className="btn-primary w-full py-4 text-lg font-semibold"
