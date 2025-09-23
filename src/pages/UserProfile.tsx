@@ -637,13 +637,8 @@ export const UserProfile: React.FC = () => {
   };
 
   const handleProfileMenu = () => {
-    // Add profile menu functionality here
-    console.log('Profile menu clicked');
-    // This could open a dropdown with options like:
-    // - Share Profile
-    // - Block User
-    // - Report User
-    // - Copy Profile Link
+    // Navigate to the main profile page (same as menu sidebar)
+    navigate('/profile');
   };
 
 
