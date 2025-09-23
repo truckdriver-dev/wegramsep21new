@@ -1,288 +1,233 @@
 import React, { useState } from 'react';
-import { ArrowLeft, DollarSign, TrendingUp, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Wallet, ChevronUp, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export const Staking: React.FC = () => {
   const navigate = useNavigate();
   const [stakeAmount, setStakeAmount] = useState('');
-  const [selectedPercentage, setSelectedPercentage] = useState<number | null>(null);
+  const [unstakeAmount, setUnstakeAmount] = useState('');
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
   
-  // Mock user data
-  const userBalance = 10000; // WGM balance
-  const currentStaked = 42.5;
-  const earnedRewards = 42.5;
-  const portfolioValue = 23850;
-  const portfolioGain = 12.14;
-  const dpr = 10.000; // Daily Percentage Rate
-  const apr = 8.540; // Annual Percentage Rate
-
-  // Mock transaction data
-  const recentTransactions = [
-    { amount: 5000, price: 5.30, type: 'Stake' },
-    { amount: 3000, price: 5.28, type: 'Unstake' }
-  ];
-
-  const percentageOptions = [25, 50, 75, 10];
-
-  const handlePercentageClick = (percentage: number) => {
-    const amount = (userBalance * percentage / 100).toString();
-    setStakeAmount(amount);
-    setSelectedPercentage(percentage);
-  };
-
-  const handleCustomPercentage = () => {
-    setSelectedPercentage(null);
-  };
+  // Mock data matching the design
+  const totalStaked = 2847392000;
+  const apy = 24.7;
+  const availableToStake = 1250.00;
+  const availableToUnstake = 500.00;
 
   const handleStake = () => {
     if (!stakeAmount || parseFloat(stakeAmount) <= 0) {
       alert('Please enter a valid amount to stake');
       return;
     }
-    if (parseFloat(stakeAmount) > userBalance) {
+    if (parseFloat(stakeAmount) > availableToStake) {
       alert('Insufficient balance');
       return;
     }
-    alert(`Staking ${stakeAmount} WGM tokens!`);
+    alert(`Staking ${stakeAmount} WEGRAM tokens!`);
   };
 
   const handleUnstake = () => {
-    if (currentStaked <= 0) {
-      alert('No tokens currently staked');
+    if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) {
+      alert('Please enter a valid amount to unstake');
       return;
     }
-    alert(`Unstaking ${currentStaked} WGM tokens!`);
-  };
-
-  const handleClaimStaking = () => {
-    if (currentStaked <= 0) {
-      alert('No staking rewards to claim');
+    if (parseFloat(unstakeAmount) > availableToUnstake) {
+      alert('Insufficient staked amount');
       return;
     }
-    alert(`Claiming staking rewards!`);
+    alert(`Unstaking ${unstakeAmount} WEGRAM tokens!`);
   };
 
-  const handleClaimRewards = () => {
-    if (earnedRewards <= 0) {
-      alert('No rewards to claim');
-      return;
-    }
-    alert(`Claiming ${earnedRewards} WGM rewards!`);
+  const handleMaxStake = () => {
+    setStakeAmount(availableToStake.toString());
   };
 
-  const handleRefreshRate = () => {
-    alert('Exchange rate refreshed!');
+  const handleMaxUnstake = () => {
+    setUnstakeAmount(availableToUnstake.toString());
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
+    <div className="min-h-screen bg-gray-900 text-white">
       <div className="max-w-md mx-auto px-4 pt-20 pb-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-6 h-6 text-primary" />
+            <ArrowLeft className="w-6 h-6 text-white" />
           </button>
           
           <div className="flex items-center gap-3">
-            <img 
-              src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
-              alt="WEGRAM Logo" 
-              className="w-12 h-12 rounded-xl object-cover shadow-2xl border border-purple-400/30"
-            />
-            <div className="text-2xl font-bold gradient-text">$WGM</div>
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              W
+            </div>
+            <div className="text-2xl font-bold text-white">Wegram Staking</div>
           </div>
+          
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors">
+            <Wallet className="w-4 h-4" />
+            Connect
+          </button>
         </div>
 
-        {/* Main Staking Card */}
-        <div className="card mb-6">
-          <h2 className="text-xl font-semibold mb-6 text-primary">How much $WGM do you want to stake?</h2>
-          
-          {/* Token Input Section */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
-              <img 
-                src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
-                alt="WEGRAM Logo" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="text-xl font-semibold text-primary">$WGM</div>
-            <input
-              type="number"
-              value={stakeAmount}
-              onChange={(e) => {
-                setStakeAmount(e.target.value);
-                handleCustomPercentage();
-              }}
-              placeholder="Enter amount"
-              className="input flex-1"
-            />
-          </div>
-
-          {/* Percentage Buttons */}
-          <div className="flex gap-3 mb-6">
-            {percentageOptions.map((percentage) => (
-              <button
-                key={percentage}
-                onClick={() => handlePercentageClick(percentage)}
-                className={`px-4 py-2 rounded-lg border transition-colors ${
-                  selectedPercentage === percentage
-                    ? 'bg-purple-600 border-purple-600 text-white'
-                    : 'border-gray-600 hover:border-purple-400 text-primary'
-                }`}
-              >
-                {percentage}%
-              </button>
-            ))}
-            <button
-              onClick={handleCustomPercentage}
-              className={`px-4 py-2 rounded-lg border transition-colors ${
-                selectedPercentage === null && stakeAmount
-                  ? 'bg-purple-600 border-purple-600 text-white'
-                  : 'border-gray-600 hover:border-purple-400 text-primary'
-              }`}
-            >
-              %
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div>
-              <div className="text-secondary text-sm">DPR:</div>
-              <div className="text-secondary text-sm">APR:</div>
-              <div className="text-secondary text-sm">staked:</div>
+        {/* Total Staked Card */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 mb-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"></div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg">
+                W
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">{totalStaked.toLocaleString()}</div>
+                <div className="text-blue-100 text-sm">Total Staked</div>
+              </div>
             </div>
             <div className="text-right">
-              <div className="text-primary">{dpr.toFixed(3)} WGM</div>
-              <div className="text-primary">{apr.toFixed(3)} so</div>
-              <div className="text-primary">{currentStaked} WGM</div>
+              <div className="text-2xl font-bold text-blue-200">{apy}%</div>
+              <div className="text-blue-100 text-sm">APY</div>
             </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="grid grid-cols-3 gap-3">
-            <button
-              onClick={handleStake}
-              className="btn-secondary py-3 font-semibold"
-            >
-              STAKE
-            </button>
-            <button
-              onClick={handleUnstake}
-              className="btn-secondary py-3 font-semibold"
-            >
-              UNSTAKE
-            </button>
-            <button
-              onClick={handleClaimStaking}
-              className="btn-secondary py-3 font-semibold"
-            >
-              CLAIM
-            </button>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="grid grid-cols-1 gap-4">
-          {/* Exchange Rate */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold text-primary">CURRENT EXCHANGE RATE</h3>
+        {/* Stake Tokens Section */}
+        <div className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h3 className="text-xl font-bold text-white mb-4">Stake Tokens</h3>
+          <div className="mb-4">
+            <div className="text-gray-300 text-sm mb-1">Available to Stake:</div>
+            <div className="text-white font-semibold">{availableToStake.toLocaleString()} WEGRAM</div>
+          </div>
+          
+          <div className="mb-4">
+            <div className="relative">
+              <input
+                type="number"
+                value={stakeAmount}
+                onChange={(e) => setStakeAmount(e.target.value)}
+                placeholder="Enter amount to stake"
+                className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
               <button
-                onClick={handleRefreshRate}
-                className="p-1 hover:bg-gray-700 rounded transition-colors"
+                onClick={handleMaxStake}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400 hover:text-blue-300 transition-colors"
               >
-                <RefreshCw className="w-4 h-4 text-secondary" />
+                MAX
               </button>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
-                  alt="WEGRAM" 
-                  className="w-6 h-6 rounded-full object-cover"
-                />
-                <span className="text-primary">WGM</span>
-              </div>
-              <span className="text-secondary">→</span>
-              <span className="text-primary">SOL</span>
-              <div className="ml-auto text-lg font-semibold text-primary">5.30</div>
-            </div>
           </div>
-
-          {/* Rewards */}
-          <div className="card">
-            <h3 className="font-semibold mb-3 text-primary">REWARDS</h3>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-secondary">Earned:</span>
-              <span className="text-xl font-semibold text-primary">{earnedRewards} WGM</span>
-            </div>
-            <button
-              onClick={handleClaimRewards}
-              className="btn-secondary w-full py-3 font-semibold"
-            >
-              CLAIM
-            </button>
-          </div>
+          
+          <button
+            onClick={handleStake}
+            className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all"
+          >
+            Stake Wegram
+          </button>
         </div>
 
-        {/* Recent Transactions */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="card">
-            <h3 className="font-semibold mb-4 text-primary">Recent transactions</h3>
-            <div className="space-y-3">
-              <div className="grid grid-cols-3 gap-2 text-sm text-secondary mb-2">
-                <span>Amount</span>
-                <span>Price</span>
-                <span>Type</span>
-              </div>
-              {recentTransactions.map((tx, index) => (
-                <div key={index} className="grid grid-cols-3 gap-2 text-sm text-primary">
-                  <span>{tx.amount.toLocaleString()}</span>
-                  <span>{tx.price}</span>
-                  <span className={tx.type === 'Stake' ? 'text-green-400' : 'text-red-400'}>
-                    {tx.type}
-                  </span>
-                </div>
-              ))}
+        {/* Unstake Tokens Section */}
+        <div className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h3 className="text-xl font-bold text-white mb-4">Unstake Tokens</h3>
+          <div className="mb-4">
+            <div className="text-gray-300 text-sm mb-1">Available to Unstake:</div>
+            <div className="text-white font-semibold">{availableToUnstake.toLocaleString()} WEGRAM</div>
+          </div>
+          
+          <div className="mb-4">
+            <div className="relative">
+              <input
+                type="number"
+                value={unstakeAmount}
+                onChange={(e) => setUnstakeAmount(e.target.value)}
+                placeholder="Enter amount to unstake"
+                className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <button
+                onClick={handleMaxUnstake}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-300 transition-colors"
+              >
+                MAX
+              </button>
             </div>
           </div>
-
-          <div className="card">
-            <h3 className="font-semibold mb-4 text-primary">Recent transactions</h3>
-            <div className="space-y-3">
-              <div className="grid grid-cols-3 gap-2 text-sm text-secondary mb-2">
-                <span>Pair</span>
-                <span>Price</span>
-                <span>Type</span>
-              </div>
-              {recentTransactions.map((tx, index) => (
-                <div key={index} className="grid grid-cols-3 gap-2 text-sm text-primary">
-                  <span>{tx.amount.toLocaleString()}</span>
-                  <span>{tx.price}</span>
-                  <span className={tx.type === 'Stake' ? 'text-green-400' : 'text-red-400'}>
-                    {tx.type}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          
+          <button
+            onClick={handleUnstake}
+            className="w-full py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg font-semibold hover:from-purple-600 hover:to-purple-700 transition-all"
+          >
+            Unstake Wegram
+          </button>
         </div>
 
-        {/* Portfolio */}
-        <div className="mt-6 card">
-          <h3 className="font-semibold mb-2 text-primary">your portfolio</h3>
-          <div className="flex items-center gap-3">
-            <div className="text-3xl font-bold text-primary">${portfolioValue.toLocaleString()}</div>
-            <div className="text-green-400 flex items-center gap-1">
-              <TrendingUp className="w-4 h-4" />
-              +{portfolioGain}%
+        {/* How Staking Works Section */}
+        <div className="bg-gray-800 rounded-xl p-6">
+          <button
+            onClick={() => setShowHowItWorks(!showHowItWorks)}
+            className="w-full flex items-center justify-between text-left"
+          >
+            <h3 className="text-xl font-bold text-blue-400">How Staking Works?</h3>
+            {showHowItWorks ? (
+              <ChevronUp className="w-5 h-5 text-blue-400" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-blue-400" />
+            )}
+          </button>
+          
+          {showHowItWorks && (
+            <div className="mt-6 space-y-4">
+              {/* Flexible Staking */}
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Flexible Staking</h4>
+                  <p className="text-gray-300 text-sm">
+                    Stake WEGRAM with no lock-up. Earn SPL tokens (SOL, USDC, WEGRAM) with rotating rewards.
+                  </p>
+                </div>
+              </div>
+
+              {/* Proportional Rewards */}
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Proportional Rewards</h4>
+                  <p className="text-gray-300 text-sm">
+                    Rewards distributed based on your stake amount. More stake = bigger share.
+                  </p>
+                </div>
+              </div>
+
+              {/* Low Fees */}
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Low Fees</h4>
+                  <p className="text-gray-300 text-sm">
+                    Small deposit fee (currently 0%). Maximum returns on Solana network.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pro Tip */}
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  i
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Pro Tip</h4>
+                  <p className="text-gray-300 text-sm">
+                    Restake rewards to compound earnings and maximize returns!
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
