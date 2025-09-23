@@ -76,17 +76,16 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
               <span className="text-xl font-bold text-primary">WEGRAM</span>
             </div>
             
-            {/* Edit Profile Button (no-op) */}
+            {/* Profile Button (navigates to profile page) */}
             <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  // intentionally do nothing
+                onClick={() => {
+                  navigate('/profile');
+                  onClose();
                 }}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 group ${
                   isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
                 }`}
-                title="Edit Profile"
+                title="View Profile"
               >
                 <User className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-colors duration-200" 
                       style={{
@@ -96,9 +95,6 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text'
                       }} />
-                <span className="text-sm font-medium bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-200 bg-clip-text text-transparent">
-                  Edit Profile
-                </span>
               </button>
           </div>
 
