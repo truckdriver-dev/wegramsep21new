@@ -636,6 +636,16 @@ export const UserProfile: React.FC = () => {
     // Add share functionality here
   };
 
+  const handleProfileMenu = () => {
+    // Add profile menu functionality here
+    console.log('Profile menu clicked');
+    // This could open a dropdown with options like:
+    // - Share Profile
+    // - Block User
+    // - Report User
+    // - Copy Profile Link
+  };
+
 
 
   const renderTabContent = () => {
@@ -721,7 +731,10 @@ export const UserProfile: React.FC = () => {
           <p className="text-sm text-secondary">{user.posts} posts</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <button className="p-2 rounded-lg transition-colors hover:bg-overlay-light">
+          <button 
+            onClick={handleProfileMenu}
+            className="p-2 rounded-lg transition-colors hover:bg-overlay-light"
+          >
             <MoreHorizontal className="w-5 h-5 text-primary" />
           </button>
         </div>
@@ -746,17 +759,14 @@ export const UserProfile: React.FC = () => {
               </div>
               <p className="text-secondary text-sm mb-4">{user.username}</p>
               
-              {/* Action Icons */}
-              <div className="flex items-center gap-2">
-                {!isFromChat && (
+              {/* Action Icons - Only show gift icon when not from chat */}
+              {!isFromChat && (
+                <div className="flex items-center gap-2">
                   <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
                     <Gift className="w-4 h-4 text-accent" />
                   </button>
-                )}
-                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
-                  <MoreHorizontal className="w-4 h-4 text-secondary" />
-                </button>
-              </div>
+                </div>
+              )}
             </div>
           </div>
 
