@@ -88,7 +88,7 @@ export const Home: React.FC = () => {
         aria-label="View livestream"
         className="relative mb-4 mx-2 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
-        <div className="rounded-full px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}>
+        <div className="bg-black rounded-full px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center space-x-3">
             {/* Profile Pictures */}
             <div className="flex -space-x-1.5">
@@ -129,7 +129,7 @@ export const Home: React.FC = () => {
         </div>
         
         {/* Subtle glow effect */}
-        <div className="absolute inset-0 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-sm" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}></div>
+        <div className="absolute inset-0 bg-black rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-sm"></div>
       </div>
 
       {/* Feed Navigation */}
