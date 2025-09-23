@@ -24,7 +24,7 @@ export const Messages: React.FC = () => {
     {
       id: '1',
       name: 'Alex Chen',
-      username: 'alexchen',
+      username: '@alexchen',
       avatar: 'A',
       avatarColor: 'bg-gradient-to-br from-red-400 to-pink-500',
       lastMessage: 'Hey! Check out this new NFT dr...',
@@ -89,7 +89,9 @@ export const Messages: React.FC = () => {
 
   const handleUserClick = (username: string, event: React.MouseEvent) => {
     event.stopPropagation();
-    navigate(`/user/${username}`, { 
+    // Remove @ symbol for URL routing
+    const cleanUsername = username.replace('@', '');
+    navigate(`/user/${cleanUsername}`, { 
       state: { originalProfile: username, fromChat: true } 
     });
   };
@@ -178,7 +180,10 @@ export const Messages: React.FC = () => {
               {/* Chat Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-semibold text-primary truncate">
+                  <h3 
+                    className={`font-semibold text-primary truncate ${!chat.isGroup ? 'cursor-pointer hover:text-accent' : ''}`}
+                    onClick={(e) => !chat.isGroup && handleUserClick(chat.username, e)}
+                  >
                     {chat.name}
                   </h3>
                   <span className="text-xs text-secondary flex-shrink-0 ml-2">{chat.timestamp}</span>
