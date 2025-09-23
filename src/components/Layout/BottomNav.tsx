@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X, Globe } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav: React.FC = () => {
@@ -124,7 +124,7 @@ export const BottomNav: React.FC = () => {
                 <Video className="w-6 h-6 text-blue-400" />
               </button>
 
-              {/* Spacer elements to mirror screenshot layout */
+              {/* Spacer elements to mirror screenshot layout */}
               <div className="w-6 h-6 rounded-full" style={{ border: '2px solid var(--border)' }} />
               <button
                 onClick={() => setShowCreateModal(false)}
