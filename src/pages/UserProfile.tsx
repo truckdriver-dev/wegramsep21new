@@ -840,7 +840,7 @@ export const UserProfile: React.FC = () => {
               className={`px-6 py-2 rounded-full font-medium transition-colors ${
                 user.isFollowing
                   ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
-                  : 'bg-white text-black hover:bg-gray-100'
+                  : 'btn-primary'
               }`}
             >
               {user.isFollowing ? 'Unfollow' : 'Follow'}
