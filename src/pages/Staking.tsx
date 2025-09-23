@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Wallet, ChevronUp, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Coins } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 
@@ -8,7 +8,6 @@ export const Staking: React.FC = () => {
   const { isDark } = useTheme();
   const [stakeAmount, setStakeAmount] = useState('');
   const [unstakeAmount, setUnstakeAmount] = useState('');
-  const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
   
@@ -86,10 +85,11 @@ export const Staking: React.FC = () => {
           </button>
           
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-80"></div>
-              <div className="relative z-10 text-white font-black text-sm tracking-tight">W</div>
-            </div>
+            <img 
+              src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
+              alt="WEGRAM Logo" 
+              className="w-12 h-12 rounded-xl object-cover shadow-2xl border border-purple-400/30 flex-shrink-0"
+            />
             <div className="text-2xl font-bold text-primary">Wegram Staking</div>
           </div>
           
@@ -98,7 +98,7 @@ export const Staking: React.FC = () => {
               onClick={handleDisconnectWallet}
               className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg flex items-center gap-2 hover:from-green-600 hover:to-green-700 transition-colors shadow-lg"
             >
-              <Wallet className="w-5 h-5" />
+              <Coins className="w-5 h-5" />
               <span className="font-medium">{walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}</span>
             </button>
           ) : (
@@ -106,7 +106,7 @@ export const Staking: React.FC = () => {
               onClick={handleConnectWallet}
               className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg flex items-center gap-2 hover:from-blue-600 hover:to-blue-700 transition-colors shadow-lg"
             >
-              <Wallet className="w-5 h-5" />
+              <Coins className="w-5 h-5" />
               <span className="font-medium">Connect Wallet</span>
             </button>
           )}
@@ -117,10 +117,11 @@ export const Staking: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-60"></div>
-                <div className="relative z-10 text-white font-black text-sm tracking-tight">W</div>
-              </div>
+              <img 
+                src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
+                alt="WEGRAM Logo" 
+                className="w-12 h-12 rounded-xl object-cover shadow-2xl border border-white/30 flex-shrink-0"
+              />
               <div>
                 <div className="text-3xl font-bold text-white">{totalStaked.toLocaleString()}</div>
                 <div className="text-blue-100 text-sm">Total Staked</div>
@@ -203,73 +204,61 @@ export const Staking: React.FC = () => {
 
         {/* How Staking Works Section */}
         <div className="card">
-          <button
-            onClick={() => setShowHowItWorks(!showHowItWorks)}
-            className="w-full flex items-center justify-between text-left"
-          >
-            <h3 className="text-xl font-bold text-accent">How Staking Works?</h3>
-            {showHowItWorks ? (
-              <ChevronUp className="w-5 h-5 text-accent" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-accent" />
-            )}
-          </button>
+          <h3 className="text-xl font-bold text-accent mb-6">How Staking Works?</h3>
           
-          {showHowItWorks && (
-            <div className="mt-6 space-y-4">
-              {/* Flexible Staking */}
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                  1
-                </div>
-                <div>
-                  <h4 className="text-primary font-semibold mb-1">Flexible Staking</h4>
-                  <p className="text-secondary text-sm">
-                    Stake WEGRAM with no lock-up. Earn SPL tokens (SOL, USDC, WEGRAM) with rotating rewards.
-                  </p>
-                </div>
+          <div className="space-y-4">
+            {/* Flexible Staking */}
+            <div className="flex items-start gap-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                1
               </div>
-
-              {/* Proportional Rewards */}
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                  2
-                </div>
-                <div>
-                  <h4 className="text-primary font-semibold mb-1">Proportional Rewards</h4>
-                  <p className="text-secondary text-sm">
-                    Rewards distributed based on your stake amount. More stake = bigger share.
-                  </p>
-                </div>
-              </div>
-
-              {/* Low Fees */}
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                  3
-                </div>
-                <div>
-                  <h4 className="text-primary font-semibold mb-1">Low Fees</h4>
-                  <p className="text-secondary text-sm">
-                    Small deposit fee (currently 0%). Maximum returns on Solana network.
-                  </p>
-                </div>
-              </div>
-
-              {/* Pro Tip */}
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                  i
-                </div>
-                <div>
-                  <h4 className="text-primary font-semibold mb-1">Pro Tip</h4>
-                  <p className="text-secondary text-sm">
-                    Restake rewards to compound earnings and maximize returns!
-                  </p>
-                </div>
+              <div>
+                <h4 className="text-primary font-semibold mb-1">Flexible Staking</h4>
+                <p className="text-secondary text-sm">
+                  Stake WEGRAM with no lock-up. Earn SPL tokens (SOL, USDC, WEGRAM) with rotating rewards.
+                </p>
               </div>
             </div>
-          )}
+
+            {/* Proportional Rewards */}
+            <div className="flex items-start gap-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                2
+              </div>
+              <div>
+                <h4 className="text-primary font-semibold mb-1">Proportional Rewards</h4>
+                <p className="text-secondary text-sm">
+                  Rewards distributed based on your stake amount. More stake = bigger share.
+                </p>
+              </div>
+            </div>
+
+            {/* Low Fees */}
+            <div className="flex items-start gap-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                3
+              </div>
+              <div>
+                <h4 className="text-primary font-semibold mb-1">Low Fees</h4>
+                <p className="text-secondary text-sm">
+                  Small deposit fee (currently 0%). Maximum returns on Solana network.
+                </p>
+              </div>
+            </div>
+
+            {/* Pro Tip */}
+            <div className="flex items-start gap-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                i
+              </div>
+              <div>
+                <h4 className="text-primary font-semibold mb-1">Pro Tip</h4>
+                <p className="text-secondary text-sm">
+                  Restake rewards to compound earnings and maximize returns!
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
