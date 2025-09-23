@@ -86,8 +86,9 @@ export const Staking: React.FC = () => {
           </button>
           
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              W
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-80"></div>
+              <div className="relative z-10 text-white font-black text-sm tracking-tight">W</div>
             </div>
             <div className="text-2xl font-bold text-primary">Wegram Staking</div>
           </div>
@@ -95,18 +96,18 @@ export const Staking: React.FC = () => {
           {isWalletConnected ? (
             <button 
               onClick={handleDisconnectWallet}
-              className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg flex items-center gap-2 hover:from-green-600 hover:to-green-700 transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg flex items-center gap-2 hover:from-green-600 hover:to-green-700 transition-colors shadow-lg"
             >
-              <Wallet className="w-4 h-4" />
-              {walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}
+              <Wallet className="w-5 h-5" />
+              <span className="font-medium">{walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}</span>
             </button>
           ) : (
             <button 
               onClick={handleConnectWallet}
-              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg flex items-center gap-2 hover:from-blue-600 hover:to-blue-700 transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg flex items-center gap-2 hover:from-blue-600 hover:to-blue-700 transition-colors shadow-lg"
             >
-              <Wallet className="w-4 h-4" />
-              Connect
+              <Wallet className="w-5 h-5" />
+              <span className="font-medium">Connect Wallet</span>
             </button>
           )}
         </div>
@@ -116,8 +117,9 @@ export const Staking: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg">
-                W
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-60"></div>
+                <div className="relative z-10 text-white font-black text-sm tracking-tight">W</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">{totalStaked.toLocaleString()}</div>
