@@ -113,6 +113,7 @@ export const BottomNav: React.FC = () => {
                 onChange={(e) => setTextContent(e.target.value)}
                 placeholder="What's happening?"
                 className="flex-1 h-28 bg-transparent text-primary outline-none resize-none"
+                style={{ color: 'var(--text)' }}
               />
             </div>
 
@@ -125,16 +126,24 @@ export const BottomNav: React.FC = () => {
             {/* Bottom toolbar */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-4">
-                <button onClick={() => imageInputRef.current?.click()} className="w-8 h-8 flex items-center justify-center" aria-label="Add photo">
-                  <Image className="w-6 h-6 text-blue-400" />
+                <button 
+                  onClick={() => imageInputRef.current?.click()} 
+                  className="w-8 h-8 flex items-center justify-center hover:opacity-80 transition-opacity" 
+                  aria-label="Add photo"
+                >
+                  <Image className="w-6 h-6" style={{ color: 'var(--gradA)' }} />
                 </button>
-                <button onClick={() => videoInputRef.current?.click()} className="w-8 h-8 flex items-center justify-center" aria-label="Add video">
-                  <Video className="w-6 h-6 text-blue-400" />
+                <button 
+                  onClick={() => videoInputRef.current?.click()} 
+                  className="w-8 h-8 flex items-center justify-center hover:opacity-80 transition-opacity" 
+                  aria-label="Add video"
+                >
+                  <Video className="w-6 h-6" style={{ color: 'var(--gradA)' }} />
                 </button>
               </div>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="w-9 h-9 rounded-full flex items-center justify-center"
+                className="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                 style={{ backgroundColor: 'var(--accent)' }}
                 aria-label="Close"
               >
@@ -151,8 +160,8 @@ export const BottomNav: React.FC = () => {
                 setTextContent('');
                 setSelectedFiles([]);
               }}
-              className="w-full py-3 rounded-full font-semibold text-white"
-              style={{ background: 'linear-gradient(90deg, #9333ea, #ef4444)' }}
+              className="w-full py-3 rounded-full font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+              style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}
               disabled={!textContent.trim() && selectedFiles.length === 0}
             >
               Post Now
