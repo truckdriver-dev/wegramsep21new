@@ -222,7 +222,7 @@ export const Settings: React.FC = () => {
         {/* ACCOUNT Section */}
         <SectionHeader title="ACCOUNT" />
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <NavigationItem label="Edit Profile" onClick={() => navigate('/profile/edit')} />
+          <NavigationItem label="Edit Profile" onClick={() => console.log('Edit profile clicked')} />
           <NavigationItem label="Change Username" onClick={() => console.log('Navigate to change username')} />
           <NavigationItem label="Active Sessions" onClick={() => console.log('Navigate to active sessions')} />
           <NavigationItem label="Export Data" onClick={() => console.log('Navigate to export data')} />
