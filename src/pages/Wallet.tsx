@@ -6,7 +6,10 @@ import {
   Plus,
   Settings,
   Activity,
-  Ticket
+  Ticket,
+  QrCode,
+  Send,
+  DollarSign
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { SolanaWallet, WalletData } from '../utils/solanaWallet';
@@ -71,6 +74,10 @@ export const Wallet: React.FC = () => {
 
   const handleMore = () => {
     alert('More wallet features coming soon!');
+  };
+
+  const handleBuy = () => {
+    alert('Buy crypto feature coming soon! Connect to exchange integration.');
   };
 
   const handleClaimRewards = () => {
@@ -153,58 +160,71 @@ export const Wallet: React.FC = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-5 gap-3 mb-6">
             <button
               onClick={handleDeposit}
-              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
                 isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
-                isDark ? 'border-gray-600' : 'border-gray-300'
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
               }`}>
-                <ArrowUp className="w-5 h-5" />
+                <QrCode className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-sm font-medium text-primary">Deposit</span>
+              <span className="text-xs font-medium text-white">Receive</span>
             </button>
             <button
               onClick={handleWithdraw}
-              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
                 isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
-                isDark ? 'border-gray-600' : 'border-gray-300'
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
               }`}>
-                <ArrowDown className="w-5 h-5" />
+                <Send className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-sm font-medium text-primary">Withdraw</span>
+              <span className="text-xs font-medium text-white">Send</span>
             </button>
             <button
               onClick={handleSwap}
-              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
                 isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
-                isDark ? 'border-gray-600' : 'border-gray-300'
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
               }`}>
-                <RefreshCw className="w-5 h-5" />
+                <RefreshCw className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-sm font-medium text-primary">Swap</span>
+              <span className="text-xs font-medium text-white">Swap</span>
+            </button>
+            <button
+              onClick={handleBuy}
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
+                isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
+              }`}
+            >
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
+              }`}>
+                <DollarSign className="w-5 h-5 text-purple-400" />
+              </div>
+              <span className="text-xs font-medium text-white">Buy</span>
             </button>
             <button
               onClick={handleMore}
-              className={`flex flex-col items-center gap-2 p-4 rounded-full transition-colors ${
+              className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-colors ${
                 isDark ? 'hover:bg-gray-700 hover:bg-opacity-30' : 'hover:bg-gray-200 hover:bg-opacity-50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-full border flex items-center justify-center ${
-                isDark ? 'border-gray-600' : 'border-gray-300'
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                isDark ? 'bg-gray-800' : 'bg-gray-200'
               }`}>
-                <Plus className="w-5 h-5" />
+                <Plus className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-sm font-medium text-primary">More</span>
+              <span className="text-xs font-medium text-white">More</span>
             </button>
           </div>
         </div>
