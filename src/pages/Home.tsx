@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PostComposer } from '../components/Post/PostComposer';
 import { PostCard } from '../components/Post/PostCard';
 import { usePosts } from '../hooks/usePosts';
@@ -36,6 +36,16 @@ export const Home: React.FC = () => {
     if (!user || !profile) return;
     await createPost(content, user.id);
   };
+
+  // Listen for quick composer posts from BottomNav modal
+  useEffect(() => {
+    const handler = (e: any) => {
+      const content = e.detail?.content as string;
+      if (content) handlePost(content);
+    };
+    window.addEventListener('wegram:new-post', handler as any);
+    return () => window.removeEventListener('wegram:new-post', handler as any);
+  }, [user, profile]);
 
   const handleLike = async (postId: string) => {
     await likePost(postId);
