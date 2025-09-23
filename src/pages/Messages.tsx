@@ -178,10 +178,7 @@ export const Messages: React.FC = () => {
               {/* Chat Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 
-                    className={`font-semibold text-primary truncate ${!chat.isGroup ? 'cursor-pointer hover:text-accent' : ''}`}
-                    onClick={(e) => !chat.isGroup && handleUserClick(chat.username, e)}
-                  >
+                  <h3 className="font-semibold text-primary truncate">
                     {chat.name}
                   </h3>
                   <span className="text-xs text-secondary flex-shrink-0 ml-2">{chat.timestamp}</span>
