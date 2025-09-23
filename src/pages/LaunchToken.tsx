@@ -79,7 +79,7 @@ export const LaunchToken: React.FC = () => {
           </div>
 
           <p className="text-purple-400 text-sm">
-            🚀 Get ready to launch your token with zero coding required
+            Get ready to launch your token with zero coding required
           </p>
         </div>
 

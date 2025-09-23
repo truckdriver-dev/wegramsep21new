@@ -172,7 +172,7 @@ export const Wallet: React.FC = () => {
               }`}>
                 <QrCode className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-white">Receive</span>
+              <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>Receive</span>
             </button>
             <button
               onClick={handleWithdraw}
@@ -185,7 +185,7 @@ export const Wallet: React.FC = () => {
               }`}>
                 <Send className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-white">Send</span>
+              <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>Send</span>
             </button>
             <button
               onClick={handleSwap}
@@ -198,7 +198,7 @@ export const Wallet: React.FC = () => {
               }`}>
                 <RefreshCw className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-white">Swap</span>
+              <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>Swap</span>
             </button>
             <button
               onClick={handleBuy}
@@ -211,7 +211,7 @@ export const Wallet: React.FC = () => {
               }`}>
                 <DollarSign className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-white">Buy</span>
+              <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>Buy</span>
             </button>
             <button
               onClick={handleMore}
@@ -224,7 +224,7 @@ export const Wallet: React.FC = () => {
               }`}>
                 <Plus className="w-5 h-5 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-white">More</span>
+              <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>More</span>
             </button>
           </div>
         </div>

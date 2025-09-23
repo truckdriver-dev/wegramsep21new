@@ -71,11 +71,11 @@ export const Home: React.FC = () => {
     <div className="max-w-md mx-auto px-4 pt-20 pb-24">
       {/* Crypto Performance Notification */}
       <div 
-        onClick={() => navigate('/trending')}
-        onKeyDown={(e) => e.key === 'Enter' && navigate('/trending')}
+        onClick={() => navigate('/livestream')}
+        onKeyDown={(e) => e.key === 'Enter' && navigate('/livestream')}
         role="button"
         tabIndex={0}
-        aria-label="View trending crypto performance"
+        aria-label="View livestream"
         className="relative mb-4 mx-2 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
         <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-full px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300">
