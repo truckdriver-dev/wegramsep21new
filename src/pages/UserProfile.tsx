@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
 import { useTheme } from '../hooks/useTheme';
@@ -749,11 +749,8 @@ export const UserProfile: React.FC = () => {
               </div>
               <p className="text-secondary text-sm mb-4">{user.username}</p>
               
-              {/* Action Icons - Gift and 3 dots next to each other */}
+              {/* Action Icons - 3 dots only */}
               <div className="flex items-center gap-2">
-                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
-                  <Gift className="w-4 h-4 text-accent" />
-                </button>
                 <button 
                   onClick={handleProfileMenu}
                   className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
