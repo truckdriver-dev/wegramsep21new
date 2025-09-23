@@ -108,9 +108,10 @@ export const Profile: React.FC = () => {
   // Memoize posts to avoid re-rendering
   const posts = useMemo(() => mockUserPosts, []);
 
-  const handleEditProfile = () => {
-    // TODO: Implement edit profile functionality
-    console.log('Edit profile clicked');
+  const handleEditProfile = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Intentionally do nothing
   };
 
   const handleProfileMenu = () => {
