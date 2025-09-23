@@ -189,7 +189,12 @@ export const Messages: React.FC = () => {
                   <span className="text-xs text-secondary flex-shrink-0 ml-2">{chat.timestamp}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-secondary truncate flex-1">{chat.lastMessage}</p>
+                  <p 
+                    className={`text-sm text-secondary truncate flex-1 ${!chat.isGroup ? 'cursor-pointer hover:text-accent' : ''}`}
+                    onClick={(e) => !chat.isGroup && handleUserClick(chat.username, e)}
+                  >
+                    {chat.lastMessage}
+                  </p>
                   {chat.unreadCount > 0 && (
                     <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ml-2" style={{ backgroundColor: 'var(--accent)' }}>
                       <span className="text-white text-xs font-bold">{chat.unreadCount}</span>
