@@ -751,11 +751,9 @@ export const UserProfile: React.FC = () => {
               
               {/* Action Icons - Gift and 3 dots next to each other */}
               <div className="flex items-center gap-2">
-                {!isFromChat && (
-                  <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
-                    <Gift className="w-4 h-4 text-accent" />
-                  </button>
-                )}
+                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
+                  <Gift className="w-4 h-4 text-accent" />
+                </button>
                 <button 
                   onClick={handleProfileMenu}
                   className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
