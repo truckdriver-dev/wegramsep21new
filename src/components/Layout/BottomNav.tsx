@@ -6,7 +6,6 @@ export const BottomNav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [composeMode, setComposeMode] = useState<'none' | 'text' | 'image' | 'video'>('none');
   const [textContent, setTextContent] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const imageInputRef = React.useRef<HTMLInputElement>(null);
@@ -33,7 +32,6 @@ export const BottomNav: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => {
-                    setComposeMode('none');
                     setTextContent('');
                     setSelectedFiles([]);
                     setShowCreateModal(true);
@@ -95,104 +93,71 @@ export const BottomNav: React.FC = () => {
               </button>
             </div>
 
-            {/* Divider */}
-            <div className="h-px mb-4" style={{ backgroundColor: 'var(--border)' }} />
+            {/* Composer UI (Twitter-like) */}
+            <h3 className="text-center text-primary font-semibold mb-3">New post</h3>
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full" style={{ backgroundColor: 'var(--border)' }} />
+              <textarea
+                value={textContent}
+                onChange={(e) => setTextContent(e.target.value)}
+                placeholder="What's happening?"
+                className="flex-1 h-28 bg-transparent text-primary outline-none resize-none"
+              />
+            </div>
 
-            {/* Icon Row or Inline Composer */}
-            {composeMode === 'none' && (
-              <div className="flex items-center justify-between">
-                {/* Text */}
-                <button
-                  onClick={() => setComposeMode('text')}
-                  className="w-10 h-10 flex items-center justify-center hover:opacity-80"
-                  aria-label="Create text post"
-                >
-                  <Type className="w-6 h-6 text-blue-400" />
-                </button>
-                {/* Photo */}
-                <button
-                  onClick={() => imageInputRef.current?.click()}
-                  className="w-10 h-10 flex items-center justify-center hover:opacity-80"
-                  aria-label="Create photo post"
-                >
+            {selectedFiles.length > 0 && (
+              <div className="mb-3 text-sm text-secondary">{selectedFiles.length} file(s) selected</div>
+            )}
+
+            <div className="h-px mb-3" style={{ backgroundColor: 'var(--border)' }} />
+
+            {/* Bottom toolbar */}
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-4">
+                <button onClick={() => imageInputRef.current?.click()} className="w-8 h-8 flex items-center justify-center" aria-label="Add photo">
                   <Image className="w-6 h-6 text-blue-400" />
                 </button>
-                {/* Video */}
-                <button
-                  onClick={() => videoInputRef.current?.click()}
-                  className="w-10 h-10 flex items-center justify-center hover:opacity-80"
-                  aria-label="Create video post"
-                >
+                <button onClick={() => videoInputRef.current?.click()} className="w-8 h-8 flex items-center justify-center" aria-label="Add video">
                   <Video className="w-6 h-6 text-blue-400" />
                 </button>
-
-                {/* Spacer elements to mirror screenshot layout */}
-                <div className="w-6 h-6 rounded-full" style={{ border: '2px solid var(--border)' }} />
-                <button
-                  onClick={() => setShowCreateModal(false)}
-                  className="w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--accent)' }}
-                  aria-label="Close"
-                >
-                  <Plus className="w-4 h-4 text-white" />
+                <button disabled className="w-8 h-8 flex items-center justify-center opacity-50" aria-label="GIF coming soon">
+                  <span className="text-blue-400 text-xs font-bold">GIF</span>
                 </button>
               </div>
-            )}
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="w-9 h-9 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'var(--accent)' }}
+                aria-label="Close"
+              >
+                <Plus className="w-4 h-4 text-white" />
+              </button>
+            </div>
 
-            {composeMode !== 'none' && (
-              <div>
-                {composeMode === 'text' && (
-                  <div>
-                    <textarea
-                      value={textContent}
-                      onChange={(e) => setTextContent(e.target.value)}
-                      placeholder="Write your post..."
-                      className="w-full h-28 bg-transparent text-primary outline-none resize-none mb-3"
-                    />
-                  </div>
-                )}
-                {selectedFiles.length > 0 && (
-                  <div className="mb-3 text-sm text-secondary">{selectedFiles.length} file(s) selected</div>
-                )}
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      const content = textContent.trim() || (composeMode === 'image' ? 'Shared an image' : 'Shared a video');
-                      window.dispatchEvent(new CustomEvent('wegram:new-post', { detail: { content } }));
-                      setShowCreateModal(false);
-                      setComposeMode('none');
-                      setTextContent('');
-                      setSelectedFiles([]);
-                    }}
-                    className="btn-primary flex-1"
-                    disabled={composeMode === 'text' && !textContent.trim()}
-                  >
-                    Post
-                  </button>
-                  <button
-                    onClick={() => {
-                      setComposeMode('none');
-                      setTextContent('');
-                      setSelectedFiles([]);
-                    }}
-                    className="btn-secondary px-6"
-                  >
-                    Back
-                  </button>
-                </div>
-              </div>
-            )}
+            <button
+              onClick={() => {
+                const content = textContent.trim() || (selectedFiles.length > 0 ? 'Shared media' : '');
+                if (!content) return; 
+                window.dispatchEvent(new CustomEvent('wegram:new-post', { detail: { content } }));
+                setShowCreateModal(false);
+                setTextContent('');
+                setSelectedFiles([]);
+              }}
+              className="w-full py-3 rounded-full font-semibold text-white"
+              style={{ background: 'linear-gradient(90deg, #9333ea, #ef4444)' }}
+              disabled={!textContent.trim() && selectedFiles.length === 0}
+            >
+              Post Now
+            </button>
 
             {/* Hidden inputs for media selection */}
             <input ref={imageInputRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => {
               const files = Array.from(e.target.files || []);
               setSelectedFiles(files);
-              setComposeMode('image');
             }} />
             <input ref={videoInputRef} type="file" accept="video/*" multiple className="hidden" onChange={(e) => {
               const files = Array.from(e.target.files || []);
               setSelectedFiles(files);
-              setComposeMode('video');
             }} />
           </div>
         </div>
