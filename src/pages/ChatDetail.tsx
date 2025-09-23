@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Phone, Video, Search, Send, Image, Gift, Coins, Diamond, Plus, TrendingUp, Compass, Gamepad2, MessageCircle, Wallet, Play, ShoppingCart } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Phone, Video, Search, Send, Image, Gift, Coins, Diamond, Plus } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -17,7 +17,7 @@ export const ChatDetail: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
   const [messageText, setMessageText] = useState('');
-  const [showBottomNav, setShowBottomNav] = useState(false);
+  const [showActionButtons, setShowActionButtons] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -72,20 +72,6 @@ export const ChatDetail: React.FC = () => {
     { icon: Coins, label: 'Token', color: 'text-yellow-400' }
   ];
 
-  const bottomNavItems = [
-    { icon: TrendingUp, label: 'Trending', path: '/trending' },
-    { icon: Compass, label: 'Explore', path: '/explore' },
-    { icon: Gamepad2, label: 'Games', path: '/games' },
-    { icon: MessageCircle, label: 'Messages', path: '/messages' },
-    { icon: Wallet, label: 'Wallet', path: '/wallet' },
-    { icon: Play, label: 'Livestream', path: '/livestream' },
-    { icon: ShoppingCart, label: 'Buy', path: '/buy-wegram' }
-  ];
-
-  const handleBottomNavClick = (path: string) => {
-    navigate(path);
-  };
-
   return (
     <div className="max-w-md mx-auto" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
       {/* Header */}
@@ -111,12 +97,6 @@ export const ChatDetail: React.FC = () => {
               </button>
               <button className="p-2 hover:bg-overlay-light rounded-lg transition-colors">
                 <Search className="w-5 h-5 text-secondary" />
-              </button>
-              <button 
-                onClick={() => setShowBottomNav(!showBottomNav)}
-                className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
-              >
-                <Plus className="w-5 h-5 text-secondary" />
               </button>
               <button className="p-2 hover:bg-overlay-light rounded-lg transition-colors">
                 <MoreHorizontal className="w-5 h-5 text-secondary" />
@@ -151,24 +131,34 @@ export const ChatDetail: React.FC = () => {
         ))}
       </div>
 
-      {/* Action Buttons */}
-      <div className="fixed bottom-20 left-0 right-0 max-w-md mx-auto px-4">
-        <div className="bg-overlay-light rounded-lg p-3 mb-3">
-          <div className="flex justify-around">
-            {actionButtons.map((button, index) => (
-              <button
-                key={index}
-                className="flex flex-col items-center gap-1 p-2 hover:bg-overlay-medium rounded-lg transition-colors"
-              >
-                <button.icon className={`w-6 h-6 ${button.color}`} />
-                <span className="text-xs text-secondary">{button.label}</span>
-              </button>
-            ))}
+      {/* Action Buttons - Only show when + button is clicked */}
+      {showActionButtons && (
+        <div className="fixed bottom-20 left-0 right-0 max-w-md mx-auto px-4">
+          <div className="bg-overlay-light rounded-lg p-3 mb-3">
+            <div className="flex justify-around">
+              {actionButtons.map((button, index) => (
+                <button
+                  key={index}
+                  className="flex flex-col items-center gap-1 p-2 hover:bg-overlay-medium rounded-lg transition-colors"
+                >
+                  <button.icon className={`w-6 h-6 ${button.color}`} />
+                  <span className="text-xs text-secondary">{button.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+      )}
 
         {/* Message Input */}
         <div className="flex items-center gap-3" style={{ backgroundColor: 'var(--card)' }}>
+          <button
+            onClick={() => setShowActionButtons(!showActionButtons)}
+            className="p-3 rounded-lg transition-colors hover:bg-overlay-light"
+            style={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)' }}
+          >
+            <Plus className="w-5 h-5 text-primary" />
+          </button>
           <div className="flex-1 relative">
             <input
               type="text"
@@ -190,31 +180,6 @@ export const ChatDetail: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {/* Bottom Navigation Overlay */}
-      {showBottomNav && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50" onClick={() => setShowBottomNav(false)}>
-          <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto">
-            <div className="card m-4 p-4">
-              <div className="grid grid-cols-4 gap-4">
-                {bottomNavItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      handleBottomNavClick(item.path);
-                      setShowBottomNav(false);
-                    }}
-                    className="flex flex-col items-center gap-2 p-3 hover:bg-overlay-light rounded-lg transition-colors"
-                  >
-                    <item.icon className="w-6 h-6 text-primary" />
-                    <span className="text-xs text-secondary">{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
