@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond, XCircle, Flag, Share } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
 import { useTheme } from '../hooks/useTheme';
@@ -539,6 +539,7 @@ export const UserProfile: React.FC = () => {
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [followingUsers, setFollowingUsers] = useState<Set<string>>(new Set(['@crypto_whale', '@defi_guru', '@solana_builder', '@metaverse_explorer']));
   const [activeTab, setActiveTab] = useState<'posts' | 'nft' | 'stats'>('posts');
+  const [showActionMenu, setShowActionMenu] = useState(false);
 
   // Memoize the feed posts to prevent regeneration on every render
   const feedPosts = useMemo(() => {
@@ -637,8 +638,29 @@ export const UserProfile: React.FC = () => {
   };
 
   const handleProfileMenu = () => {
-    // Navigate to the main profile page (same as menu sidebar)
-    navigate('/profile');
+    setShowActionMenu(!showActionMenu);
+  };
+
+  const handleActionMenuClose = () => {
+    setShowActionMenu(false);
+  };
+
+  const handleNotInterested = () => {
+    setShowActionMenu(false);
+    // TODO: Implement not interested functionality
+    console.log('Not interested in this profile');
+  };
+
+  const handleReport = () => {
+    setShowActionMenu(false);
+    // TODO: Implement report functionality
+    console.log('Report this profile');
+  };
+
+  const handleShare = () => {
+    setShowActionMenu(false);
+    // TODO: Implement share functionality
+    console.log('Share this profile');
   };
 
 
@@ -703,6 +725,52 @@ export const UserProfile: React.FC = () => {
 
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: 'var(--bg)' }}>
+      {/* Action Menu Popup */}
+      {showActionMenu && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50" 
+            onClick={handleActionMenuClose}
+          />
+          
+          {/* Menu */}
+          <div 
+            className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden min-w-[280px] max-w-[320px] mx-4"
+            style={{ backgroundColor: 'var(--card)' }}
+          >
+            {/* Menu Items */}
+            <div className="py-2">
+              <button
+                onClick={handleNotInterested}
+                className="w-full px-6 py-4 flex items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                style={{ backgroundColor: 'transparent' }}
+              >
+                <XCircle className="w-5 h-5 text-red-500" />
+                <span className="text-gray-900 dark:text-white font-medium">Not Interested</span>
+              </button>
+              
+              <button
+                onClick={handleReport}
+                className="w-full px-6 py-4 flex items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                style={{ backgroundColor: 'transparent' }}
+              >
+                <Flag className="w-5 h-5 text-orange-500" />
+                <span className="text-gray-900 dark:text-white font-medium">Report</span>
+              </button>
+              
+              <button
+                onClick={handleShare}
+                className="w-full px-6 py-4 flex items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                style={{ backgroundColor: 'transparent' }}
+              >
+                <Share className="w-5 h-5 text-blue-500" />
+                <span className="text-gray-900 dark:text-white font-medium">Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Header */}
       <div className="sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm px-4 py-3 flex items-center gap-3" style={{ backgroundColor: 'var(--bg)' }}>
         <button
