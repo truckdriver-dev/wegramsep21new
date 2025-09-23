@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Settings, Plus, MoreHorizontal, TrendingUp, Compass, Gamepad2, MessageCircle, Coins, Play, ShoppingCart } from 'lucide-react';
+import { Search, Settings, Plus, MoreHorizontal } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface Chat {
@@ -18,7 +18,6 @@ interface Chat {
 
 export const Messages: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [showBottomNav, setShowBottomNav] = useState(false);
   const navigate = useNavigate();
 
   const mockChats: Chat[] = [
@@ -113,20 +112,6 @@ export const Messages: React.FC = () => {
     navigate('/settings');
   };
 
-  const handleBottomNavClick = (path: string) => {
-    navigate(path);
-  };
-
-  const bottomNavItems = [
-    { icon: TrendingUp, label: 'Trending', path: '/trending' },
-    { icon: Compass, label: 'Explore', path: '/explore' },
-    { icon: Gamepad2, label: 'Games', path: '/games' },
-    { icon: MessageCircle, label: 'Messages', path: '/messages' },
-    { icon: Coins, label: 'Wallet', path: '/wallet' },
-    { icon: Play, label: 'Livestream', path: '/livestream' },
-    { icon: ShoppingCart, label: 'Buy', path: '/buy-wegram' }
-  ];
-
   return (
     <div className="max-w-md mx-auto pt-20 pb-24" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
       {/* Header */}
@@ -140,7 +125,7 @@ export const Messages: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <button 
-              onClick={() => setShowBottomNav(!showBottomNav)}
+              onClick={handleCreateNew}
               className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
             >
               <Plus className="w-5 h-5 text-secondary" />
@@ -227,31 +212,6 @@ export const Messages: React.FC = () => {
           </div>
           <h3 className="text-primary font-semibold mb-2">No chats found</h3>
           <p className="text-secondary text-sm">Try adjusting your search terms</p>
-        </div>
-      )}
-
-      {/* Bottom Navigation Overlay */}
-      {showBottomNav && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50" onClick={() => setShowBottomNav(false)}>
-          <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto">
-            <div className="card m-4 p-4">
-              <div className="grid grid-cols-4 gap-4">
-                {bottomNavItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      handleBottomNavClick(item.path);
-                      setShowBottomNav(false);
-                    }}
-                    className="flex flex-col items-center gap-2 p-3 hover:bg-overlay-light rounded-lg transition-colors"
-                  >
-                    <item.icon className="w-6 h-6 text-primary" />
-                    <span className="text-xs text-secondary">{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>
