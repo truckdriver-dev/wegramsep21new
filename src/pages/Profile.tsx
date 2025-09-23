@@ -109,7 +109,8 @@ export const Profile: React.FC = () => {
   const posts = useMemo(() => mockUserPosts, []);
 
   const handleEditProfile = () => {
-    navigate('/profile/edit');
+    // TODO: Implement edit profile functionality
+    console.log('Edit profile clicked');
   };
 
   const handleProfileMenu = () => {
