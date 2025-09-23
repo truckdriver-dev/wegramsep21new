@@ -88,7 +88,8 @@ export const Home: React.FC = () => {
         aria-label="View livestream"
         className="relative mb-4 mx-2 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
-        <div className="bg-black rounded-full px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <div className="rounded-full p-0.5 shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}>
+          <div className="bg-black rounded-full px-4 py-3">
           <div className="flex items-center space-x-3">
             {/* Profile Pictures */}
             <div className="flex -space-x-1.5">
@@ -125,6 +126,7 @@ export const Home: React.FC = () => {
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-white text-xs font-medium">+417</span>
             </div>
+          </div>
           </div>
         </div>
         
