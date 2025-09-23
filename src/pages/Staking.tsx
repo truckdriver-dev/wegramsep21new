@@ -196,7 +196,7 @@ export const Staking: React.FC = () => {
           
           <button
             onClick={handleUnstake}
-            className="btn-secondary w-full py-3 font-semibold"
+            className="w-full py-3 font-semibold bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-colors shadow-lg"
           >
             Unstake Wegram
           </button>
