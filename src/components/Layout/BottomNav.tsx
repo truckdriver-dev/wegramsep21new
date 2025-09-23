@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X } from 'lucide-react';
+import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X, Globe } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const BottomNav: React.FC = () => {
@@ -62,7 +62,7 @@ export const BottomNav: React.FC = () => {
 
       {/* Create Modal (simple, beautiful, matches screenshot) */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black bg-opacity-50"
@@ -71,12 +71,13 @@ export const BottomNav: React.FC = () => {
 
           {/* Modal */}
           <div
-            className="relative w-full max-w-sm rounded-t-2xl p-5"
+            className="relative w-full max-w-sm rounded-2xl p-5 shadow-xl"
             style={{ backgroundColor: 'var(--card)', color: 'var(--text)' }}
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
+                <Globe className="w-4 h-4 text-blue-400" />
                 <span className="text-blue-400 text-sm">Everyone can reply</span>
               </div>
               <button
