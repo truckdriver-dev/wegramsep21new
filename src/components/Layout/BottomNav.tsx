@@ -115,7 +115,7 @@ export const BottomNav: React.FC = () => {
                 onChange={(e) => setTextContent(e.target.value)}
                 placeholder="What's happening?"
                 className="flex-1 h-28 bg-transparent text-primary outline-none resize-none"
-                style={{ color: 'var(--text)' }}
+                style={{ color: 'var(--text)', fontSize: '16px' }}
               />
             </div>
 

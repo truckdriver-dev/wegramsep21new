@@ -148,6 +148,7 @@ export const Messages: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="input pl-10 pr-4"
+            style={{ fontSize: '16px' }}
           />
         </div>
       </div>

@@ -168,7 +168,7 @@ export const ChatDetail: React.FC = () => {
               onKeyPress={handleKeyPress}
               placeholder="iMessage"
               className="w-full px-4 py-3 rounded-lg text-primary placeholder-secondary focus:outline-none focus:ring-2 focus:ring-accent"
-              style={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)' }}
+              style={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)', fontSize: '16px' }}
             />
           </div>
           <button
