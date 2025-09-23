@@ -257,6 +257,71 @@ const getUserData = (username: string): UserProfileData => {
 
 // Mock feed posts personalized for each user based on their interests and following patterns
 const getFeedPosts = (username: string) => {
+  // Add specific dummy posts for each user
+  const userSpecificPosts: { [key: string]: any[] } = {
+    '@alexchen': [
+      {
+        id: 'alex_post_1',
+        userId: 'alexchen',
+        username: '@alexchen',
+        content: 'Just discovered this amazing new DeFi protocol! The yield farming opportunities are incredible 🚀',
+        timestamp: '2h',
+        likes: 234,
+        replies: 45,
+        shares: 12,
+        gifts: 8
+      },
+      {
+        id: 'alex_post_2',
+        userId: 'alexchen',
+        username: '@alexchen',
+        content: 'Building the future of Web3 social media. Excited to share what we\'ve been working on! 💎',
+        timestamp: '5h',
+        likes: 567,
+        replies: 89,
+        shares: 34,
+        gifts: 15
+      },
+      {
+        id: 'alex_post_3',
+        userId: 'alexchen',
+        username: '@alexchen',
+        content: 'NFT market is heating up! Just minted a rare piece from the new collection 🔥',
+        timestamp: '1d',
+        likes: 123,
+        replies: 23,
+        shares: 7,
+        gifts: 3
+      },
+      {
+        id: 'alex_post_4',
+        userId: 'alexchen',
+        username: '@alexchen',
+        content: 'Solana ecosystem is growing so fast! The developer experience is unmatched ⚡',
+        timestamp: '2d',
+        likes: 345,
+        replies: 67,
+        shares: 19,
+        gifts: 11
+      },
+      {
+        id: 'alex_post_5',
+        userId: 'alexchen',
+        username: '@alexchen',
+        content: 'Web3 education is key to mass adoption. Sharing knowledge with the community 📚',
+        timestamp: '3d',
+        likes: 189,
+        replies: 34,
+        shares: 15,
+        gifts: 6
+      }
+    ]
+  };
+
+  // Return user-specific posts if available, otherwise use the personalized feed
+  if (userSpecificPosts[username]) {
+    return userSpecificPosts[username];
+  }
   // Define realistic following relationships and interests for each user
   const userInterests: { [key: string]: { following: string[], interests: string[], recommendations: string[] } } = {
     '@crypto_trader': {
@@ -489,12 +554,18 @@ export const UserProfile: React.FC = () => {
   // This tracks the first profile clicked from home
   const originalProfile = location.state?.originalProfile;
   
+  // Check if we came from chat page
+  const isFromChat = location.state?.fromChat;
+  
   // If no originalProfile is set, this means we came directly from home
   const isFirstProfileFromHome = !originalProfile;
   
   // Determine where the back button should go
   const getBackDestination = () => {
-    if (isFirstProfileFromHome) {
+    if (isFromChat) {
+      // If we came from chat, go back to chat
+      return { path: '/messages', state: null };
+    } else if (isFirstProfileFromHome) {
       // If this is the first profile clicked from home, go back to home
       return { path: '/home', state: null };
     } else {
@@ -511,7 +582,8 @@ export const UserProfile: React.FC = () => {
   // Back button should only work if:
   // 1. This is the first profile from home (can go back to home)
   // 2. This is a subsequent profile (can go back to original profile)
-  const canGoBack = isFirstProfileFromHome || originalProfile;
+  // 3. This is from chat (can go back to chat)
+  const canGoBack = isFirstProfileFromHome || originalProfile || isFromChat;
   
   if (!username) {
     navigate('/home');
@@ -676,9 +748,11 @@ export const UserProfile: React.FC = () => {
               
               {/* Action Icons */}
               <div className="flex items-center gap-2">
-                <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
-                  <Gift className="w-4 h-4 text-accent" />
-                </button>
+                {!isFromChat && (
+                  <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
+                    <Gift className="w-4 h-4 text-accent" />
+                  </button>
+                )}
                 <button className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center">
                   <MoreHorizontal className="w-4 h-4 text-secondary" />
                 </button>

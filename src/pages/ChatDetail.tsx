@@ -79,7 +79,7 @@ export const ChatDetail: React.FC = () => {
         <div className="px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
           <div className="flex items-center gap-3">
             <button 
-              onClick={() => navigate('/messages')}
+              onClick={() => navigate(-1)}
               className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
             >
               <ArrowLeft className="w-5 h-5 text-primary" />

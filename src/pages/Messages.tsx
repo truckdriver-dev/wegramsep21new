@@ -90,7 +90,7 @@ export const Messages: React.FC = () => {
   const handleUserClick = (username: string, event: React.MouseEvent) => {
     event.stopPropagation();
     navigate(`/user/${username}`, { 
-      state: { originalProfile: username } 
+      state: { originalProfile: username, fromChat: true } 
     });
   };
 
