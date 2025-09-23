@@ -282,71 +282,71 @@ export const Analytics: React.FC = () => {
         </div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
           {/* Row 1 */}
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm text-secondary">Verified followers</span>
-              <CheckCircle className="w-4 h-4 text-blue-400" />
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="flex items-center gap-1 sm:gap-2 mb-2">
+              <span className="text-xs sm:text-sm text-secondary leading-tight">Verified followers</span>
+              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 flex-shrink-0" />
             </div>
-            <div className="text-xl font-bold text-primary mb-1">43.9K</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">43.9K</div>
             <div className="text-xs text-secondary">/ 231.3K</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Impressions</div>
-            <div className="text-xl font-bold text-primary mb-1">173.1M</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Impressions</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">173.1M</div>
             <div className="text-xs text-green-400 font-medium">↑ 124%</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Engagement rate</div>
-            <div className="text-xl font-bold text-primary mb-1">2.5%</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Engagement rate</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">2.5%</div>
             <div className="text-xs text-red-400 font-medium">↓ -43%</div>
           </div>
 
           {/* Row 2 */}
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Engagements</div>
-            <div className="text-xl font-bold text-primary mb-1">4.4M</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Engagements</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">4.4M</div>
             <div className="text-xs text-green-400 font-medium">↑ 26%</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Profile visits</div>
-            <div className="text-xl font-bold text-primary mb-1">396.6K</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Profile visits</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">396.6K</div>
             <div className="text-xs text-green-400 font-medium">↑ 45%</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Replies</div>
-            <div className="text-xl font-bold text-primary mb-1">882.2K</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Replies</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">882.2K</div>
             <div className="text-xs text-green-400 font-medium">↑ 51%</div>
           </div>
 
           {/* Row 3 */}
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Likes</div>
-            <div className="text-xl font-bold text-primary mb-1">1.4M</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Likes</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">1.4M</div>
             <div className="text-xs text-green-400 font-medium">↑ 20%</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Reposts</div>
-            <div className="text-xl font-bold text-primary mb-1">96.3K</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Reposts</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">96.3K</div>
             <div className="text-xs text-red-400 font-medium">↓ -3.2%</div>
           </div>
           
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Bookmarks</div>
-            <div className="text-xl font-bold text-primary mb-1">45.4K</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Bookmarks</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">45.4K</div>
             <div className="text-xs text-green-400 font-medium">↑ 50%</div>
           </div>
 
           {/* Row 4 - Shares spans single column */}
-          <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
-            <div className="text-sm text-secondary mb-2">Shares</div>
-            <div className="text-xl font-bold text-primary mb-1">14K</div>
+          <div className={`p-3 sm:p-4 rounded-lg ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+            <div className="text-xs sm:text-sm text-secondary mb-2 leading-tight">Shares</div>
+            <div className="text-lg sm:text-xl font-bold text-primary mb-1">14K</div>
             <div className="text-xs text-green-400 font-medium">↑ 45%</div>
           </div>
         </div>
