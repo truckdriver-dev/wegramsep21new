@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Gift, Calendar, Users, Trophy, Zap, Star, Clock, CheckCircle, Copy, Coins } from 'lucide-react';
+import { Gift, Calendar, Users, Trophy, Zap, Star, Clock, CheckCircle, Copy, Coins, Target, Heart, MessageCircle, PenTool, ThumbsUp, Lock, Flame } from 'lucide-react';
 import { mockRewards, Reward } from '../data/mockData';
 import { useTheme } from '../hooks/useTheme';
 
@@ -39,7 +39,7 @@ export const Rewards: React.FC = () => {
       progress: 1,
       maxProgress: 1,
       completed: true,
-      icon: '🎯'
+      icon: 'target'
     },
     {
       id: '2',
@@ -49,7 +49,7 @@ export const Rewards: React.FC = () => {
       progress: 7,
       maxProgress: 10,
       completed: false,
-      icon: '❤️'
+      icon: 'heart'
     },
     {
       id: '3',
@@ -59,7 +59,7 @@ export const Rewards: React.FC = () => {
       progress: 12,
       maxProgress: 25,
       completed: false,
-      icon: '💬'
+      icon: 'message'
     },
     {
       id: '4',
@@ -69,7 +69,7 @@ export const Rewards: React.FC = () => {
       progress: 23,
       maxProgress: 50,
       completed: false,
-      icon: '🎁'
+      icon: 'gift'
     },
     {
       id: '5',
@@ -79,7 +79,7 @@ export const Rewards: React.FC = () => {
       progress: 18,
       maxProgress: 30,
       completed: false,
-      icon: '🔥'
+      icon: 'flame'
     }
   ];
 
@@ -91,7 +91,7 @@ export const Rewards: React.FC = () => {
       description: 'Open the app and claim your daily bonus',
       reward: '2 WGM',
       completed: false,
-      icon: '📅'
+      icon: 'calendar'
     },
     {
       id: '2',
@@ -99,7 +99,7 @@ export const Rewards: React.FC = () => {
       description: 'Share something with the community',
       reward: '5 WGM',
       completed: true,
-      icon: '✍️'
+      icon: 'pen'
     },
     {
       id: '3',
@@ -107,7 +107,7 @@ export const Rewards: React.FC = () => {
       description: 'Show some love to other creators',
       reward: '3 WGM',
       completed: false,
-      icon: '👍'
+      icon: 'thumbsup'
     },
     {
       id: '4',
@@ -115,7 +115,7 @@ export const Rewards: React.FC = () => {
       description: 'Support a creator with a gift',
       reward: '10 WGM',
       completed: false,
-      icon: '🎁'
+      icon: 'gift'
     }
   ];
 
@@ -143,6 +143,32 @@ export const Rewards: React.FC = () => {
   const totalEarned = 156.5; // Mock total earnings
   const todayEarned = 12.5; // Mock today's earnings
   const streakDays = 7; // Mock streak
+
+  // Function to render icon based on icon string
+  const renderIcon = (iconString: string, size: string = 'w-6 h-6') => {
+    const iconProps = { className: size };
+    
+    switch (iconString) {
+      case 'target':
+        return <Target {...iconProps} />;
+      case 'heart':
+        return <Heart {...iconProps} />;
+      case 'message':
+        return <MessageCircle {...iconProps} />;
+      case 'gift':
+        return <Gift {...iconProps} />;
+      case 'flame':
+        return <Flame {...iconProps} />;
+      case 'calendar':
+        return <Calendar {...iconProps} />;
+      case 'pen':
+        return <PenTool {...iconProps} />;
+      case 'thumbsup':
+        return <ThumbsUp {...iconProps} />;
+      default:
+        return <Star {...iconProps} />;
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto px-4 pt-20 pb-24">
@@ -173,7 +199,9 @@ export const Rewards: React.FC = () => {
           <div>
             <div className="text-2xl font-bold text-primary">{streakDays}</div>
             <div className="text-secondary text-sm">Day Streak</div>
-            <div className="text-xs text-orange-400">🔥</div>
+            <div className="text-xs text-orange-400 flex items-center justify-center">
+              <Flame className="w-3 h-3" />
+            </div>
           </div>
         </div>
       </div>
@@ -219,7 +247,7 @@ export const Rewards: React.FC = () => {
                 {dailyTasks.map((task) => (
                   <div key={task.id} className="flex items-center justify-between p-3 bg-overlay-light rounded-lg">
                     <div className="flex items-center gap-3">
-                      <div className="text-2xl">{task.icon}</div>
+                      <div className="text-purple-400">{renderIcon(task.icon, 'w-6 h-6')}</div>
                       <div>
                         <h4 className="text-primary font-medium">{task.title}</h4>
                         <p className="text-secondary text-sm">{task.description}</p>
@@ -273,12 +301,16 @@ export const Rewards: React.FC = () => {
             {achievements.map((achievement) => (
               <div key={achievement.id} className="card">
                 <div className="flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                     achievement.completed 
                       ? 'bg-yellow-400 bg-opacity-20' 
                       : isDark ? 'bg-gray-700' : 'bg-gray-300'
                   }`}>
-                    {achievement.completed ? achievement.icon : '🔒'}
+                    {achievement.completed ? (
+                      <div className="text-purple-400">{renderIcon(achievement.icon, 'w-6 h-6')}</div>
+                    ) : (
+                      <Lock className="w-6 h-6 text-gray-400" />
+                    )}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
