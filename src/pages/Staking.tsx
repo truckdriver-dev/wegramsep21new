@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Wallet, ChevronUp, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 export const Staking: React.FC = () => {
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const [stakeAmount, setStakeAmount] = useState('');
   const [unstakeAmount, setUnstakeAmount] = useState('');
   const [showHowItWorks, setShowHowItWorks] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
   
   // Mock data matching the design
   const totalStaked = 2847392000;
@@ -46,33 +50,69 @@ export const Staking: React.FC = () => {
     setUnstakeAmount(availableToUnstake.toString());
   };
 
+  const handleConnectWallet = async () => {
+    try {
+      // Check if Phantom wallet is installed
+      if (typeof window !== 'undefined' && window.solana?.isPhantom) {
+        const response = await window.solana.connect();
+        setIsWalletConnected(true);
+        setWalletAddress(response.publicKey.toString());
+        console.log('Wallet connected:', response.publicKey.toString());
+      } else {
+        // If Phantom is not installed, show instructions
+        alert('Please install Phantom wallet from https://phantom.app/');
+      }
+    } catch (error) {
+      console.error('Failed to connect wallet:', error);
+      alert('Failed to connect wallet. Please try again.');
+    }
+  };
+
+  const handleDisconnectWallet = () => {
+    setIsWalletConnected(false);
+    setWalletAddress('');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
       <div className="max-w-md mx-auto px-4 pt-20 pb-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-overlay-light rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-6 h-6 text-white" />
+            <ArrowLeft className="w-6 h-6 text-primary" />
           </button>
           
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
               W
             </div>
-            <div className="text-2xl font-bold text-white">Wegram Staking</div>
+            <div className="text-2xl font-bold text-primary">Wegram Staking</div>
           </div>
           
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors">
-            <Wallet className="w-4 h-4" />
-            Connect
-          </button>
+          {isWalletConnected ? (
+            <button 
+              onClick={handleDisconnectWallet}
+              className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg flex items-center gap-2 hover:from-green-600 hover:to-green-700 transition-colors"
+            >
+              <Wallet className="w-4 h-4" />
+              {walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}
+            </button>
+          ) : (
+            <button 
+              onClick={handleConnectWallet}
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg flex items-center gap-2 hover:from-blue-600 hover:to-blue-700 transition-colors"
+            >
+              <Wallet className="w-4 h-4" />
+              Connect
+            </button>
+          )}
         </div>
 
         {/* Total Staked Card */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 mb-8 relative overflow-hidden">
+        <div className="card mb-8 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--accent), #3b82f6)' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -92,11 +132,11 @@ export const Staking: React.FC = () => {
         </div>
 
         {/* Stake Tokens Section */}
-        <div className="bg-gray-800 rounded-xl p-6 mb-6">
-          <h3 className="text-xl font-bold text-white mb-4">Stake Tokens</h3>
+        <div className="card mb-6">
+          <h3 className="text-xl font-bold text-primary mb-4">Stake Tokens</h3>
           <div className="mb-4">
-            <div className="text-gray-300 text-sm mb-1">Available to Stake:</div>
-            <div className="text-white font-semibold">{availableToStake.toLocaleString()} WEGRAM</div>
+            <div className="text-secondary text-sm mb-1">Available to Stake:</div>
+            <div className="text-primary font-semibold">{availableToStake.toLocaleString()} WEGRAM</div>
           </div>
           
           <div className="mb-4">
@@ -106,11 +146,11 @@ export const Staking: React.FC = () => {
                 value={stakeAmount}
                 onChange={(e) => setStakeAmount(e.target.value)}
                 placeholder="Enter amount to stake"
-                className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input w-full"
               />
               <button
                 onClick={handleMaxStake}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400 hover:text-blue-300 transition-colors"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-accent hover:text-accent/80 transition-colors"
               >
                 MAX
               </button>
@@ -119,18 +159,18 @@ export const Staking: React.FC = () => {
           
           <button
             onClick={handleStake}
-            className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all"
+            className="btn-primary w-full py-3 font-semibold"
           >
             Stake Wegram
           </button>
         </div>
 
         {/* Unstake Tokens Section */}
-        <div className="bg-gray-800 rounded-xl p-6 mb-6">
-          <h3 className="text-xl font-bold text-white mb-4">Unstake Tokens</h3>
+        <div className="card mb-6">
+          <h3 className="text-xl font-bold text-primary mb-4">Unstake Tokens</h3>
           <div className="mb-4">
-            <div className="text-gray-300 text-sm mb-1">Available to Unstake:</div>
-            <div className="text-white font-semibold">{availableToUnstake.toLocaleString()} WEGRAM</div>
+            <div className="text-secondary text-sm mb-1">Available to Unstake:</div>
+            <div className="text-primary font-semibold">{availableToUnstake.toLocaleString()} WEGRAM</div>
           </div>
           
           <div className="mb-4">
@@ -140,11 +180,11 @@ export const Staking: React.FC = () => {
                 value={unstakeAmount}
                 onChange={(e) => setUnstakeAmount(e.target.value)}
                 placeholder="Enter amount to unstake"
-                className="w-full px-4 py-3 bg-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="input w-full"
               />
               <button
                 onClick={handleMaxUnstake}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-300 transition-colors"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-accent hover:text-accent/80 transition-colors"
               >
                 MAX
               </button>
@@ -153,23 +193,23 @@ export const Staking: React.FC = () => {
           
           <button
             onClick={handleUnstake}
-            className="w-full py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg font-semibold hover:from-purple-600 hover:to-purple-700 transition-all"
+            className="btn-secondary w-full py-3 font-semibold"
           >
             Unstake Wegram
           </button>
         </div>
 
         {/* How Staking Works Section */}
-        <div className="bg-gray-800 rounded-xl p-6">
+        <div className="card">
           <button
             onClick={() => setShowHowItWorks(!showHowItWorks)}
             className="w-full flex items-center justify-between text-left"
           >
-            <h3 className="text-xl font-bold text-blue-400">How Staking Works?</h3>
+            <h3 className="text-xl font-bold text-accent">How Staking Works?</h3>
             {showHowItWorks ? (
-              <ChevronUp className="w-5 h-5 text-blue-400" />
+              <ChevronUp className="w-5 h-5 text-accent" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-blue-400" />
+              <ChevronDown className="w-5 h-5 text-accent" />
             )}
           </button>
           
@@ -177,12 +217,12 @@ export const Staking: React.FC = () => {
             <div className="mt-6 space-y-4">
               {/* Flexible Staking */}
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   1
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Flexible Staking</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="text-primary font-semibold mb-1">Flexible Staking</h4>
+                  <p className="text-secondary text-sm">
                     Stake WEGRAM with no lock-up. Earn SPL tokens (SOL, USDC, WEGRAM) with rotating rewards.
                   </p>
                 </div>
@@ -190,12 +230,12 @@ export const Staking: React.FC = () => {
 
               {/* Proportional Rewards */}
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   2
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Proportional Rewards</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="text-primary font-semibold mb-1">Proportional Rewards</h4>
+                  <p className="text-secondary text-sm">
                     Rewards distributed based on your stake amount. More stake = bigger share.
                   </p>
                 </div>
@@ -203,12 +243,12 @@ export const Staking: React.FC = () => {
 
               {/* Low Fees */}
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   3
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Low Fees</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="text-primary font-semibold mb-1">Low Fees</h4>
+                  <p className="text-secondary text-sm">
                     Small deposit fee (currently 0%). Maximum returns on Solana network.
                   </p>
                 </div>
@@ -216,12 +256,12 @@ export const Staking: React.FC = () => {
 
               {/* Pro Tip */}
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   i
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-1">Pro Tip</h4>
-                  <p className="text-gray-300 text-sm">
+                  <h4 className="text-primary font-semibold mb-1">Pro Tip</h4>
+                  <p className="text-secondary text-sm">
                     Restake rewards to compound earnings and maximize returns!
                   </p>
                 </div>
