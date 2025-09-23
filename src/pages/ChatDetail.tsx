@@ -150,7 +150,8 @@ export const ChatDetail: React.FC = () => {
         </div>
       )}
 
-        {/* Message Input */}
+      {/* Message Input */}
+      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-4 py-4" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="flex items-center gap-3" style={{ backgroundColor: 'var(--card)' }}>
           <button
             onClick={() => setShowActionButtons(!showActionButtons)}
