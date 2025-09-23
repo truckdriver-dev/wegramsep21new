@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, MessageCircle, Share, Bookmark, User, Play, Volume2, VolumeX, Plus, Upload, X, Camera } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface VideoPost {
   id: string;
@@ -16,6 +17,7 @@ interface VideoPost {
 }
 
 export const Video: React.FC = () => {
+  const navigate = useNavigate();
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadTitle, setUploadTitle] = useState('');
@@ -175,6 +177,11 @@ export const Video: React.FC = () => {
     alert(`Now following ${username}! ✨`);
   };
 
+  const handleUserClick = (username: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    navigate(`/user/${username}`);
+  };
+
   return (
     <div className="min-h-screen pt-20 pb-24" style={{ backgroundColor: 'var(--bg)' }}>
       <div className="max-w-md mx-auto">
@@ -304,12 +311,20 @@ export const Video: React.FC = () => {
               <div className="mt-4">
                 {/* User Info */}
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                  <button
+                    onClick={(e) => handleUserClick(video.username, e)}
+                    className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-105 transition-transform cursor-pointer"
+                  >
                     <User className="w-5 h-5 text-white" />
-                  </div>
+                  </button>
                   <div className="flex-1">
-                    <h3 className="text-primary font-semibold">{video.displayName}</h3>
-                    <p className="text-secondary text-sm">{video.username}</p>
+                    <button
+                      onClick={(e) => handleUserClick(video.username, e)}
+                      className="text-left hover:opacity-80 transition-opacity cursor-pointer"
+                    >
+                      <h3 className="text-primary font-semibold">{video.displayName}</h3>
+                      <p className="text-secondary text-sm">{video.username}</p>
+                    </button>
                   </div>
                   <button
                     onClick={() => handleFollow(video.username)}

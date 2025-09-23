@@ -92,13 +92,6 @@ export const Wallet: React.FC = () => {
       balance: 2.45,
       usdValue: 367.50,
       logo: 'https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png'
-    },
-    {
-      symbol: 'USDC',
-      name: 'USD Coin',
-      balance: 150.00,
-      usdValue: 150.00,
-      logo: '💵'
     }
   ];
 
@@ -116,7 +109,11 @@ export const Wallet: React.FC = () => {
         }`}>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">W</span>
+              <img 
+                src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
+                alt="WEGRAM" 
+                className="w-10 h-10 rounded-full object-cover"
+              />
             </div>
             <div>
               <h2 className="text-xl font-bold text-primary">WeGram</h2>
@@ -281,19 +278,11 @@ export const Wallet: React.FC = () => {
               <div key={token.symbol} className="card">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    {token.symbol === 'USDC' ? (
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${
-                        isDark ? 'bg-gray-700' : 'bg-gray-200'
-                      }`}>
-                        {token.logo}
-                      </div>
-                    ) : (
-                      <img 
-                        src={token.logo}
-                        alt={token.name} 
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                    )}
+                    <img 
+                      src={token.logo}
+                      alt={token.name} 
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
                     <div>
                       <h3 className="text-primary font-semibold">{token.symbol}</h3>
                       <p className="text-secondary text-sm">{token.name}</p>
