@@ -837,11 +837,7 @@ export const UserProfile: React.FC = () => {
             {/* Follow Button - positioned on the right */}
             <button
               onClick={handleFollow}
-              className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                user.isFollowing
-                  ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
-                  : 'btn-primary'
-              }`}
+              className={`btn-primary px-6 py-2 rounded-full font-medium transition-colors`}
             >
               {user.isFollowing ? 'Unfollow' : 'Follow'}
             </button>
