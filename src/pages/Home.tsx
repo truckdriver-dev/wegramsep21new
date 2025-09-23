@@ -90,7 +90,7 @@ export const Home: React.FC = () => {
       >
         <div className="rounded-full p-0.5 shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}>
           <div className="bg-black rounded-full px-4 py-3">
-          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
             {/* Profile Pictures */}
             <div className="flex -space-x-1.5">
               <img 
