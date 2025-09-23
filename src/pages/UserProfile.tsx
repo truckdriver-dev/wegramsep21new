@@ -657,7 +657,7 @@ export const UserProfile: React.FC = () => {
     console.log('Report this profile');
   };
 
-  const handleShare = () => {
+  const handleShareProfile = () => {
     setShowActionMenu(false);
     // TODO: Implement share functionality
     console.log('Share this profile');
@@ -760,7 +760,7 @@ export const UserProfile: React.FC = () => {
               </button>
               
               <button
-                onClick={handleShare}
+                onClick={handleShareProfile}
                 className="w-full px-6 py-4 flex items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 style={{ backgroundColor: 'transparent' }}
               >
