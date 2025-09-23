@@ -96,7 +96,18 @@ export const BottomNav: React.FC = () => {
             {/* Composer UI (Twitter-like) */}
             <h3 className="text-center text-primary font-semibold mb-3">New post</h3>
             <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full" style={{ backgroundColor: 'var(--border)' }} />
+              <button
+                onClick={() => navigate('/profile')}
+                className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center"
+                style={{ backgroundColor: 'var(--border)' }}
+                aria-label="Open profile"
+              >
+                <img
+                  src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </button>
               <textarea
                 value={textContent}
                 onChange={(e) => setTextContent(e.target.value)}
@@ -119,9 +130,6 @@ export const BottomNav: React.FC = () => {
                 </button>
                 <button onClick={() => videoInputRef.current?.click()} className="w-8 h-8 flex items-center justify-center" aria-label="Add video">
                   <Video className="w-6 h-6 text-blue-400" />
-                </button>
-                <button disabled className="w-8 h-8 flex items-center justify-center opacity-50" aria-label="GIF coming soon">
-                  <span className="text-blue-400 text-xs font-bold">GIF</span>
                 </button>
               </div>
               <button
