@@ -235,6 +235,54 @@ const getUserData = (username: string): UserProfileData => {
       mutualConnections: 19,
       isFollowing: true,
       connections: []
+    },
+    '@mayarodriguez': {
+      username: '@mayarodriguez.eth',
+      displayName: 'Maya Rodriguez',
+      bio: 'DeFi strategist & yield farming expert 🌾 | Building sustainable wealth in Web3 | Always exploring new protocols',
+      avatar: 'MR',
+      bannerColor: 'from-amber-500 to-orange-600',
+      joinDate: 'Feb 3, 2024',
+      posts: 423,
+      followers: 8900,
+      following: 1567,
+      mutualConnections: 8,
+      isFollowing: false,
+      verified: true,
+      connections: [
+        {
+          platform: 'Twitter',
+          username: '@maya_defi',
+          memberSince: 'Aug 20, 2022',
+          posts: 892,
+          followers: 15600,
+          verified: true
+        }
+      ]
+    },
+    '@jordankim': {
+      username: '@jordankim.eth',
+      displayName: 'Jordan Kim',
+      bio: 'Crypto investor & blockchain researcher 🔬 | Focused on Layer 2 solutions | Sharing alpha daily',
+      avatar: 'JK',
+      bannerColor: 'from-pink-400 to-purple-500',
+      joinDate: 'Dec 18, 2023',
+      posts: 156,
+      followers: 4200,
+      following: 892,
+      mutualConnections: 15,
+      isFollowing: false,
+      verified: false,
+      connections: [
+        {
+          platform: 'Twitter',
+          username: '@jordan_crypto',
+          memberSince: 'Mar 10, 2023',
+          posts: 234,
+          followers: 6800,
+          verified: false
+        }
+      ]
     }
   };
 
@@ -314,6 +362,76 @@ const getFeedPosts = (username: string) => {
         replies: 34,
         shares: 15,
         gifts: 6
+      }
+    ],
+    '@mayarodriguez': [
+      {
+        id: 'maya_post_1',
+        userId: 'mayarodriguez',
+        username: '@mayarodriguez',
+        content: 'Yield farming on this new protocol is absolutely insane! 45% APY with minimal risk 🚀',
+        timestamp: '1h',
+        likes: 156,
+        replies: 23,
+        shares: 8,
+        gifts: 5
+      },
+      {
+        id: 'maya_post_2',
+        userId: 'mayarodriguez',
+        username: '@mayarodriguez',
+        content: 'DeFi education thread: Understanding impermanent loss and how to minimize it 📚',
+        timestamp: '4h',
+        likes: 89,
+        replies: 12,
+        shares: 15,
+        gifts: 3
+      },
+      {
+        id: 'maya_post_3',
+        userId: 'mayarodriguez',
+        username: '@mayarodriguez',
+        content: 'Just staked my ETH for the next 6 months. Long-term thinking pays off 💎',
+        timestamp: '1d',
+        likes: 234,
+        replies: 45,
+        shares: 22,
+        gifts: 12
+      }
+    ],
+    '@jordankim': [
+      {
+        id: 'jordan_post_1',
+        userId: 'jordankim',
+        username: '@jordankim',
+        content: 'Research deep dive: Layer 2 scaling solutions comparison. Polygon vs Arbitrum vs Optimism',
+        timestamp: '2h',
+        likes: 78,
+        replies: 15,
+        shares: 6,
+        gifts: 2
+      },
+      {
+        id: 'jordan_post_2',
+        userId: 'jordankim',
+        username: '@jordankim',
+        content: 'Just sent 0.5 ETH to a friend. Lightning fast and cheap! This is the future of payments ⚡',
+        timestamp: '6h',
+        likes: 45,
+        replies: 8,
+        shares: 3,
+        gifts: 1
+      },
+      {
+        id: 'jordan_post_3',
+        userId: 'jordankim',
+        username: '@jordankim',
+        content: 'Market analysis: Why I\'m bullish on Solana ecosystem projects this quarter 📈',
+        timestamp: '2d',
+        likes: 123,
+        replies: 28,
+        shares: 11,
+        gifts: 7
       }
     ]
   };
@@ -525,6 +643,16 @@ const getNFTData = (username: string) => {
       { id: '2', name: 'Uniswap V3', tokenId: '#12456', icon: Zap, color: 'text-cyan-400' },
       { id: '3', name: 'Bored Apes', tokenId: '#420', icon: Flame, color: 'text-orange-400' },
       { id: '4', name: 'Azuki', tokenId: '#1337', icon: Diamond, color: 'text-blue-400' }
+    ],
+    '@mayarodriguez': [
+      { id: '1', name: 'DeFi Protocol', tokenId: '#8901', icon: Zap, color: 'text-amber-400' },
+      { id: '2', name: 'Yield Farming', tokenId: '#5678', icon: Flame, color: 'text-orange-400' },
+      { id: '3', name: 'Liquidity Pool', tokenId: '#2345', icon: Diamond, color: 'text-green-400' }
+    ],
+    '@jordankim': [
+      { id: '1', name: 'Layer 2 Token', tokenId: '#3456', icon: Zap, color: 'text-blue-400' },
+      { id: '2', name: 'Research NFT', tokenId: '#7890', icon: Palette, color: 'text-purple-400' },
+      { id: '3', name: 'Solana NFT', tokenId: '#1234', icon: Flame, color: 'text-pink-400' }
     ]
   };
   

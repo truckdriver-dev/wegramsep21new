@@ -35,7 +35,7 @@ export const Messages: React.FC = () => {
     {
       id: '2',
       name: 'Maya Rodriguez',
-      username: 'mayarodriguez',
+      username: '@mayarodriguez',
       avatar: 'M',
       avatarColor: 'bg-gradient-to-br from-amber-500 to-orange-600',
       lastMessage: 'The DeFi yield is looking amazing',
@@ -72,7 +72,7 @@ export const Messages: React.FC = () => {
     {
       id: '5',
       name: 'Jordan Kim',
-      username: 'jordankim',
+      username: '@jordankim',
       avatar: 'J',
       avatarColor: 'bg-gradient-to-br from-pink-400 to-purple-500',
       lastMessage: 'Sent you 0.5 ETH',
