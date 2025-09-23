@@ -817,20 +817,8 @@ export const UserProfile: React.FC = () => {
               </div>
               <p className="text-secondary text-sm mb-3">{user.username}</p>
               
-              {/* Follow Button and Action Icons */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handleFollow}
-                  className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                    user.isFollowing
-                      ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
-                      : 'bg-white text-black hover:bg-gray-100'
-                  }`}
-                >
-                  {user.isFollowing ? 'Unfollow' : 'Follow'}
-                </button>
-                
-                {/* Action Icons - Gift and 3 dots */}
+              {/* Action Icons - Gift and 3 dots */}
+              <div className="flex items-center gap-2">
                 <button 
                   onClick={() => navigate('/rewards')}
                   className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
@@ -845,6 +833,18 @@ export const UserProfile: React.FC = () => {
                 </button>
               </div>
             </div>
+            
+            {/* Follow Button - positioned on the right */}
+            <button
+              onClick={handleFollow}
+              className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                user.isFollowing
+                  ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
+                  : 'bg-white text-black hover:bg-gray-100'
+              }`}
+            >
+              {user.isFollowing ? 'Unfollow' : 'Follow'}
+            </button>
           </div>
 
           {/* Stats */}
