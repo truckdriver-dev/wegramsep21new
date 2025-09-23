@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart3, Plus, Wallet, HelpCircle, Play, Type, Image, Video, X, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { mockUser } from '../../data/mockData';
 
 export const BottomNav: React.FC = () => {
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ export const BottomNav: React.FC = () => {
             <h3 className="text-center text-primary font-semibold mb-3">New post</h3>
             <div className="flex items-start gap-3 mb-4">
               <button
-                onClick={() => navigate('/profile')}
+                onClick={() => navigate(`/user/${mockUser.username.replace('@', '')}`)}
                 className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover:scale-105 transition-transform cursor-pointer"
                 aria-label="Open profile"
               >
