@@ -89,6 +89,13 @@ function AppContent() {
 
   // Don't show TopBar and BottomNav on landing and auth pages
   const hideNavigation = location.pathname === '/' || location.pathname === '/auth';
+  
+  // Hide bottom navigation on chat pages
+  const hideBottomNav = hideNavigation || 
+    location.pathname.startsWith('/chat/') || 
+    location.pathname.startsWith('/messages') ||
+    location.pathname.startsWith('/settings') ||
+    location.pathname.startsWith('/create-');
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
@@ -145,7 +152,7 @@ function AppContent() {
         </Routes>
       </main>
 
-      {!hideNavigation && <BottomNav />}
+      {!hideBottomNav && <BottomNav />}
       
       <SideDrawer 
         isOpen={isDrawerOpen}
