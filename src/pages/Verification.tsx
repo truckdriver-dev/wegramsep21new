@@ -7,18 +7,18 @@ export const Verification: React.FC = () => {
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'processing' | 'success'>('info');
   const [copiedAddress, setCopiedAddress] = useState(false);
 
-  const verificationPriceUSD = 2.00; // $2 worth of WGM tokens
-  const [wgmAmount, setWgmAmount] = useState<string>('Loading...');
-  const [wgmPrice, setWgmPrice] = useState<number | null>(null);
+  const verificationPriceUSD = 2.00; // $2 worth of $WEGRAM tokens
+  const [wegramAmount, setWegramAmount] = useState<string>('Loading...');
+  const [wegramPrice, setWegramPrice] = useState<number | null>(null);
 
   // Mock price calculation - in real implementation, fetch from price API
   React.useEffect(() => {
-    // Simulate fetching WGM price (in real app, use CoinGecko, CoinMarketCap, etc.)
+    // Simulate fetching $WEGRAM price (in real app, use CoinGecko, CoinMarketCap, etc.)
     const fetchPrice = async () => {
-      const mockWgmPriceUSD = 0.33; // Example: $0.33 per WGM
-      setWgmPrice(mockWgmPriceUSD);
-      const tokensNeeded = (verificationPriceUSD / mockWgmPriceUSD).toFixed(2);
-      setWgmAmount(tokensNeeded);
+      const mockWegramPriceUSD = 0.33; // Example: $0.33 per $WEGRAM
+      setWegramPrice(mockWegramPriceUSD);
+      const tokensNeeded = (verificationPriceUSD / mockWegramPriceUSD).toFixed(2);
+      setWegramAmount(tokensNeeded);
     };
     
     setTimeout(fetchPrice, 1000);
@@ -41,7 +41,7 @@ export const Verification: React.FC = () => {
   };
 
   const handleCopyAddress = () => {
-    navigator.clipboard?.writeText('WGM7xK4pJh2mR8qN5vL9cX3tY6wE1oP4qR9mL3v');
+    navigator.clipboard?.writeText('WEGRAM7xK4pJh2mR8qN5vL9cX3tY6wE1oP4qR9mL3v');
     setCopiedAddress(true);
     setTimeout(() => setCopiedAddress(false), 2000);
   };
@@ -55,8 +55,16 @@ export const Verification: React.FC = () => {
         </div>
         <h1 className="text-3xl font-bold text-primary mb-2">Get Verified</h1>
         <p className="text-secondary">
-          Get your verification badge on WEGRAM for just $2 worth of WGM tokens.
+          Get your verification badge on WEGRAM for just $2 worth of $WEGRAM tokens.
         </p>
+        
+        {/* Free verification notice */}
+        <div className="mt-4 p-4 bg-gradient-to-r from-green-500 to-blue-500 bg-opacity-20 border border-green-500 border-opacity-30 rounded-lg">
+          <div className="text-green-400 font-semibold text-sm mb-1">🎉 Early Bird Special</div>
+          <div className="text-secondary text-xs">
+            First 1,000 members get verified for FREE! Limited time offer.
+          </div>
+        </div>
       </div>
 
       {paymentStep === 'info' && (
@@ -69,7 +77,7 @@ export const Verification: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Verified Badge</h3>
               <div className="text-3xl font-bold gradient-text mb-1">
-                {wgmAmount === 'Loading...' ? 'Loading...' : `${wgmAmount} WGM`}
+                {wegramAmount === 'Loading...' ? 'Loading...' : `${wegramAmount} $WEGRAM`}
               </div>
               <div className="text-secondary text-sm">One-time payment ($2.00 USD worth)</div>
             </div>
@@ -106,7 +114,7 @@ export const Verification: React.FC = () => {
             <Shield className="w-12 h-12 mx-auto mb-4 text-green-400" />
             <h3 className="text-xl font-semibold text-primary mb-2">Send Payment</h3>
             <p className="text-secondary text-sm">
-              Send exactly {wgmAmount} WGM ($2.00 worth) to the address below. We'll automatically detect your payment and complete verification.
+              Send exactly {wegramAmount} $WEGRAM ($2.00 worth) to the address below. We'll automatically detect your payment and complete verification.
             </p>
           </div>
 
@@ -115,14 +123,14 @@ export const Verification: React.FC = () => {
             <div>
               <label className="block text-secondary text-sm mb-2">Amount to Send</label>
               <div className="p-3 bg-overlay-light rounded-lg">
-                <div className="text-xl font-bold text-primary">{wgmAmount} WGM</div>
+                <div className="text-xl font-bold text-primary">{wegramAmount} $WEGRAM</div>
               </div>
             </div>
 
             <div>
               <label className="block text-secondary text-sm mb-2">Payment Address</label>
               <div className="p-3 bg-overlay-light rounded-lg flex items-center justify-between">
-                <code className="text-primary text-sm">WGM7xK4pJh2mR8qN5vL9cX3tY6wE1oP4qR9mL3v</code>
+                <code className="text-primary text-sm">WEGRAM7xK4pJh2mR8qN5vL9cX3tY6wE1oP4qR9mL3v</code>
                 <button
                   onClick={handleCopyAddress}
                   className={`p-2 rounded-lg transition-colors ${
@@ -146,7 +154,7 @@ export const Verification: React.FC = () => {
               <div>
                 <div className="font-medium text-yellow-400 mb-1">Important</div>
                 <div className="text-secondary text-sm">
-                  Only send WGM tokens to this address. Sending other tokens will result in permanent loss.
+                  Only send $WEGRAM tokens to this address. Sending other tokens will result in permanent loss.
                 </div>
               </div>
             </div>
