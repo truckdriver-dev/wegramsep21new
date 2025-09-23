@@ -815,10 +815,22 @@ export const UserProfile: React.FC = () => {
                   </div>
                 )}
               </div>
-              <p className="text-secondary text-sm mb-4">{user.username}</p>
+              <p className="text-secondary text-sm mb-3">{user.username}</p>
               
-              {/* Action Icons - Gift and 3 dots */}
-              <div className="flex items-center gap-2">
+              {/* Follow Button and Action Icons */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleFollow}
+                  className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                    user.isFollowing
+                      ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
+                      : 'bg-white text-black hover:bg-gray-100'
+                  }`}
+                >
+                  {user.isFollowing ? 'Unfollow' : 'Follow'}
+                </button>
+                
+                {/* Action Icons - Gift and 3 dots */}
                 <button 
                   onClick={() => navigate('/rewards')}
                   className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
@@ -851,25 +863,6 @@ export const UserProfile: React.FC = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="space-y-3 mb-6">
-            <button
-              onClick={handleFollow}
-              className={`w-full py-3 rounded-lg font-medium transition-colors ${
-                user.isFollowing
-                  ? 'bg-overlay-light text-primary hover:bg-overlay-medium'
-                  : 'btn-primary'
-              }`}
-            >
-              {user.isFollowing ? 'Unfollow' : 'Follow'}
-            </button>
-            <button
-              onClick={handleMessage}
-              className="w-full py-3 rounded-lg font-medium transition-colors border border-accent text-accent hover:bg-accent hover:text-white"
-            >
-              Message
-            </button>
-          </div>
 
           {/* Bio */}
           <div className="mb-6">
