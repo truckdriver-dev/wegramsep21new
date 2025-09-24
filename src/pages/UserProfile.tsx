@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond, XCircle, Flag, Share } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, XCircle, Flag, Share } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
-import { useTheme } from '../hooks/useTheme';
 
 interface UserProfileData {
   username: string;
@@ -635,48 +634,18 @@ const getFeedPosts = (username: string) => {
   return userFeeds[username] || [];
 };
 
-// Mock NFT data
-const getNFTData = (username: string) => {
-  const nftData: { [key: string]: any[] } = {
-    '@alexchen': [
-      { id: '1', name: 'CryptoPunks', tokenId: '#7804', icon: Palette, color: 'text-purple-400' },
-      { id: '2', name: 'Uniswap V3', tokenId: '#12456', icon: Zap, color: 'text-cyan-400' },
-      { id: '3', name: 'Bored Apes', tokenId: '#420', icon: Flame, color: 'text-orange-400' },
-      { id: '4', name: 'Azuki', tokenId: '#1337', icon: Diamond, color: 'text-blue-400' }
-    ],
-    '@mayarodriguez': [
-      { id: '1', name: 'DeFi Protocol', tokenId: '#8901', icon: Zap, color: 'text-amber-400' },
-      { id: '2', name: 'Yield Farming', tokenId: '#5678', icon: Flame, color: 'text-orange-400' },
-      { id: '3', name: 'Liquidity Pool', tokenId: '#2345', icon: Diamond, color: 'text-green-400' }
-    ],
-    '@jordankim': [
-      { id: '1', name: 'Layer 2 Token', tokenId: '#3456', icon: Zap, color: 'text-blue-400' },
-      { id: '2', name: 'Research NFT', tokenId: '#7890', icon: Palette, color: 'text-purple-400' },
-      { id: '3', name: 'Solana NFT', tokenId: '#1234', icon: Flame, color: 'text-pink-400' }
-    ]
-  };
-  
-  return nftData[username] || [];
-};
 
 export const UserProfile: React.FC = () => {
-  const { isDark } = useTheme();
   const { username } = useParams<{ username: string }>();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
-  const [followingUsers, setFollowingUsers] = useState<Set<string>>(new Set(['@crypto_whale', '@defi_guru', '@solana_builder', '@metaverse_explorer']));
   const [activeTab, setActiveTab] = useState<'posts' | 'nft' | 'stats'>('posts');
   const [showActionMenu, setShowActionMenu] = useState(false);
 
   // Memoize the feed posts to prevent regeneration on every render
   const feedPosts = useMemo(() => {
     return getFeedPosts(`@${username}`);
-  }, [username]);
-
-  // Memoize NFT data
-  const nftData = useMemo(() => {
-    return getNFTData(`@${username}`);
   }, [username]);
   
   // Get the original profile from navigation state
@@ -726,19 +695,6 @@ export const UserProfile: React.FC = () => {
     console.log('Follow/unfollow user:', username);
   };
 
-  const handleFollowUser = (postUsername: string) => {
-    const newFollowing = new Set(followingUsers);
-    if (newFollowing.has(postUsername)) {
-      newFollowing.delete(postUsername);
-    } else {
-      newFollowing.add(postUsername);
-    }
-    setFollowingUsers(newFollowing);
-  };
-
-  const handleMessage = () => {
-    setIsMessageModalOpen(true);
-  };
 
   const handleLike = async (postId: string) => {
     console.log('Liking post:', postId);
@@ -824,16 +780,21 @@ export const UserProfile: React.FC = () => {
         );
       case 'nft':
         return (
-          <div className="grid grid-cols-2 gap-4">
-            {nftData.map(nft => (
-              <div key={nft.id} className="card p-4 text-center">
-                <div className={`w-12 h-12 mx-auto mb-3 rounded-lg bg-overlay-light flex items-center justify-center`}>
-                  <nft.icon className={`w-6 h-6 ${nft.color}`} />
-                </div>
-                <h3 className="font-semibold text-primary text-sm mb-1">{nft.name}</h3>
-                <p className="text-secondary text-xs">{nft.tokenId}</p>
+          <div className="text-center py-16">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg">
+              <div className="text-3xl">🎨</div>
+            </div>
+            <h3 className="text-xl font-bold text-primary mb-3">Coming Soon</h3>
+            <p className="text-secondary text-sm max-w-xs mx-auto leading-relaxed">
+              NFT collection display is being developed. Soon you'll be able to showcase your digital art and collectibles here!
+            </p>
+            <div className="mt-6 flex justify-center">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
               </div>
-            ))}
+            </div>
           </div>
         );
       case 'stats':
