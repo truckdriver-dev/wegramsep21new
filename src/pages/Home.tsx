@@ -89,7 +89,7 @@ export const Home: React.FC = () => {
         className="relative mb-4 mx-2 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-purple-400"
       >
         <div className="rounded-full p-0.5 shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}>
-          <div className="bg-black rounded-full px-4 py-3">
+          <div className="rounded-full px-4 py-3" style={{ background: 'linear-gradient(135deg, var(--gradA) 0%, var(--gradB) 100%)' }}>
             <div className="flex items-center space-x-3">
             {/* Profile Pictures */}
             <div className="flex -space-x-1.5">
