@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, UserPlus, UserMinus, Send, Palette, Zap, Flame, Diamond, XCircle, Flag, Share, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, CheckCircle, XCircle, Flag, Share, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
-import { useTheme } from '../hooks/useTheme';
-import { mockUser, mockPosts } from '../data/mockData';
+import { mockPosts } from '../data/mockData';
 
 // Mock user data for the logged-in user
 const mockLoggedInUser = {
@@ -96,7 +95,6 @@ const mockUserPosts = [
 ];
 
 export const Profile: React.FC = () => {
-  const { isDark } = useTheme();
   const navigate = useNavigate();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'posts' | 'nft' | 'stats'>('posts');
@@ -344,14 +342,8 @@ export const Profile: React.FC = () => {
               </div>
               <p className="text-secondary text-sm mb-3">{user.username}</p>
               
-              {/* Action Icons - Gift and 3 dots */}
+              {/* Action Icons - 3 dots only (no gift for own profile) */}
               <div className="flex items-center gap-2">
-                <button 
-                  onClick={() => navigate('/rewards')}
-                  className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
-                >
-                  <Gift className="w-4 h-4 text-accent" />
-                </button>
                 <button 
                   onClick={handleProfileMenu}
                   className="w-8 h-8 rounded-full bg-overlay-light flex items-center justify-center"
@@ -478,7 +470,6 @@ export const Profile: React.FC = () => {
       <MessageModal
         isOpen={isMessageModalOpen}
         onClose={() => setIsMessageModalOpen(false)}
-        recipient={user.displayName}
       />
     </div>
   );
