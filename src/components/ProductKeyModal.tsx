@@ -35,7 +35,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
       localStorage.setItem('wegram_product_key', productKey);
       localStorage.setItem('wegram_activated', 'true');
     } else {
-      alert('Invalid product key. Please contact support for a valid key.');
+      alert('Invalid product key. Please try again.');
     }
     
     setIsLoading(false);
@@ -70,7 +70,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
             </div>
             <div>
               <h2 className="text-xl font-bold text-primary">Product Activation</h2>
-              <p className="text-secondary text-sm">Wegram License Management</p>
+              <p className="text-secondary text-sm">Product Key Entry</p>
             </div>
           </div>
           <button
@@ -163,7 +163,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
                       required
                     />
                     <p className="text-xs text-secondary mt-1">
-                      Enter your permanent software license key provided after purchase.
+                      Enter the product key provided after payment.
                     </p>
                   </div>
                   
@@ -172,7 +172,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
                     disabled={isLoading}
                     className="btn-primary w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Activating License...' : 'Activate Software License'}
+                    {isLoading ? 'Activating...' : 'Activate Product'}
                   </button>
                 </form>
 
@@ -193,9 +193,9 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-primary mb-2">License Activated Successfully!</h3>
+              <h3 className="text-xl font-bold text-primary mb-2">Product Activated Successfully!</h3>
               <p className="text-secondary mb-6">
-                Your <strong>permanent software license</strong> has been activated. You now own this software installation! (Sold as-is, no maintenance included)
+                Your product has been activated. You now have full access to all features!
               </p>
               <button
                 onClick={handleClose}
@@ -210,7 +210,6 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
         {/* Footer */}
         <div className="px-6 py-4 border-t" style={{ borderColor: 'var(--border)' }}>
           <p className="text-xs text-secondary text-center">
-            Need help? Contact support at support@wegram.com
           </p>
         </div>
       </div>
