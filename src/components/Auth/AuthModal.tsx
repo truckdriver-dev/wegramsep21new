@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X as CloseIcon, Search, Mail, Phone } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -9,16 +10,45 @@ interface AuthModalProps {
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth }) => {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, signInWithTwitter } = useAuth();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleAuth = async () => {
-    await signInWithGoogle();
-    navigate('/landing');
+    setIsLoading(true);
+    try {
+      await signInWithGoogle();
+      onClose();
+      navigate('/home');
+    } catch (error) {
+      console.error('Google auth error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTwitterAuth = async () => {
+    setIsLoading(true);
+    try {
+      const result = await signInWithTwitter();
+      if (result.success) {
+        onClose();
+        navigate('/home');
+      } else {
+        alert(result.error || 'Twitter authentication failed');
+      }
+    } catch (error) {
+      console.error('Twitter auth error:', error);
+      alert('Twitter authentication failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleEmailAuth = () => {
     // For now, just close modal - email auth form can be added later
-    navigate('/landing');
+    onClose();
+    navigate('/home');
   };
 
   if (!isOpen) return null;
@@ -61,11 +91,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth })
             Continue with Google
           </button>
           <button
-            onClick={() => onAuth('twitter')}
-            className="btn-primary w-full flex items-center justify-center gap-3 py-4"
+            onClick={handleTwitterAuth}
+            disabled={isLoading}
+            className="btn-primary w-full flex items-center justify-center gap-3 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <div className="w-5 h-5 flex items-center justify-center font-bold text-lg">𝕏</div>
-            Continue with X
+            {isLoading ? 'Connecting...' : 'Continue with X'}
           </button>
           <button
             onClick={handleEmailAuth}

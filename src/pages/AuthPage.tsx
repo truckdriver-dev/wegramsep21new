@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 export const AuthPage: React.FC = () => {
   const navigate = useNavigate();
+  const { signInWithTwitter } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAuthorize = () => {
-    // Simulate X authorization and navigate to main app
-    navigate('/');
+  const handleAuthorize = async () => {
+    setIsLoading(true);
+    try {
+      const result = await signInWithTwitter();
+      if (result.success) {
+        navigate('/home');
+      } else {
+        alert(result.error || 'Twitter authentication failed');
+      }
+    } catch (error) {
+      console.error('Twitter auth error:', error);
+      alert('Twitter authentication failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCancel = () => {
@@ -71,9 +86,10 @@ export const AuthPage: React.FC = () => {
         <div className="w-full max-w-sm space-y-4">
           <button
             onClick={handleAuthorize}
-            className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-4 px-6 rounded-full text-lg transition-colors"
+            disabled={isLoading}
+            className="w-full bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-full text-lg transition-colors"
           >
-            Authorize app
+            {isLoading ? 'Authorizing...' : 'Authorize app'}
           </button>
           
           <button

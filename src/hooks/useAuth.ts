@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { mockUser } from '../data/mockData';
+import { twitterAuth, TwitterUser } from '../lib/twitterAuth';
 
 export interface Profile {
   id: string;
@@ -16,6 +17,7 @@ export interface Profile {
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [twitterUser, setTwitterUser] = useState<TwitterUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -147,22 +149,59 @@ export const useAuth = () => {
     return { error };
   };
 
+  const signInWithTwitter = async () => {
+    try {
+      // For demo purposes, simulate Twitter auth
+      const result = await twitterAuth.simulateTwitterAuth();
+      
+      if (result.success && result.user) {
+        setTwitterUser(result.user);
+        
+        // Create or update profile with Twitter data
+        const twitterProfile: Profile = {
+          id: result.user.id,
+          username: `@${result.user.username}`,
+          email: null,
+          avatar_url: result.user.profile_image_url || null,
+          bio: `Twitter user ${result.user.name}`,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        };
+        
+        setProfile(twitterProfile);
+        setUser(null); // No Supabase user for Twitter auth
+        return { success: true, user: result.user };
+      } else {
+        throw new Error(result.error || 'Twitter authentication failed');
+      }
+    } catch (error) {
+      console.error('Twitter sign-in error:', error);
+      return { success: false, error: error instanceof Error ? error.message : 'Authentication failed' };
+    }
+  };
+
   const signOut = async () => {
     if (!supabase) {
       console.log('Demo mode: Sign-out simulated');
+      setTwitterUser(null);
+      setProfile(null);
+      setUser(null);
       return;
     }
     const { error } = await supabase.auth.signOut();
     if (error) console.error('Error signing out:', error);
+    setTwitterUser(null);
   };
 
   return {
     user,
     profile,
+    twitterUser,
     loading,
     signInWithGoogle,
     signInWithEmail,
     signUpWithEmail,
+    signInWithTwitter,
     signOut,
   };
 };
