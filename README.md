@@ -1,364 +1,177 @@
-# 🚀 WEGRAM - The Future of Web3 Social Media
+# Wegram - Web3 Social Media Platform
 
-<div align="center">
+Wegram is a decentralized social media platform built on Solana that combines traditional social networking features with Web3 functionality including cryptocurrency rewards, NFT integration, and blockchain-based interactions.
 
-![WEGRAM Logo](src/assets/IMAGE%202025-09-16%2017:58:35.jpg)
+## Overview
 
-**The Revolutionary Web3 SocialFi Platform That Rewards Your Engagement**
+Wegram aims to create a social media experience where users can earn cryptocurrency through engagement, showcase their NFT collections, participate in blockchain-based games, and interact in a decentralized environment. The platform features a modern, mobile-first design with support for both light and dark themes.
 
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Solana](https://img.shields.io/badge/Solana-Blockchain-9945FF?style=for-the-badge&logo=solana)](https://solana.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Ready-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+## Tech Stack
 
-</div>
+### Frontend
+- **React 18.3.1** - Modern React with hooks and functional components
+- **TypeScript 5.5.3** - Type-safe development
+- **Vite 5.4.20** - Fast build tool and development server
+- **React Router DOM 7.9.1** - Client-side routing
+- **Tailwind CSS 3.4.1** - Utility-first CSS framework
+- **Lucide React 0.344.0** - Icon library
 
----
+### Blockchain & Crypto
+- **Solana Web3.js 1.98.4** - Solana blockchain integration
+- **@noble/secp256k1 3.0.0** - Cryptographic functions
+- **@noble/hashes 2.0.0** - Hash functions
+- **bip39 3.1.0** - BIP39 mnemonic phrase generation
+- **bs58 6.0.0** - Base58 encoding/decoding
+- **ed25519-hd-key 1.3.0** - HD key derivation
+- **tweetnacl 1.0.3** - Cryptographic library
 
-## ✨ **What Makes WEGRAM Extraordinary**
+### Backend & Database
+- **Supabase 2.57.4** - Backend-as-a-Service with PostgreSQL
+- **@supabase/supabase-js** - Supabase client library
 
-WEGRAM isn't just another social media platform—it's a **complete Web3 ecosystem** where users earn real cryptocurrency rewards for their social interactions. Built with cutting-edge technology and designed for the future of decentralized social networking.
+### Development Tools
+- **ESLint 9.9.1** - Code linting
+- **PostCSS 8.4.35** - CSS processing
+- **Autoprefixer 10.4.18** - CSS vendor prefixing
 
-### 🎯 **Core Features That Will Blow Your Mind**
+## Setup and Installation
 
-🔥 **SocialFi Revolution**
-- Earn **WGM tokens** for every post, like, comment, and share
-- Real-time rewards system with transparent blockchain transactions
-- Daily, weekly, and achievement-based reward structures
+### Prerequisites
+- Node.js (version 16 or higher)
+- npm or yarn package manager
+- Git
 
-💎 **Integrated Solana Wallet**
-- Auto-generated wallets for every user
-- Seamless token management and transactions
-- Built-in staking and DeFi integration
+### Installation Steps
 
-🎮 **Web3 Gaming Hub**
-- Play-to-earn games with real cryptocurrency rewards
-- Tournament system with massive prize pools
-- Achievement system with token rewards
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/truckdriver-dev/wegramsep21new.git
+   cd wegramsep21new
+   ```
 
-📺 **TikTok-Style Video Platform**
-- Immersive full-screen video experience
-- Smooth scrolling through Web3 content
-- Creator monetization through tips and gifts
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-🤖 **AI-Powered Assistant**
-- Built-in Wegram AI for Web3 guidance
-- Smart contract interaction help
-- Market analysis and trading insights
+3. **Environment Configuration (Optional)**
+   Create a `.env` file in the root directory for Supabase integration:
+   ```bash
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+   *Note: The app works in demo mode without these credentials*
 
-🏆 **Advanced Analytics Dashboard**
-- Real-time engagement metrics
-- Earnings tracking and projections
-- Referral system with detailed analytics
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
----
+5. **Access the application**
+   Open your browser and navigate to `http://localhost:5000`
 
-## 🚀 **Lightning-Fast Setup (5 Minutes to Launch)**
-
-WEGRAM is designed to be **100% plug-and-play**. Simply connect your database and you're ready to launch a production-grade Web3 social platform.
-
-### **Option 1: Quick Start with Supabase (Recommended)**
-
+### Build for Production
 ```bash
-# 1. Clone and install
-git clone <repository-url>
-cd wegram
-npm install
-
-# 2. Set up your database
-cp .env.example .env
-# Add your Supabase credentials to .env
-
-# 3. Launch your platform
-npm run dev
-```
-
-**That's it!** Your Web3 social platform is live in under 5 minutes.
-
-### **Option 2: Use Any Database**
-
-WEGRAM works with **any database or API**:
-- PostgreSQL, MySQL, MongoDB
-- Firebase, PlanetScale, Neon
-- Custom REST or GraphQL APIs
-
-Simply update the data hooks in `src/hooks/` to connect to your preferred backend.
-
----
-
-## 🏗️ **Enterprise-Grade Architecture**
-
-### **Frontend Powerhouse**
-- **React 18** with TypeScript for type safety
-- **Tailwind CSS** for lightning-fast styling
-- **Vite** for instant hot reloading
-- **React Router** for seamless navigation
-
-### **Web3 Integration**
-- **Solana Web3.js** for blockchain interactions
-- **Native wallet generation** with secure key management
-- **Real-time token balance tracking**
-- **Smart contract integration ready**
-
-### **Database Flexibility**
-- **Supabase** integration out of the box
-- **Row Level Security** for enterprise security
-- **Real-time subscriptions** for live updates
-- **Automatic migrations** and schema management
-
-### **Performance Optimized**
-- **Lazy loading** for optimal performance
-- **Component-based architecture** for scalability
-- **Responsive design** for all devices
-- **PWA ready** for mobile app experience
-
----
-
-## 🎨 **Stunning User Experience**
-
-### **Apple-Level Design Aesthetics**
-- **Dark theme** with purple gradient accents
-- **Micro-interactions** and smooth animations
-- **Consistent 8px spacing system**
-- **Professional typography** and color schemes
-
-### **Mobile-First Responsive**
-- **Perfect mobile experience** with native app feel
-- **Touch-optimized interactions**
-- **Swipe gestures** and intuitive navigation
-- **Cross-platform compatibility**
-
----
-
-## 💰 **Complete SocialFi Ecosystem**
-
-### **Multiple Revenue Streams**
-- **Post rewards** - Earn for creating content
-- **Engagement rewards** - Get paid for likes and comments
-- **Referral bonuses** - Earn from friend invitations
-- **Gaming rewards** - Play-to-earn integration
-- **Staking yields** - Passive income opportunities
-
-### **Advanced Tokenomics**
-- **WGM token** as native currency
-- **Deflationary mechanisms** built-in
-- **Governance voting** for platform decisions
-- **Liquidity mining** opportunities
-
----
-
-## 🎮 **Gaming & Entertainment**
-
-### **Play-to-Earn Games**
-- **Strategy games** with token rewards
-- **Puzzle challenges** with daily prizes
-- **Racing competitions** with tournament prizes
-- **Card battles** with NFT integration
-
-### **Live Streaming Platform**
-- **Go live** with integrated streaming
-- **Superchat** with cryptocurrency tips
-- **Real-time audience engagement**
-- **Creator monetization tools**
-
----
-
-## 📊 **Analytics & Insights**
-
-### **Comprehensive Dashboard**
-- **Real-time metrics** for all activities
-- **Earnings tracking** with detailed breakdowns
-- **Growth analytics** and trend analysis
-- **Referral performance** monitoring
-
-### **Business Intelligence**
-- **User behavior insights**
-- **Content performance metrics**
-- **Revenue optimization tools**
-- **Market trend analysis**
-
----
-
-## 🔐 **Enterprise Security**
-
-### **Blockchain Security**
-- **Non-custodial wallets** - Users own their keys
-- **Encrypted storage** for sensitive data
-- **Multi-signature support** for enterprise accounts
-- **Audit trail** for all transactions
-
-### **Database Security**
-- **Row Level Security** policies
-- **JWT authentication** with refresh tokens
-- **API rate limiting** and DDoS protection
-- **GDPR compliant** data handling
-
----
-
-## 🌐 **Deployment Ready**
-
-### **One-Click Deployment**
-- **Vercel** integration for instant deployment
-- **Environment variable** management
-- **Automatic SSL** and CDN optimization
-- **Global edge network** for fast loading
-
-### **Scalability Built-In**
-- **Serverless architecture** for automatic scaling
-- **Database connection pooling**
-- **Image optimization** and lazy loading
-- **Caching strategies** for performance
-
----
-
-## 📱 **Feature Showcase**
-
-| Feature | Description | Status |
-|---------|-------------|---------|
-| 🏠 **Social Feed** | Real-time posts with engagement rewards | ✅ Live |
-| 💰 **Wallet Integration** | Native Solana wallet with full functionality | ✅ Live |
-| 🎮 **Gaming Hub** | Play-to-earn games with tournaments | ✅ Live |
-| 📺 **Video Platform** | TikTok-style video sharing and discovery | ✅ Live |
-| 🤖 **AI Assistant** | Web3-focused AI helper and guide | ✅ Live |
-| 📊 **Analytics** | Comprehensive metrics and insights | ✅ Live |
-| 💬 **Messaging** | Telegram-style chat with crypto features | ✅ Live |
-| 🔴 **Live Streaming** | Real-time streaming with monetization | ✅ Live |
-| 🏆 **Rewards System** | Multi-tier reward and achievement system | ✅ Live |
-| 📖 **Bookmarks** | Save and organize favorite content | ✅ Live |
-
----
-
-## 🛠️ **Technical Stack**
-
-### **Core Technologies**
-```json
-{
-  "frontend": {
-    "framework": "React 18.3.1",
-    "language": "TypeScript 5.5.3",
-    "styling": "Tailwind CSS 3.4.1",
-    "bundler": "Vite 5.4.2",
-    "routing": "React Router 7.9.1"
-  },
-  "blockchain": {
-    "network": "Solana",
-    "library": "@solana/web3.js 1.98.4",
-    "wallet": "Native implementation"
-  },
-  "database": {
-    "primary": "Supabase 2.57.4",
-    "alternative": "Any SQL/NoSQL database",
-    "orm": "Native SQL with TypeScript"
-  },
-  "deployment": {
-    "platform": "Vercel/Netlify ready",
-    "build": "Static site generation",
-    "cdn": "Global edge network"
-  }
-}
-```
-
-### **Development Tools**
-- **ESLint** for code quality
-- **TypeScript** for type safety
-- **PostCSS** for CSS processing
-- **Autoprefixer** for browser compatibility
-
----
-
-## 🚀 **Get Started in 60 Seconds**
-
-### **Prerequisites**
-- Node.js 18+ installed
-- A Supabase account (free tier available)
-- Git installed on your system
-
-### **Installation**
-```bash
-# Clone the repository
-git clone https://github.com/your-username/wegram.git
-cd wegram
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your Supabase credentials
-
-# Start the development server
-npm run dev
-```
-
-### **Production Deployment**
-```bash
-# Build for production
 npm run build
-
-# Deploy to Vercel (one command)
-npx vercel --prod
+npm run preview
 ```
 
----
+## Current Features
 
-## 🌟 **Why Choose WEGRAM?**
+### Core Social Features
+- **User Profiles** - Complete profile system with bio, stats, and social connections
+- **Post Creation** - Text-based posts with like, reply, share, and gift functionality
+- **Social Feed** - Home feed with following, trending, and discovery tabs
+- **User Discovery** - Explore page for finding new users and content
+- **Messaging System** - Direct messaging between users with chat interface
+- **Bookmarks** - Save and organize favorite posts
+- **Notifications** - User activity notifications
 
-### **For Entrepreneurs**
-- **Complete platform** ready for launch
-- **Monetization built-in** from day one
-- **Scalable architecture** for millions of users
-- **White-label ready** for custom branding
+### Web3 Features
+- **Solana Wallet Integration** - Connect and manage Solana wallets
+- **Cryptocurrency Rewards** - Earn tokens through engagement and activities
+- **Staking System** - Stake WEGRAM tokens to earn rewards
+- **NFT Display** - Showcase NFT collections (Coming Soon placeholder)
+- **Token Economy** - $WEGRAM token integration throughout the platform
 
-### **For Developers**
-- **Clean, documented code** with TypeScript
-- **Modular architecture** for easy customization
-- **Modern tech stack** with best practices
-- **Extensive component library**
+### Gaming
+- **WeRunner Game** - Playable endless runner game with scoring system
+- **Game Hub** - Centralized gaming section with multiple game categories
+- **Tournament System** - Competitive gaming with prizes and leaderboards
 
-### **For Users**
-- **Earn while socializing** with real cryptocurrency
-- **Beautiful, intuitive interface**
-- **Comprehensive Web3 features**
-- **Mobile-optimized experience**
+### User Interface
+- **Responsive Design** - Mobile-first design that works on all devices
+- **Dark/Light Theme** - Automatic theme switching with user preference
+- **Modern UI Components** - Clean, intuitive interface with smooth animations
+- **Navigation** - Bottom navigation and sidebar drawer for easy access
 
----
+### Additional Features
+- **Analytics Dashboard** - User engagement and content performance metrics
+- **Verification System** - User verification with token requirements
+- **Rewards System** - Daily tasks, achievements, and referral rewards
+- **Settings** - Comprehensive user preferences and account management
+- **Help Center** - User support and documentation
 
-## 📈 **Market Opportunity**
+## Planned Features
 
-The **SocialFi market** is exploding with billions in potential:
-- Social media users: **4.8 billion globally**
-- Cryptocurrency adoption: **Growing 100%+ annually**
-- Creator economy: **$104 billion market**
-- Web3 social platforms: **Early stage opportunity**
+### Blockchain Integration
+- **Full Supabase Integration** - Complete database implementation
+- **Real-time Updates** - Live feed updates and notifications
+- **Advanced Wallet Features** - Multi-wallet support and transaction history
+- **Smart Contract Integration** - On-chain interactions and DeFi features
 
-WEGRAM positions you at the forefront of this revolution.
+### Social Features
+- **Video Posts** - Video content creation and sharing
+- **Live Streaming** - Real-time video streaming capabilities
+- **Group Chats** - Multi-user chat rooms and communities
+- **Content Moderation** - Automated and community-based moderation tools
 
----
+### NFT Features
+- **NFT Marketplace** - Buy, sell, and trade NFTs within the platform
+- **NFT Creation Tools** - Mint and create NFTs directly on the platform
+- **Collection Management** - Advanced NFT portfolio and collection tools
+- **Rarity Tracking** - NFT rarity and value tracking
 
-## 🎯 **Perfect For**
+### Gaming Expansion
+- **Additional Games** - More blockchain-based games
+- **Play-to-Earn Mechanics** - Enhanced earning opportunities through gaming
+- **Cross-Platform Gaming** - Multi-device gaming support
+- **Game Development SDK** - Tools for community game creation
 
-✅ **Startups** looking to launch a Web3 social platform  
-✅ **Enterprises** wanting to enter the SocialFi space  
-✅ **Developers** building on Solana ecosystem  
-✅ **Communities** seeking tokenized engagement  
-✅ **Creators** wanting to monetize their audience  
-✅ **Investors** exploring SocialFi opportunities  
+### Advanced Features
+- **AI Integration** - AI-powered content recommendations and moderation
+- **Advanced Analytics** - Detailed user and content analytics
+- **API Development** - Public API for third-party integrations
+- **Mobile Apps** - Native iOS and Android applications
 
----
+## Project Structure
 
-## 🔮 **The Future is Here**
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Auth/           # Authentication components
+│   ├── Layout/         # Layout and navigation components
+│   └── Post/           # Post-related components
+├── hooks/              # Custom React hooks
+├── lib/                # External library configurations
+├── pages/              # Page components
+├── data/               # Mock data and interfaces
+├── styles/             # Global styles and themes
+└── utils/              # Utility functions
+```
 
-WEGRAM isn't just a social media platform—it's a **complete Web3 ecosystem** that transforms how people interact, create, and earn online. With its plug-and-play architecture, stunning design, and comprehensive feature set, you can launch the next generation of social media in minutes, not months.
+## Development Notes
 
-**Ready to revolutionize social media?**
+- The application currently runs in demo mode with mock data
+- Supabase integration is optional and can be enabled with proper credentials
+- All blockchain interactions are simulated for development purposes
+- The codebase is fully TypeScript with comprehensive type definitions
+- Responsive design is implemented using Tailwind CSS utility classes
 
----
+## Contributing
 
-<div align="center">
+This project is currently in active development. For contribution guidelines and development setup, please refer to the project maintainers.
 
-**Built with ❤️ for the Web3 Community**
+## License
 
-*Join the SocialFi Revolution Today*
-
-</div>
+This project is proprietary software. All rights reserved.
