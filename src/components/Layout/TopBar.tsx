@@ -1,7 +1,6 @@
 import React from 'react';
 import { Search, MessageCircle, Gift, Bell, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
-import { useAuth } from '../../hooks/useAuth';
 
 interface TopBarProps {
   onMenuClick: () => void;
@@ -12,7 +11,6 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMessageClick, onNotificationClick }) => {
   const { isDark, toggleTheme } = useTheme();
-  const { profile, twitterUser } = useAuth();
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-opacity-95 backdrop-blur-sm" style={{ backgroundColor: 'var(--bg)' }}>
       <div className="max-w-md mx-auto px-4 py-3 flex items-center gap-3">
