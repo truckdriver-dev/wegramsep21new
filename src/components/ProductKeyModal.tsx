@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X as CloseIcon, Key, Clock, CreditCard, CheckCircle } from 'lucide-react';
-import { useTrialMode } from '../../hooks/useTrialMode';
 
 interface ProductKeyModalProps {
   isOpen: boolean;
@@ -12,7 +11,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
   const [code, setCode] = useState('');
   const [productKey, setProductKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { daysRemaining, isActivated, activateProduct } = useTrialMode();
+  const [daysRemaining] = useState(15); // Static for now
 
   const handleCodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +31,9 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
     
     if (productKey === 'WEGRAM-PRO-2024') {
       setStep('success');
-      activateProduct(productKey);
+      // Store activation in localStorage
+      localStorage.setItem('wegram_product_key', productKey);
+      localStorage.setItem('wegram_activated', 'true');
     } else {
       alert('Invalid product key. Please contact support for a valid key.');
     }
