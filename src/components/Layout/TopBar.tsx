@@ -1,8 +1,7 @@
 import React from 'react';
-import { Search, MessageCircle, Gift, Bell, Moon, Sun, Clock } from 'lucide-react';
+import { Search, MessageCircle, Gift, Bell, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
-import { useTrialMode } from '../../hooks/useTrialMode';
 
 interface TopBarProps {
   onMenuClick: () => void;
@@ -14,7 +13,6 @@ interface TopBarProps {
 export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMessageClick, onNotificationClick }) => {
   const { isDark, toggleTheme } = useTheme();
   const { profile, twitterUser } = useAuth();
-  const { isTrialMode, daysRemaining } = useTrialMode();
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-opacity-95 backdrop-blur-sm" style={{ backgroundColor: 'var(--bg)' }}>
       <div className="max-w-md mx-auto px-4 py-3 flex items-center gap-3">
@@ -43,13 +41,6 @@ export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMess
           />
         </div>
 
-        {/* Trial Mode Indicator */}
-        {isTrialMode && (
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-orange-500 text-white text-xs font-medium">
-            <Clock className="w-3 h-3" />
-            <span>{daysRemaining}d</span>
-          </div>
-        )}
 
         {/* User Indicator */}
         {(profile || twitterUser) && (
