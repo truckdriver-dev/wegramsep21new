@@ -13,7 +13,6 @@ export const Staking: React.FC = () => {
   
   // Mock data matching the design
   const totalStaked = 2847392000;
-  const apy = 24.7;
   const availableToStake = 1250.00;
   const availableToUnstake = 500.00;
 
@@ -115,7 +114,7 @@ export const Staking: React.FC = () => {
         {/* Total Staked Card */}
         <div className="card mb-8 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--accent), #3b82f6)' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-20"></div>
-          <div className="relative z-10 flex items-center justify-between">
+          <div className="relative z-10 flex items-center">
             <div className="flex items-center gap-4">
               <img 
                 src="https://i.ibb.co/TxdWc0kL/IMG-9101.jpg"
@@ -126,10 +125,6 @@ export const Staking: React.FC = () => {
                 <div className="text-3xl font-bold text-white">{totalStaked.toLocaleString()}</div>
                 <div className="text-blue-100 text-sm">Total Staked</div>
               </div>
-            </div>
-            <div className="text-right">
-              <div className="text-2xl font-bold text-blue-200">{apy}%</div>
-              <div className="text-blue-100 text-sm">APY</div>
             </div>
           </div>
         </div>
