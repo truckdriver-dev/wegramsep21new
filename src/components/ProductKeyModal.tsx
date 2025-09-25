@@ -128,42 +128,41 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
               </div>
 
               <div className="space-y-4 mb-6">
-                <div className="p-4 rounded-lg" style={{ backgroundColor: 'var(--bg)' }}>
-                  <h4 className="font-semibold text-primary mb-2">Current Status</h4>
-                  <p className="text-secondary text-sm">
-                    Your Wegram instance is currently running in <strong>trial mode</strong> with limited functionality.
+                <div className="p-4 rounded-lg border-2 border-red-500 bg-red-50 dark:bg-red-900/20">
+                  <h4 className="font-semibold text-red-600 mb-2">🚨 TRIAL MODE ACTIVE</h4>
+                  <p className="text-red-700 dark:text-red-300 text-sm font-medium">
+                    This software is currently running in <strong>trial mode</strong> and will <strong>STOP FUNCTIONING</strong> if a valid product key is not entered by the end of the 15-day trial period.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-lg border-2 border-orange-500">
-                  <h4 className="font-semibold text-orange-600 mb-2">⚠️ Trial Limitations</h4>
-                  <ul className="text-sm text-secondary space-y-1">
-                    <li>• Limited to 100 posts per day</li>
-                    <li>• Basic analytics only</li>
-                    <li>• No custom branding</li>
-                    <li>• Limited customer support</li>
+                <div className="p-4 rounded-lg border-2 border-orange-500 bg-orange-50 dark:bg-orange-900/20">
+                  <h4 className="font-semibold text-orange-600 mb-2">⚠️ IMPORTANT NOTICE</h4>
+                  <ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
+                    <li>• <strong>Day {daysRemaining} of 15</strong> remaining in trial</li>
+                    <li>• Software will become <strong>completely non-functional</strong> after trial expires</li>
+                    <li>• All data and access will be <strong>permanently disabled</strong></li>
+                    <li>• No extensions or grace periods available</li>
                   </ul>
                 </div>
 
-                <div className="p-4 rounded-lg border-2 border-green-500">
-                  <h4 className="font-semibold text-green-600 mb-2">✅ Full Version Benefits</h4>
-                  <ul className="text-sm text-secondary space-y-1">
-                    <li>• Unlimited posts and features</li>
-                    <li>• Advanced analytics dashboard</li>
-                    <li>• Custom branding and themes</li>
-                    <li>• Priority customer support</li>
-                    <li>• API access and integrations</li>
+                <div className="p-4 rounded-lg border-2 border-green-500 bg-green-50 dark:bg-green-900/20">
+                  <h4 className="font-semibold text-green-600 mb-2">✅ CONTINUED ACCESS</h4>
+                  <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
+                    <li>• Enter valid product key to <strong>maintain full functionality</strong></li>
+                    <li>• Uninterrupted access to all features</li>
+                    <li>• Priority technical support</li>
+                    <li>• Regular software updates</li>
                   </ul>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 rounded-lg" style={{ backgroundColor: 'var(--bg)' }}>
+                <div className="flex items-center gap-3 p-4 rounded-lg border-2 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
                   <CreditCard className="w-6 h-6 text-blue-500" />
                   <div>
-                    <h4 className="font-semibold text-primary">Payment Required</h4>
-                    <p className="text-secondary text-sm">
-                      To activate the full version, please complete payment and receive your product key.
+                    <h4 className="font-semibold text-blue-600">PAYMENT REQUIRED TO CONTINUE</h4>
+                    <p className="text-blue-700 dark:text-blue-300 text-sm font-medium">
+                      To prevent software shutdown, complete payment and receive your product key immediately.
                     </p>
                   </div>
                 </div>
