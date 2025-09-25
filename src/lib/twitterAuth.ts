@@ -41,6 +41,13 @@ class TwitterAuthService {
     return `https://twitter.com/i/oauth2/authorize?${params.toString()}`;
   }
 
+  // Start real Twitter OAuth flow
+  async startRealOAuth(): Promise<void> {
+    const authUrl = this.generateAuthUrl();
+    // Redirect to Twitter for real authentication
+    window.location.href = authUrl;
+  }
+
   // Handle OAuth callback
   async handleCallback(code: string, state: string): Promise<TwitterAuthResponse> {
     try {

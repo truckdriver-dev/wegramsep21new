@@ -45,6 +45,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth })
     }
   };
 
+  const handleRealTwitterAuth = async () => {
+    setIsLoading(true);
+    try {
+      // Import twitterAuth dynamically to avoid circular imports
+      const { twitterAuth } = await import('../../lib/twitterAuth');
+      await twitterAuth.startRealOAuth();
+    } catch (error) {
+      console.error('Real Twitter auth error:', error);
+      alert('Failed to start Twitter authentication');
+      setIsLoading(false);
+    }
+  };
+
   const handleEmailAuth = () => {
     // For now, just close modal - email auth form can be added later
     onClose();
@@ -96,7 +109,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth })
             className="btn-primary w-full flex items-center justify-center gap-3 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <div className="w-5 h-5 flex items-center justify-center font-bold text-lg">𝕏</div>
-            {isLoading ? 'Connecting...' : 'Continue with X'}
+            {isLoading ? 'Connecting...' : 'Continue with X (Demo)'}
+          </button>
+          <button
+            onClick={handleRealTwitterAuth}
+            disabled={isLoading}
+            className="btn-secondary w-full flex items-center justify-center gap-3 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <div className="w-5 h-5 flex items-center justify-center font-bold text-lg">𝕏</div>
+            {isLoading ? 'Redirecting...' : 'Continue with Real X Account'}
           </button>
           <button
             onClick={handleEmailAuth}

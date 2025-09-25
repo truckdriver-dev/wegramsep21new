@@ -46,6 +46,7 @@ import { Settings } from './pages/Settings';
 import { CreateNew } from './pages/CreateNew';
 import { CreateGroup } from './pages/CreateGroup';
 import { WeRunner } from './pages/WeRunner';
+import { AuthCallback } from './pages/AuthCallback';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -112,6 +113,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/analytics" element={<Analytics />} />
