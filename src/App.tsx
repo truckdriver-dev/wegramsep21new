@@ -47,6 +47,7 @@ import { CreateNew } from './pages/CreateNew';
 import { CreateGroup } from './pages/CreateGroup';
 import { WeRunner } from './pages/WeRunner';
 import { AuthCallback } from './pages/AuthCallback';
+import { ProductKeyFooter } from './components/Layout/ProductKeyFooter';
 
 function AppContent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -157,6 +158,9 @@ function AppContent() {
       </main>
 
       {!hideBottomNav && <BottomNav />}
+      
+      {/* Product Key Footer - Always visible */}
+      <ProductKeyFooter />
       
       <SideDrawer 
         isOpen={isDrawerOpen}
