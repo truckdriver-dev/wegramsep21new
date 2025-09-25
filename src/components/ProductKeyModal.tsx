@@ -18,7 +18,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
     if (code === '1234') {
       setStep('explanation');
     } else {
-      alert('Invalid code. Please enter 1234 to continue.');
+      alert('Invalid access code. Please try again.');
     }
   };
 
@@ -61,7 +61,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
       <div className="absolute inset-0 bg-black bg-opacity-75" onClick={handleClose} />
       
       {/* Modal */}
-      <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden min-w-[400px] max-w-[500px] mx-4" style={{ backgroundColor: 'var(--card)' }}>
+      <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden min-w-[400px] max-w-[500px] mx-4 max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--card)' }}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: 'var(--border)' }}>
           <div className="flex items-center gap-3">
@@ -129,14 +129,14 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
 
               <div className="space-y-4 mb-6">
                 <div className="p-4 rounded-lg border-2 border-red-500 bg-red-50 dark:bg-red-900/20">
-                  <h4 className="font-semibold text-red-600 mb-2">🚨 TRIAL MODE ACTIVE</h4>
+                  <h4 className="font-semibold text-red-600 dark:text-red-400 mb-2">🚨 TRIAL MODE ACTIVE</h4>
                   <p className="text-red-700 dark:text-red-300 text-sm font-medium">
                     This software is currently running in <strong>trial mode</strong> and will <strong>STOP FUNCTIONING</strong> if a valid product key is not entered by the end of the 15-day trial period.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-lg border-2 border-orange-500 bg-orange-50 dark:bg-orange-900/20">
-                  <h4 className="font-semibold text-orange-600 mb-2">⚠️ IMPORTANT NOTICE</h4>
+                  <h4 className="font-semibold text-orange-600 dark:text-orange-400 mb-2">⚠️ IMPORTANT NOTICE</h4>
                   <ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
                     <li>• <strong>Day {daysRemaining} of 15</strong> remaining in trial</li>
                     <li>• Software will become <strong>completely non-functional</strong> after trial expires</li>
@@ -145,27 +145,9 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
                   </ul>
                 </div>
 
-                <div className="p-4 rounded-lg border-2 border-green-500 bg-green-50 dark:bg-green-900/20">
-                  <h4 className="font-semibold text-green-600 mb-2">✅ CONTINUED ACCESS</h4>
-                  <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
-                    <li>• Enter valid product key to <strong>maintain full functionality</strong></li>
-                    <li>• Uninterrupted access to all features</li>
-                    <li>• Priority technical support</li>
-                    <li>• Regular software updates</li>
-                  </ul>
-                </div>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 rounded-lg border-2 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
-                  <CreditCard className="w-6 h-6 text-blue-500" />
-                  <div>
-                    <h4 className="font-semibold text-blue-600">PAYMENT REQUIRED TO CONTINUE</h4>
-                    <p className="text-blue-700 dark:text-blue-300 text-sm font-medium">
-                      To prevent software shutdown, complete payment and receive your product key immediately.
-                    </p>
-                  </div>
-                </div>
 
                 <form onSubmit={handleProductKeySubmit} className="space-y-4">
                   <div>
@@ -181,7 +163,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
                       required
                     />
                     <p className="text-xs text-secondary mt-1">
-                      Enter the product key provided after payment completion.
+                      Enter your permanent software license key provided after purchase.
                     </p>
                   </div>
                   
@@ -190,7 +172,7 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
                     disabled={isLoading}
                     className="btn-primary w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Activating...' : 'Activate Full Version'}
+                    {isLoading ? 'Activating License...' : 'Activate Software License'}
                   </button>
                 </form>
 
@@ -211,9 +193,9 @@ export const ProductKeyModal: React.FC<ProductKeyModalProps> = ({ isOpen, onClos
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-primary mb-2">Activation Successful!</h3>
+              <h3 className="text-xl font-bold text-primary mb-2">License Activated Successfully!</h3>
               <p className="text-secondary mb-6">
-                Your Wegram instance has been upgraded to the full version. All features are now unlocked!
+                Your <strong>permanent software license</strong> has been activated. You now own this software installation! (Sold as-is, no maintenance included)
               </p>
               <button
                 onClick={handleClose}
