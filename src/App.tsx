@@ -159,8 +159,8 @@ function AppContent() {
 
       {!hideBottomNav && <BottomNav />}
       
-      {/* Product Key Footer - Always visible */}
-      <ProductKeyFooter />
+      {/* Product Key Footer - Only show on authenticated pages */}
+      {!hideNavigation && <ProductKeyFooter />}
       
       <SideDrawer 
         isOpen={isDrawerOpen}
