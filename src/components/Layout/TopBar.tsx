@@ -42,29 +42,6 @@ export const TopBar: React.FC<TopBarProps> = ({ onMenuClick, onGiftClick, onMess
         </div>
 
 
-        {/* User Indicator */}
-        {(profile || twitterUser) && (
-          <div className="flex items-center gap-2 mr-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
-              {twitterUser?.profile_image_url ? (
-                <img 
-                  src={twitterUser.profile_image_url} 
-                  alt={twitterUser.name}
-                  className="w-6 h-6 rounded-full object-cover"
-                />
-              ) : (
-                <span className="text-white text-xs font-bold">
-                  {(profile?.username || twitterUser?.username || 'U').charAt(1).toUpperCase()}
-                </span>
-              )}
-            </div>
-            {twitterUser?.verified && (
-              <div className="w-3 h-3 rounded-full bg-blue-500 flex items-center justify-center">
-                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* Right Icons */}
         <div className="flex items-center gap-2">
