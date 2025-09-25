@@ -19,7 +19,7 @@ export interface TwitterAuthResponse {
 }
 
 class TwitterAuthService {
-  private readonly clientId = 'aHSpRTZbb4nc7ePrzUX9u80sP';
+  private readonly clientId = import.meta.env.VITE_TWITTER_API_KEY || 'YOUR_TWITTER_API_KEY_HERE';
   private readonly redirectUri = `${window.location.origin}/auth/callback`;
   private readonly scope = 'tweet.read users.read offline.access';
 

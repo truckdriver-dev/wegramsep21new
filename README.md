@@ -84,18 +84,43 @@ The app includes complete Twitter OAuth integration with your API credentials al
 - ✅ **Demo Mode**: Works immediately - simulates Twitter authentication
 - ⏳ **Real Mode**: Requires backend endpoints (see setup below)
 
-### Your Twitter API Credentials (Already Configured)
+### Your Twitter API Credentials Setup
+
+**Step 1: Get Your Twitter API Credentials**
+1. Go to [Twitter Developer Portal](https://developer.twitter.com/)
+2. Create a new app or use existing app
+3. Go to "Keys and Tokens" section
+4. Copy your credentials:
+
 ```
-API Key: aHSpRTZbb4nc7ePrzUX9u80sP
-API Secret: bU3H9dm3EPrLMjGucMBcsttDGRPZh9qzcnee1rsKxY67o7f2dN
-Bearer Token: AAAAAAAAAAAAAAAAAAAAANje4AEAAAAAqIgC%2B%2FNr3RJA2%2FZfoDGKYmr9I4M%3DNQki8RvpWAjAlQmNSX505TURkaYHNPNpsv5CDMrtInzJnUTWc6
-Access Token: 1966499553881862144-v1SuKm6GvtsioSfg6mVAu9nNPyPOZl
-Access Token Secret: OvlJjspTm5kzjCvVGAUozHbw7uQRhm1IYl6bHMZcQU4or
+API Key: YOUR_TWITTER_API_KEY_HERE
+API Secret: YOUR_TWITTER_API_SECRET_HERE
+Bearer Token: YOUR_TWITTER_BEARER_TOKEN_HERE
+Access Token: YOUR_TWITTER_ACCESS_TOKEN_HERE
+Access Token Secret: YOUR_TWITTER_ACCESS_TOKEN_SECRET_HERE
 ```
+
+**Step 2: Create Environment Files**
+
+**Backend Environment File** (`.env` in backend directory):
+```bash
+TWITTER_API_KEY=YOUR_TWITTER_API_KEY_HERE
+TWITTER_API_SECRET=YOUR_TWITTER_API_SECRET_HERE
+TWITTER_BEARER_TOKEN=YOUR_TWITTER_BEARER_TOKEN_HERE
+```
+
+**Frontend Environment File** (`.env` in main project directory):
+```bash
+VITE_TWITTER_API_KEY=YOUR_TWITTER_API_KEY_HERE
+VITE_TWITTER_API_SECRET=YOUR_TWITTER_API_SECRET_HERE
+VITE_TWITTER_BEARER_TOKEN=YOUR_TWITTER_BEARER_TOKEN_HERE
+```
+
+**Important**: Add `.env` to your `.gitignore` file to keep credentials secure!
 
 ### Enable Real Twitter Authentication
 
-**Step 1: Create Backend Server**
+**Step 3: Create Backend Server**
 ```bash
 # Create a new directory for backend
 mkdir wegram-backend
@@ -104,7 +129,7 @@ npm init -y
 npm install express cors dotenv
 ```
 
-**Step 2: Create Server File (`server.js`)**
+**Step 4: Create Server File (`server.js`)**
 ```javascript
 const express = require('express');
 const cors = require('cors');
@@ -114,8 +139,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = 'aHSpRTZbb4nc7ePrzUX9u80sP';
-const API_SECRET = 'bU3H9dm3EPrLMjGucMBcsttDGRPZh9qzcnee1rsKxY67o7f2dN';
+// Load credentials from environment variables
+const API_KEY = process.env.TWITTER_API_KEY;
+const API_SECRET = process.env.TWITTER_API_SECRET;
 
 // Twitter OAuth Token Exchange
 app.post('/api/twitter/token', async (req, res) => {
@@ -171,7 +197,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**Step 3: Update Frontend API URLs**
+**Step 5: Update Frontend API URLs**
 In `src/lib/twitterAPI.ts`, update the base URL:
 ```javascript
 // Change from:
@@ -181,7 +207,7 @@ const response = await fetch('/api/twitter/token', {
 const response = await fetch('https://your-backend-domain.com/api/twitter/token', {
 ```
 
-**Step 4: Deploy Backend**
+**Step 6: Deploy Backend**
 - Deploy to Vercel, Netlify Functions, or any hosting service
 - Update frontend to use your deployed backend URL
 

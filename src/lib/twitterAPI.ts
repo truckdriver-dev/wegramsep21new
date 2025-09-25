@@ -25,9 +25,9 @@ export interface TwitterUserResponse {
 }
 
 class RealTwitterAPI {
-  private readonly apiKey = 'aHSpRTZbb4nc7ePrzUX9u80sP';
-  private readonly apiSecret = 'bU3H9dm3EPrLMjGucMBcsttDGRPZh9qzcnee1rsKxY67o7f2dN';
-  private readonly bearerToken = 'AAAAAAAAAAAAAAAAAAAAANje4AEAAAAAqIgC%2B%2FNr3RJA2%2FZfoDGKYmr9I4M%3DNQki8RvpWAjAlQmNSX505TURkaYHNPNpsv5CDMrtInzJnUTWc6';
+  private readonly apiKey = 'YOUR_TWITTER_API_KEY_HERE';
+  private readonly apiSecret = 'YOUR_TWITTER_API_SECRET_HERE';
+  private readonly bearerToken = 'YOUR_TWITTER_BEARER_TOKEN_HERE';
 
   // Exchange authorization code for access token (REQUIRES BACKEND)
   async exchangeCodeForToken(code: string, redirectUri: string, codeVerifier: string): Promise<TwitterTokenResponse> {
