@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, XCircle, Flag, Share } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, Gift, CheckCircle, XCircle, Flag, Share, Mail } from 'lucide-react';
 import { MessageModal } from '../components/Layout/MessageModal';
 import { PostCard } from '../components/Post/PostCard';
 
@@ -695,6 +695,11 @@ export const UserProfile: React.FC = () => {
     console.log('Follow/unfollow user:', username);
   };
 
+  const handleMessage = () => {
+    // Navigate to direct message with this user
+    navigate(`/dm/${username.replace('@', '')}`);
+  };
+
 
   const handleLike = async (postId: string) => {
     console.log('Liking post:', postId);
@@ -923,13 +928,22 @@ export const UserProfile: React.FC = () => {
               </div>
             </div>
             
-            {/* Follow Button - positioned on the right */}
-            <button
-              onClick={handleFollow}
-              className={`btn-primary px-6 py-2 rounded-full font-medium transition-colors`}
-            >
-              {user.isFollowing ? 'Unfollow' : 'Follow'}
-            </button>
+            {/* Message and Follow Buttons - positioned on the right */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleMessage}
+                className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                title="Send message"
+              >
+                <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              </button>
+              <button
+                onClick={handleFollow}
+                className={`btn-primary px-6 py-2 rounded-full font-medium transition-colors`}
+              >
+                {user.isFollowing ? 'Unfollow' : 'Follow'}
+              </button>
+            </div>
           </div>
 
           {/* Stats */}

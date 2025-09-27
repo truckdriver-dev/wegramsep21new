@@ -48,6 +48,7 @@ import { CreateGroup } from './pages/CreateGroup';
 import { WeRunner } from './pages/WeRunner';
 import { AuthCallback } from './pages/AuthCallback';
 import { TwitterCallback } from './pages/TwitterCallback';
+import { DirectMessage } from './pages/DirectMessage';
 import { ProductKeyFooter } from './components/Layout/ProductKeyFooter';
 
 function AppContent() {
@@ -96,6 +97,7 @@ function AppContent() {
   // Hide bottom navigation on chat pages
   const hideBottomNav = hideNavigation || 
     location.pathname.startsWith('/chat/') || 
+    location.pathname.startsWith('/dm/') ||
     location.pathname.startsWith('/messages') ||
     location.pathname.startsWith('/settings') ||
     location.pathname.startsWith('/create-');
@@ -141,6 +143,7 @@ function AppContent() {
           
           {/* Chat Routes */}
           <Route path="/chat/:username" element={<ChatDetail />} />
+          <Route path="/dm/:username" element={<DirectMessage />} />
           
           {/* Settings and Creation Routes */}
           <Route path="/settings" element={<Settings />} />
