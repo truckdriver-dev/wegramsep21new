@@ -93,10 +93,15 @@ function AppContent() {
 
   // Don't show TopBar and BottomNav on landing and auth pages
   const hideNavigation = location.pathname === '/' || location.pathname === '/auth';
-  
-  // Hide bottom navigation on chat pages
-  const hideBottomNav = hideNavigation || 
-    location.pathname.startsWith('/chat/') || 
+
+  // Hide top navigation (TopBar) on chat-style pages (custom headers)
+  const hideTopNav = hideNavigation ||
+    location.pathname.startsWith('/chat/') ||
+    location.pathname.startsWith('/dm/');
+
+  // Hide bottom navigation on pages where it shouldn't appear
+  const hideBottomNav = hideNavigation ||
+    location.pathname.startsWith('/chat/') ||
     location.pathname.startsWith('/dm/') ||
     location.pathname.startsWith('/messages') ||
     location.pathname.startsWith('/settings') ||
@@ -104,7 +109,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
-      {!hideNavigation && (
+      {!hideTopNav && (
         <TopBar 
           onMenuClick={() => setIsDrawerOpen(true)}
           onGiftClick={handleGiftClick}
@@ -164,8 +169,8 @@ function AppContent() {
 
       {!hideBottomNav && <BottomNav />}
       
-      {/* Product Key Footer - Only show on authenticated pages */}
-      {!hideNavigation && <ProductKeyFooter />}
+      {/* Product Key Footer - Hide on chat-style pages to avoid overlap */}
+      {!hideTopNav && <ProductKeyFooter />}
       
       <SideDrawer 
         isOpen={isDrawerOpen}
