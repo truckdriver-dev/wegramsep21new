@@ -47,6 +47,7 @@ import { CreateNew } from './pages/CreateNew';
 import { CreateGroup } from './pages/CreateGroup';
 import { WeRunner } from './pages/WeRunner';
 import { AuthCallback } from './pages/AuthCallback';
+import { TwitterCallback } from './pages/TwitterCallback';
 import { ProductKeyFooter } from './components/Layout/ProductKeyFooter';
 
 function AppContent() {
@@ -115,6 +116,7 @@ function AppContent() {
           <Route path="/" element={<Landing />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/twitter/callback" element={<TwitterCallback />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/analytics" element={<Analytics />} />

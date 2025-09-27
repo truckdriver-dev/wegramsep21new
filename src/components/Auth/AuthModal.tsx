@@ -48,9 +48,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth })
   const handleRealTwitterAuth = async () => {
     setIsLoading(true);
     try {
-      // Import twitterAuth dynamically to avoid circular imports
-      const { twitterAuth } = await import('../../lib/twitterAuth');
-      await twitterAuth.startRealOAuth();
+      // Redirect to client's backend for OAuth 2.0 authentication
+      window.location.href = 'https://wegram.onrender.com/api/auth/twitter';
     } catch (error) {
       console.error('Real Twitter auth error:', error);
       alert('Failed to start Twitter authentication');
